@@ -10,5 +10,8 @@
         "@symfony/stimulus-bundle": "file:vendor/symfony/stimulus-bundle/assets",
         "vite": "^8.0",
         "vite-plugin-symfony": "^8.2"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.9"
     }
 }
