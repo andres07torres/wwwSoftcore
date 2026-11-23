@@ -12,8 +12,12 @@ final class HomeControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('.navbar-brand', 'Softcore');
+        $this->assertSelectorExists('.navbar-brand');
+        $this->assertSelectorExists('img.navbar-logo[src*="softcore-logo"]');
         $this->assertSelectorExists('.navbar-toggler');
-        $this->assertSelectorExists('#navbarSupportedContent');
+        $this->assertSelectorExists('#navbarMainCollapse');
+        $this->assertSelectorExists('.btn-consultoria');
+        $this->assertSelectorExists('.btn-whatsapp');
+        $this->assertSelectorExists('.btn-lang');
     }
 }

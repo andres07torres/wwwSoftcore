@@ -1,24 +1,39 @@
 /* ==========================================================================
-   styles.css - Estilos Generales y Formateo de la Aplicación Softcore
-   Integrado con Bootstrap 5
+   styles.css - Estilos Generales SoftCore
+   Navbar Responsivo personalizado con Bootstrap 5 & Montserrat
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Variables y Tokens de Diseño
+   1. Tipografía Montserrat (@import al inicio del archivo)
    -------------------------------------------------------------------------- */
-:root {
-    --sc-primary: #0d6efd;
-    --sc-primary-hover: #0b5ed7;
-    --sc-dark-bg: #212529;
-    --sc-light-bg: #f8f9fa;
-    --sc-text-main: #212529;
-    --sc-text-muted: #6c757d;
-    --sc-border-color: #dee2e6;
-    --sc-transition: all 0.25s ease-in-out;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* --------------------------------------------------------------------------
-   2. Reset y Estilos Base
+   2. Variables y Tokens
+   -------------------------------------------------------------------------- */
+:root {
+    --sc-font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    --sc-navy: #082046;
+    --sc-navy-hover: #04142f;
+    --sc-whatsapp: #25d366;
+    --sc-whatsapp-hover: #1ebd5a;
+    --sc-text-nav: #4a5568;
+    --sc-text-nav-hover: #082046;
+    --sc-border-gray: #d0d7de;
+    --sc-bg-light: #f8f9fa;
+    --sc-transition: all 0.2s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   3. Reset y Estilos Base
    -------------------------------------------------------------------------- */
 *,
 *::before,
@@ -37,16 +52,13 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif;
-    background-color: var(--sc-light-bg);
-    color: var(--sc-text-main);
+    font-family: var(--sc-font-family);
+    background-color: var(--sc-bg-light);
+    color: #212529;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
 }
 
-/* --------------------------------------------------------------------------
-   3. Estructura del Layout
-   -------------------------------------------------------------------------- */
 .main-header {
     width: 100%;
     z-index: 1030;
@@ -58,106 +70,198 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   4. Navbar y Componentes de Navegación
+   4. Navbar SoftCore
    -------------------------------------------------------------------------- */
 .navbar {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    background-color: var(--sc-dark-bg) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #ffffff !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    font-family: var(--sc-font-family);
 }
 
+/* Logo */
 .navbar-brand {
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: -0.02em;
-    color: #ffffff !important;
-    text-decoration: none;
-    transition: var(--sc-transition);
+    padding: 0;
+    margin-right: 1.5rem;
 }
 
-.navbar-brand:hover {
-    opacity: 0.9;
+.navbar-logo {
+    max-height: 48px;
+    width: auto;
+    object-fit: contain;
+    display: block;
 }
 
-.brand-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.brand-title {
-    font-weight: 700;
-}
-
-/* Enlaces de Navegación */
-.navbar-nav .nav-link {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.75) !important;
-    padding: 0.5rem 0.85rem;
-    border-radius: 0.375rem;
-    transition: var(--sc-transition);
-}
-
-.navbar-nav .nav-link:hover {
-    color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.08);
-}
-
-.navbar-nav .nav-link.active {
-    color: #ffffff !important;
-    font-weight: 600;
-}
-
-/* Botón Hamburguesa Toggler */
+/* Botón Hamburguesa */
 .navbar-toggler {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.375rem 0.6rem;
-    border-radius: 0.375rem;
+    border: 1px solid rgba(8, 32, 70, 0.18);
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
     transition: var(--sc-transition);
 }
 
 .navbar-toggler:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(8, 32, 70, 0.15);
     outline: none;
 }
 
-/* Botones de Acción del Navbar */
-.navbar-actions .btn {
-    font-weight: 600;
+/* Enlaces de Navegación */
+.navbar-nav .nav-link {
+    font-family: var(--sc-font-family);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--sc-text-nav) !important;
+    padding: 0.5rem 0.9rem !important;
+    border-radius: 4px;
     transition: var(--sc-transition);
 }
 
+.navbar-nav .nav-link:hover {
+    color: var(--sc-text-nav-hover) !important;
+    background-color: rgba(8, 32, 70, 0.04);
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--sc-text-nav-hover) !important;
+    font-weight: 600;
+}
+
 /* --------------------------------------------------------------------------
-   5. Ajustes Responsivos (Media Queries)
+   5. Acciones Derecha (Consultoría, WhatsApp, Idioma)
+   -------------------------------------------------------------------------- */
+/* Botón Consultoría */
+.btn-consultoria {
+    font-family: var(--sc-font-family);
+    background-color: var(--sc-navy);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    padding: 0.6rem 1.4rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--sc-navy);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--sc-transition);
+    white-space: nowrap;
+}
+
+.btn-consultoria:hover {
+    background-color: var(--sc-navy-hover);
+    border-color: var(--sc-navy-hover);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(8, 32, 70, 0.2);
+}
+
+/* Botón Circular WhatsApp */
+.btn-whatsapp {
+    background-color: var(--sc-whatsapp);
+    color: #ffffff !important;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3);
+    transition: var(--sc-transition);
+}
+
+.btn-whatsapp:hover {
+    background-color: var(--sc-whatsapp-hover);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.45);
+}
+
+/* Selector de Idioma */
+.btn-lang {
+    font-family: var(--sc-font-family);
+    border: 1px solid var(--sc-border-gray);
+    color: #495057;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.32rem 0.6rem;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #ffffff;
+    transition: var(--sc-transition);
+    line-height: 1.2;
+}
+
+.btn-lang:hover {
+    border-color: var(--sc-navy);
+    color: var(--sc-navy);
+    background-color: #f8f9fa;
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsivo Móvil (< 992px)
    -------------------------------------------------------------------------- */
 @media (max-width: 991.98px) {
+    /* Mantener .navbar-collapse completamente libre de padding/margin para que el cálculo de altura de Bootstrap sea 100% exacto */
     .navbar-collapse {
-        padding-top: 1rem;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .navbar-collapse-inner {
+        padding-top: 0.75rem;
         padding-bottom: 0.75rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        margin-top: 0.5rem;
     }
 
     .navbar-nav {
-        gap: 0.25rem;
+        width: 100%;
+        margin-bottom: 0.5rem !important;
+        gap: 0.25rem !important;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
     }
 
     .navbar-nav .nav-link {
-        padding: 0.65rem 0.75rem;
-    }
-
-    .navbar-actions {
-        margin-top: 0.75rem;
-        padding-top: 0.75rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: block;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        padding: 0.65rem 1rem !important;
+        border-radius: 6px;
+        font-size: 0.98rem;
     }
 
-    .navbar-actions .btn {
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+        background-color: rgba(8, 32, 70, 0.05);
+    }
+
+    /* Acciones en móvil */
+    .navbar-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.85rem !important;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        width: 100%;
+    }
+
+    .btn-consultoria {
         width: 100%;
         text-align: center;
+        padding: 0.7rem 1rem;
+        font-size: 0.88rem;
+    }
+
+    .navbar-actions-secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
     }
 }

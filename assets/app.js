@@ -7,4 +7,7 @@ import 'bootstrap';
 // Hoja de estilos generales de la aplicación
 import './styles/styles.css';
 
+// Compilar y emitir automáticamente todas las imágenes de assets/images
+import.meta.glob('./images/**', { eager: true });
+
 console.log('Softcore frontend assets loaded successfully 🚀');

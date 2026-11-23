@@ -5,6 +5,11 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    assets:
+        packages:
+            vite:
+                version_strategy: 'Pentatrion\ViteBundle\Asset\ViteAssetVersionStrategy'
+
     #esi: true
     #fragments: true
 
