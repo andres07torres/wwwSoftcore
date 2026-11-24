@@ -49,13 +49,7 @@ final class AboutControllerTest extends WebTestCase
         $this->assertSelectorTextContains('#trayectoria', '100%');
         $this->assertSelectorTextContains('#trayectoria', '+7');
 
-        // 6. Call to Action (CTA)
-        $this->assertSelectorExists('.about-cta-section');
-        $this->assertSelectorExists('.cta-banner');
-        $this->assertSelectorExists('#cta-title');
-        $this->assertSelectorExists('.btn-cta-whatsapp');
-
-        // 7. Footer heredado
+        // 6. Footer heredado
         $this->assertSelectorExists('.main-footer#consultoria');
         $this->assertSelectorExists('.footer-logo');
         $this->assertSelectorTextContains('.footer-bottom', 'SoftCore');

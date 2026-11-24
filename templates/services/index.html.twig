@@ -1,0 +1,528 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Servicios - SoftCore | Soluciones de Ingeniería de Software & Cloud{% endblock %}
+
+{% block body %}
+<!-- =========================================================================
+     1. HERO SECTION - SERVICIOS
+     ========================================================================= -->
+<section class="services-hero-section py-5 position-relative text-white" aria-labelledby="services-hero-title">
+    <div class="services-hero-bg-overlay"></div>
+    <div class="container position-relative py-3 py-lg-4">
+        <div class="row align-items-center g-4 g-lg-5">
+            <div class="col-12 col-lg-7">
+                <h1 id="services-hero-title" class="services-hero-title mb-4" data-i18n-html="services_page.hero_title">
+                    Servicios de ingeniería diseñados para <span class="text-gradient-light">escalar tu negocio</span>
+                </h1>
+
+                <p class="services-hero-subtitle text-white-50 mb-4 lead" data-i18n="services_page.hero_subtitle">
+                    Acompañamos a tu empresa en cada fase del ciclo tecnológico: desde el diseño conceptual de arquitecturas robustas hasta el despliegue cloud automatizado y la optimización continua.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#formulario-contacto" class="btn btn-hero-primary rounded-pill d-inline-flex align-items-center gap-2">
+                        <span data-i18n="services_page.hero_btn_cta">Iniciar Proyecto</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                    <a href="#catalogo" class="btn btn-hero-outline-light btn-hero-secondary rounded-pill d-inline-flex align-items-center gap-2">
+                        <span data-i18n="services_page.hero_btn_catalog">Explorar Soluciones</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+                <div class="services-hero-media position-relative">
+                    <div class="services-img-frame rounded-4 overflow-hidden shadow-lg border border-white-15">
+                        <img src="{{ asset('assets/images/hero/hero-3.png', 'vite') }}" 
+                             alt="Equipo de ingeniería de software y cloud de SoftCore desarrollando soluciones" 
+                             class="img-fluid w-100 services-hero-img"
+                             loading="eager">
+                        <div class="services-img-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     2. CATÁLOGO DE SERVICIOS ESPECIALIZADOS
+     ========================================================================= -->
+<section class="services-catalog-section py-5 py-lg-6 bg-light" id="catalogo" aria-labelledby="catalog-title">
+    <div class="container">
+        <div class="text-center max-w-700 mx-auto mb-5">
+            <span class="section-eyebrow" data-i18n="services_page.catalog_eyebrow">Nuestro Portafolio</span>
+            <h2 id="catalog-title" class="section-title" data-i18n="services_page.catalog_title">Soluciones diseñadas con rigor técnico</h2>
+            <p class="section-subtitle text-muted" data-i18n="services_page.catalog_subtitle">
+                Arquitecturas escalables, código limpio y buenas prácticas de ingeniería para resolver desafíos de alto impacto.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Servicio 1: Desarrollo de Software a Medida & APIs -->
+            <div class="col-12 col-md-6 col-lg-4" id="software">
+                <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="service-detail-icon-box mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <span class="service-category-badge mb-2" data-i18n="services_page.serv1_cat">Desarrollo Core</span>
+                    <h3 class="h5 service-card-title mb-3" data-i18n="services_page.serv1_title">Software a Medida & APIs</h3>
+                    <p class="text-muted service-card-desc mb-3" data-i18n="services_page.serv1_desc">
+                        Construimos backends robustos, arquitecturas limpias y APIs RESTful/GraphQL de alto rendimiento orientadas a operaciones críticas de negocio.
+                    </p>
+                    <ul class="list-unstyled service-capabilities-list mb-4">
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv1_cap1">Arquitecturas limpias (Hexagonal / DDD)</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv1_cap2">APIs RESTful y GraphQL escalables</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv1_cap3">Integración continua y tests automáticos</span>
+                        </li>
+                    </ul>
+                    <div class="service-tech-tags mt-auto pt-3 border-top">
+                        <span class="tech-tag">Symfony</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 2: Cloud Architecture & DevOps -->
+            <div class="col-12 col-md-6 col-lg-4" id="cloud">
+                <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="service-detail-icon-box mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/>
+                        </svg>
+                    </div>
+                    <span class="service-category-badge mb-2" data-i18n="services_page.serv2_cat">Infraestructura & Cloud</span>
+                    <h3 class="h5 service-card-title mb-3" data-i18n="services_page.serv2_title">Cloud Architecture & DevOps</h3>
+                    <p class="text-muted service-card-desc mb-3" data-i18n="services_page.serv2_desc">
+                        Infraestructura como código y pipelines automatizados que eliminan la fricción operativa y garantizan disponibilidad continua.
+                    </p>
+                    <ul class="list-unstyled service-capabilities-list mb-4">
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv2_cap1">Infraestructura como Código (Terraform)</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv2_cap2">Contenedores con Kubernetes y Docker</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv2_cap3">Flujos CI/CD automatizados y seguros</span>
+                        </li>
+                    </ul>
+                    <div class="service-tech-tags mt-auto pt-3 border-top">
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Cloudflare</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 3: Aplicaciones Web & Móviles -->
+            <div class="col-12 col-md-6 col-lg-4" id="web-mobile">
+                <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="service-detail-icon-box mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <span class="service-category-badge mb-2" data-i18n="services_page.serv3_cat">Frontend & UX</span>
+                    <h3 class="h5 service-card-title mb-3" data-i18n="services_page.serv3_title">Aplicaciones Web & Móviles</h3>
+                    <p class="text-muted service-card-desc mb-3" data-i18n="services_page.serv3_desc">
+                        Interfaces de usuario reactivas, de carga ultra rápida y diseño intuitivo, optimizadas para la conversión y la retención del usuario.
+                    </p>
+                    <ul class="list-unstyled service-capabilities-list mb-4">
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv3_cap1">SPAs y plataformas interactivas</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv3_cap2">Optimización Core Web Vitals</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv3_cap3">Enfoque Mobile-First adaptable</span>
+                        </li>
+                    </ul>
+                    <div class="service-tech-tags mt-auto pt-3 border-top">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Bootstrap 5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 4: Consultoría & Auditoría IT -->
+            <div class="col-12 col-md-6 col-lg-4" id="consultoria-it">
+                <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="service-detail-icon-box mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="service-category-badge mb-2" data-i18n="services_page.serv4_cat">Estrategia Tecnológica</span>
+                    <h3 class="h5 service-card-title mb-3" data-i18n="services_page.serv4_title">Consultoría & Auditoría IT</h3>
+                    <p class="text-muted service-card-desc mb-3" data-i18n="services_page.serv4_desc">
+                        Diagnóstico integral de sistemas, identificación de cuellos de botella y mitigación de deuda técnica para asegurar estabilidad operativa.
+                    </p>
+                    <ul class="list-unstyled service-capabilities-list mb-4">
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv4_cap1">Auditoría de código y arquitectura</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv4_cap2">Planes de modernización de legado</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv4_cap3">Optimización de costos cloud</span>
+                        </li>
+                    </ul>
+                    <div class="service-tech-tags mt-auto pt-3 border-top">
+                        <span class="tech-tag">Code Review</span>
+                        <span class="tech-tag">Profiling</span>
+                        <span class="tech-tag">Refactoring</span>
+                        <span class="tech-tag">OWASP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 5: Bases de Datos & Alta Concurrencia -->
+            <div class="col-12 col-md-6 col-lg-4" id="databases">
+                <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="service-detail-icon-box mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                        </svg>
+                    </div>
+                    <span class="service-category-badge mb-2" data-i18n="services_page.serv5_cat">Persistencia & Datos</span>
+                    <h3 class="h5 service-card-title mb-3" data-i18n="services_page.serv5_title">Bases de Datos & Rendimiento</h3>
+                    <p class="text-muted service-card-desc mb-3" data-i18n="services_page.serv5_desc">
+                        Modelado relacional avanzado, afinamiento de consultas SQL y capas de caché distribuido para sostener millones de transacciones.
+                    </p>
+                    <ul class="list-unstyled service-capabilities-list mb-4">
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv5_cap1">Indexación y afinamiento de queries</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv5_cap2">Caché de alto rendimiento con Redis</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv5_cap3">Replicación y alta disponibilidad</span>
+                        </li>
+                    </ul>
+                    <div class="service-tech-tags mt-auto pt-3 border-top">
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Doctrine</span>
+                        <span class="tech-tag">SQL Tuning</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicio 6: Ciberseguridad & Resiliencia -->
+            <div class="col-12 col-md-6 col-lg-4" id="seguridad">
+                <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="service-detail-icon-box mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <span class="service-category-badge mb-2" data-i18n="services_page.serv6_cat">Seguridad & Continuidad</span>
+                    <h3 class="h5 service-card-title mb-3" data-i18n="services_page.serv6_title">Ciberseguridad & Hardening</h3>
+                    <p class="text-muted service-card-desc mb-3" data-i18n="services_page.serv6_desc">
+                        Protección perimetral y seguridad por diseño en cada capa de la aplicación, siguiendo directrices OWASP y gestión criptográfica moderna.
+                    </p>
+                    <ul class="list-unstyled service-capabilities-list mb-4">
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv6_cap1">Mitigación OWASP Top 10</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv6_cap2">Autenticación segura (OAuth2 / JWT)</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span data-i18n="services_page.serv6_cap3">Hardening de servidores y contenedores</span>
+                        </li>
+                    </ul>
+                    <div class="service-tech-tags mt-auto pt-3 border-top">
+                        <span class="tech-tag">Zero Trust</span>
+                        <span class="tech-tag">OAuth2</span>
+                        <span class="tech-tag">WAF</span>
+                        <span class="tech-tag">SSL/TLS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     3. MODELO DE TRABAJO Y ENTREGAS (WORKFLOW)
+     ========================================================================= -->
+<section class="workflow-section py-5 py-lg-6 bg-white" id="metodologia-servicio" aria-labelledby="workflow-title">
+    <div class="container">
+        <div class="text-center max-w-700 mx-auto mb-5">
+            <span class="section-eyebrow" data-i18n="services_page.workflow_eyebrow">Cómo Trabajamos</span>
+            <h2 id="workflow-title" class="section-title" data-i18n="services_page.workflow_title">Un proceso claro, predecible y orientado a resultados</h2>
+            <p class="section-subtitle text-muted" data-i18n="services_page.workflow_subtitle">
+                De la conceptualización a la producción con transparencia total y validación rigurosa en cada hito.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Paso 1 -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="workflow-card p-4 rounded-4 h-100 border">
+                    <div class="workflow-step-badge mb-3">01</div>
+                    <h3 class="h5 workflow-card-title mb-2" data-i18n="services_page.step1_title">Diagnóstico & Estrategia</h3>
+                    <p class="text-muted small mb-0" data-i18n="services_page.step1_desc">
+                        Analizamos tus requerimientos técnicos, evaluamos la arquitectura actual y definimos una propuesta de solución clara y viable.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="workflow-card p-4 rounded-4 h-100 border">
+                    <div class="workflow-step-badge mb-3">02</div>
+                    <h3 class="h5 workflow-card-title mb-2" data-i18n="services_page.step2_title">Desarrollo Iterativo</h3>
+                    <p class="text-muted small mb-0" data-i18n="services_page.step2_desc">
+                        Avanzamos en sprints ágiles con entregables funcionales, revisiones de código exhaustivas y comunicación continua.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="workflow-card p-4 rounded-4 h-100 border">
+                    <div class="workflow-step-badge mb-3">03</div>
+                    <h3 class="h5 workflow-card-title mb-2" data-i18n="services_page.step3_title">QA & Seguridad CI/CD</h3>
+                    <p class="text-muted small mb-0" data-i18n="services_page.step3_desc">
+                        Pruebas unitarias, de integración y escaneo de vulnerabilidades integrados en cada despliegue automatizado.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="workflow-card p-4 rounded-4 h-100 border">
+                    <div class="workflow-step-badge mb-3">04</div>
+                    <h3 class="h5 workflow-card-title mb-2" data-i18n="services_page.step4_title">Despliegue & Soporte</h3>
+                    <p class="text-muted small mb-0" data-i18n="services_page.step4_desc">
+                        Pase a producción sin tiempo de inactividad, monitoreo continuo del rendimiento y soporte proactivo post-lanzamiento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     4. FORMULARIO DE CONSULTORÍA & CONTACTO
+     ========================================================================= -->
+<section class="services-form-section py-5 py-lg-6 bg-light" id="formulario-contacto" aria-labelledby="services-form-title">
+    <div class="container">
+        <!-- Notificaciones de éxito o error tras enviar el formulario -->
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show rounded-4 mb-4 shadow-sm border-0 d-flex align-items-center gap-2" role="alert">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-success flex-shrink-0">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="fw-semibold">{{ message }}</div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger alert-dismissible fade show rounded-4 mb-4 shadow-sm border-0 d-flex align-items-center gap-2" role="alert">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-danger flex-shrink-0">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="fw-semibold">{{ message }}</div>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        {% endfor %}
+
+        <div class="services-form-container cta-banner rounded-4 p-4 p-lg-5 text-white shadow-lg position-relative overflow-hidden">
+            <div class="cta-bg-glow" aria-hidden="true"></div>
+            
+            <div class="position-relative z-1">
+                <div class="row g-5 align-items-center">
+                    <!-- Columna Izquierda: Propuesta de valor & contacto directo -->
+                    <div class="col-12 col-lg-5">
+                        <h2 id="services-form-title" class="h1 fw-bold mb-3 text-white" data-i18n="services_page.form_title">
+                            ¿Tienes un proyecto desafiante en mente?
+                        </h2>
+                        
+                        <p class="text-white-50 mb-4 lead fs-6" data-i18n="services_page.form_subtitle">
+                            Conversemos sobre tus metas tecnológicas y diseñemos juntos una arquitectura sólida, escalable y optimizada para tu negocio.
+                        </p>
+
+                        <div class="form-benefits-list mb-4">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="form-check-icon">
+                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="text-white-90 small" data-i18n="services_page.form_feat1">Respuesta técnica en menos de 24 horas</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="form-check-icon">
+                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="text-white-90 small" data-i18n="services_page.form_feat2">Acuerdo de confidencialidad (NDA) garantizado</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div class="form-check-icon">
+                                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="text-white-90 small" data-i18n="services_page.form_feat3">Diagnóstico preliminar sin costo ni compromiso</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-top border-white-15">
+                            <p class="text-white-50 extra-small mb-2" data-i18n="services_page.form_whatsapp_alt">¿Prefieres una consulta inmediata?</p>
+                            <a href="https://wa.me/51987654321?text=Hola%20SoftCore,%20deseo%20asesoría%20sobre%20un%20proyecto%20de%20software" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="btn btn-hero-outline-light rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/>
+                                </svg>
+                                <span data-i18n="services_page.form_btn_whatsapp">Escribir por WhatsApp</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Tarjeta con Formulario de Contacto -->
+                    <div class="col-12 col-lg-7">
+                        <div class="services-form-card bg-white text-dark rounded-4 p-4 p-md-5 shadow">
+                            <h3 class="h4 fw-bold mb-1 text-navy" data-i18n="services_page.form_card_title">
+                                Solicitar Asesoría Técnica
+                            </h3>
+                            <p class="text-muted small mb-4" data-i18n="services_page.form_card_subtitle">
+                                Completa el formulario y analizaremos tus requerimientos sin costo inicial.
+                            </p>
+
+                            <form action="{{ path('app_services') }}" method="POST" id="servicesInquiryForm" class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label for="contact_name" class="form-label small fw-semibold text-secondary" data-i18n="services_page.form_lbl_name">
+                                            Nombre Completo <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" 
+                                               class="form-control rounded-3" 
+                                               id="contact_name" 
+                                               name="name" 
+                                               required 
+                                               placeholder="Ej. Carlos Torres" 
+                                               data-i18n-ph="services_page.form_ph_name">
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label for="contact_email" class="form-label small fw-semibold text-secondary" data-i18n="services_page.form_lbl_email">
+                                            Correo Corporativo <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="email" 
+                                               class="form-control rounded-3" 
+                                               id="contact_email" 
+                                               name="email" 
+                                               required 
+                                               placeholder="nombre@empresa.com" 
+                                               data-i18n-ph="services_page.form_ph_email">
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label for="contact_company" class="form-label small fw-semibold text-secondary" data-i18n="services_page.form_lbl_company">
+                                            Empresa / Organización
+                                        </label>
+                                        <input type="text" 
+                                               class="form-control rounded-3" 
+                                               id="contact_company" 
+                                               name="company" 
+                                               placeholder="Tu empresa o startup" 
+                                               data-i18n-ph="services_page.form_ph_company">
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label for="contact_service" class="form-label small fw-semibold text-secondary" data-i18n="services_page.form_lbl_service">
+                                            Servicio de Interés <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-select rounded-3" id="contact_service" name="service" required>
+                                            <option value="" selected disabled data-i18n="services_page.form_opt_select">Selecciona una opción...</option>
+                                            <option value="software" data-i18n="services_page.form_opt_1">Software a Medida & APIs</option>
+                                            <option value="cloud" data-i18n="services_page.form_opt_2">Cloud Architecture & DevOps</option>
+                                            <option value="web-mobile" data-i18n="services_page.form_opt_3">Aplicaciones Web & Móviles</option>
+                                            <option value="consultoria-it" data-i18n="services_page.form_opt_4">Consultoría & Auditoría IT</option>
+                                            <option value="databases" data-i18n="services_page.form_opt_5">Bases de Datos & Rendimiento</option>
+                                            <option value="seguridad" data-i18n="services_page.form_opt_6">Ciberseguridad & Hardening</option>
+                                            <option value="otro" data-i18n="services_page.form_opt_other">Otro requerimiento</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="contact_message" class="form-label small fw-semibold text-secondary" data-i18n="services_page.form_lbl_message">
+                                            Cuéntanos sobre tu proyecto <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea class="form-control rounded-3" 
+                                                  id="contact_message" 
+                                                  name="message" 
+                                                  rows="3" 
+                                                  required 
+                                                  placeholder="Describe brevemente tus requerimientos técnicos, metas o plazos estimados..." 
+                                                  data-i18n-ph="services_page.form_ph_message"></textarea>
+                                    </div>
+
+                                    <div class="col-12 mt-4 text-center">
+                                        <button type="submit" class="btn btn-primary btn-submit-service rounded-pill px-4 py-2 d-inline-flex align-items-center justify-content-center gap-2">
+                                            <span data-i18n="services_page.form_btn_submit">Enviar Solicitud de Asesoría</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div class="col-12 text-center mt-2">
+                                        <span class="text-muted extra-small d-inline-flex align-items-center gap-1">
+                                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                            <span data-i18n="services_page.form_privacy">Tus datos están protegidos. Confidencialidad técnica garantizada.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
