@@ -13,6 +13,7 @@ final class HomeControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('.navbar-brand');
+        $this->assertSelectorExists('.navbar-accent-bar');
         $this->assertSelectorExists('img.navbar-logo[src*="softcore-logo"]');
         $this->assertSelectorExists('.navbar-toggler');
         $this->assertSelectorExists('#navbarMainCollapse');
