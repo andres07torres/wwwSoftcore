@@ -12,6 +12,7 @@ final class HomeControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('.main-header.fixed-top');
         $this->assertSelectorExists('.navbar-brand');
         $this->assertSelectorExists('.navbar-accent-bar');
         $this->assertSelectorExists('img.navbar-logo[src*="softcore-logo"]');

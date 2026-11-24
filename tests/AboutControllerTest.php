@@ -14,6 +14,7 @@ final class AboutControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         // 1. Navbar y elementos globales
+        $this->assertSelectorExists('.main-header.fixed-top');
         $this->assertSelectorExists('.navbar-brand');
         $this->assertSelectorExists('img.navbar-logo[src*="softcore-logo"]');
         $this->assertSelectorExists('.btn-lang[data-controller="language-switcher"]');
