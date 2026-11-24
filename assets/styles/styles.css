@@ -1859,52 +1859,131 @@ body {
     box-shadow: 0 0 0 3px rgba(2, 116, 230, 0.15);
 }
 
+/* Notificaciones flash dentro de la tarjeta del formulario */
+.services-form-card .alert {
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.75rem !important;
+    font-size: 0.92rem !important;
+    line-height: 1.45;
+}
+
 @media (max-width: 767.98px) {
+    /* Banner contenedor: acolchado exterior ajustado para dar máxima amplitud a la tarjeta interior */
     .services-form-container.cta-banner {
-        padding: 2rem 1rem !important;
+        padding: 2.25rem 0.85rem 1.85rem 0.85rem !important;
         border-radius: 1.25rem !important;
     }
 
+    .services-form-container .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Columna informativa superior */
+    .services-form-container .col-lg-5 {
+        padding: 0 0.5rem 1.75rem 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .services-form-container .col-lg-7 {
+        padding: 0 !important;
+    }
+
+    /* Tarjeta blanca del formulario: colores idénticos a escritorio, bordes suaves y máxima amplitud */
     .services-form-card {
-        padding: 1.75rem 1.25rem !important;
+        background-color: #ffffff !important;
+        color: #212529 !important;
         border-radius: 1.25rem !important;
+        padding: 1.85rem 1.25rem 1.75rem 1.25rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22) !important;
+        width: 100% !important;
+        margin: 0 !important;
     }
 
-    .services-form-card h3.h4 {
+    .services-form-card h3.h4,
+    .services-form-card h3.text-navy {
+        color: var(--sc-navy) !important;
         font-size: 1.35rem !important;
+        font-weight: 700 !important;
         line-height: 1.25;
+        margin-bottom: 0.4rem !important;
     }
 
-    .services-form-card p.small {
+    .services-form-card p.small,
+    .services-form-card p.text-muted {
+        color: #64748b !important;
         font-size: 0.92rem !important;
         line-height: 1.5;
-        margin-bottom: 1.25rem !important;
+        margin-bottom: 1.35rem !important;
     }
 
     .services-form-card .form-label {
         font-size: 0.92rem !important;
         font-weight: 600 !important;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.35rem !important;
         color: var(--sc-navy) !important;
     }
 
+    .services-form-card .form-label .text-danger {
+        color: #dc3545 !important;
+    }
+
+    /* Campos de entrada: fondo blanco limpio, borde sutil y altura táctil cómoda */
     .services-form-card .form-control,
     .services-form-card .form-select {
         min-height: 48px;
         padding: 0.72rem 0.95rem !important;
         font-size: 0.98rem !important;
-        border-radius: 0.6rem !important;
+        border-radius: 0.65rem !important;
+        background-color: #ffffff !important;
+        color: #1e293b !important;
+        border: 1px solid #d1d5db !important;
+        box-shadow: none !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .services-form-card .form-control::placeholder {
+        color: #9ca3af !important;
+    }
+
+    .services-form-card .form-control:focus,
+    .services-form-card .form-select:focus {
+        background-color: #ffffff !important;
+        color: #1e293b !important;
+        border-color: var(--sc-blue) !important;
+        box-shadow: 0 0 0 3px rgba(10, 87, 255, 0.15) !important;
     }
 
     .services-form-card textarea.form-control {
         min-height: 110px;
     }
 
+    /* Botón de envío: azul corporativo idéntico al diseño de escritorio */
     .btn-submit-service {
-        font-size: 0.95rem;
-        padding: 0.75rem 2rem;
+        background-color: var(--sc-blue) !important;
+        background-image: none !important;
+        border: 1px solid var(--sc-blue) !important;
+        color: #ffffff !important;
+        font-size: 0.96rem !important;
+        font-weight: 600 !important;
+        padding: 0.75rem 2rem !important;
+        border-radius: 50rem !important;
         width: 100%;
         max-width: 310px;
+        box-shadow: 0 4px 14px rgba(10, 87, 255, 0.3) !important;
+    }
+
+    .btn-submit-service:hover,
+    .btn-submit-service:active {
+        background-color: #0848d4 !important;
+        border-color: #0848d4 !important;
+        color: #ffffff !important;
+    }
+
+    .services-form-card .text-muted.extra-small {
+        color: #64748b !important;
+        font-size: 0.8rem !important;
     }
 }
 
