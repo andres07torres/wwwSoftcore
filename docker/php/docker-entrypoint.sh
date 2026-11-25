@@ -8,7 +8,7 @@ mkdir -p /var/www/html/var/cache /var/www/html/var/log /var/www/html/public
 if [ ! -f /var/www/html/public/build/.vite/entrypoints.json ]; then
     echo "Sincronizando assets de Vite compilados hacia public..."
     mkdir -p /var/www/html/public/build
-    cp -r /var/www/public_build/* /var/www/html/public/build/ 2>/dev/null || true
+    cp -r /var/www/public_build/. /var/www/html/public/build/ 2>/dev/null || true
 fi
 
 # Ajustar permisos para www-data

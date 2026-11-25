@@ -2490,3 +2490,36 @@ body {
     }
 }
 
+/* Centrado de botones en héroes internos en móviles / pantallas pequeñas (< 992px) */
+@media (max-width: 991.98px) {
+    .about-hero-actions,
+    .services-hero-actions,
+    .methodology-hero-actions,
+    .technology-hero-actions {
+        justify-content: center !important;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .about-hero-actions,
+    .services-hero-actions,
+    .methodology-hero-actions,
+    .technology-hero-actions {
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .about-hero-actions .btn,
+    .services-hero-actions .btn,
+    .methodology-hero-actions .btn,
+    .technology-hero-actions .btn {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+}
+
+
