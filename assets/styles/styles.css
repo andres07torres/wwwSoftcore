@@ -2217,6 +2217,141 @@ body {
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
 }
 
+.technology-hero-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--sc-navy) 0%, #082855 50%, #051a38 100%);
+    overflow: hidden;
+    min-height: clamp(500px, 65vh, 580px);
+    display: flex;
+    align-items: center;
+}
+
+.technology-hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(2, 116, 230, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 10% 80%, rgba(243, 112, 33, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.technology-hero-title {
+    font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+}
+
+.technology-hero-subtitle {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    max-width: 580px;
+}
+
+.technology-hero-card {
+    background: rgba(8, 32, 70, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+}
+
+.tech-stack-row {
+    transition: var(--sc-transition);
+}
+
+.tech-stack-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    padding-left: 0.25rem;
+}
+
+.tech-criterion-card,
+.tech-matrix-card,
+.standard-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(8, 32, 70, 0.06) !important;
+}
+
+.tech-criterion-card:hover,
+.tech-matrix-card:hover,
+.standard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(8, 32, 70, 0.09) !important;
+}
+
+.tech-criterion-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(2, 116, 230, 0.08);
+    color: var(--sc-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-category-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-tag-group {
+    border-color: rgba(8, 32, 70, 0.06) !important;
+}
+
+.tech-tag-item {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sc-navy);
+    background-color: rgba(8, 32, 70, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(8, 32, 70, 0.08);
+}
+
+.standard-number {
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 767.98px) {
+    .technology-hero-section {
+        display: flex !important;
+        align-items: center !important;
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+    .technology-hero-title {
+        font-size: 1.65rem !important;
+        line-height: 1.22 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .technology-hero-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 1.25rem !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .technology-hero-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        gap: 0.65rem !important;
+    }
+    .technology-hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.6rem 1.15rem;
+        font-size: 0.86rem;
+    }
+}
+
 .bg-black-20 {
     background-color: rgba(0, 0, 0, 0.25);
 }
@@ -2262,7 +2397,8 @@ body {
 
     .about-hero-section,
     .services-hero-section,
-    .methodology-hero-section {
+    .methodology-hero-section,
+    .technology-hero-section {
         height: clamp(500px, 65vh, 580px);
         min-height: clamp(500px, 65vh, 580px);
         display: flex;
@@ -2286,7 +2422,8 @@ body {
 
     .about-hero-section,
     .services-hero-section,
-    .methodology-hero-section {
+    .methodology-hero-section,
+    .technology-hero-section {
         min-height: clamp(460px, 60vh, 520px);
         display: flex;
         align-items: center;
@@ -2310,7 +2447,8 @@ body {
 
     .about-hero-section,
     .services-hero-section,
-    .methodology-hero-section {
+    .methodology-hero-section,
+    .technology-hero-section {
         height: clamp(420px, 58vh, 480px);
         min-height: clamp(420px, 58vh, 480px);
         display: flex !important;
@@ -2335,7 +2473,8 @@ body {
 
     .about-hero-section,
     .services-hero-section,
-    .methodology-hero-section {
+    .methodology-hero-section,
+    .technology-hero-section {
         height: clamp(390px, 54vh, 450px);
         min-height: clamp(390px, 54vh, 450px);
         display: flex !important;

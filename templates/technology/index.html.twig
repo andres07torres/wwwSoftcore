@@ -1,0 +1,374 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tecnologías - SoftCore | Stack Tecnológico & Arquitectura Cloud{% endblock %}
+
+{% block body %}
+<!-- =========================================================================
+     1. HERO SECTION - TECNOLOGÍAS
+     ========================================================================= -->
+<section class="technology-hero-section position-relative text-white" aria-labelledby="technology-hero-title">
+    <div class="technology-hero-bg-overlay"></div>
+    <div class="container position-relative py-0 py-lg-4">
+        <div class="row align-items-center g-4 g-lg-5">
+            <div class="col-12 col-lg-7">
+                <h1 id="technology-hero-title" class="technology-hero-title mb-4" data-i18n-html="technology_page.hero_title">
+                    Stack tecnológico seleccionado para <span class="text-gradient-light">rendimiento y escalabilidad</span>
+                </h1>
+
+                <p class="technology-hero-subtitle text-white-50 mb-4 lead" data-i18n="technology_page.hero_subtitle">
+                    Elegimos lenguajes, frameworks y plataformas cloud con madurez comprobada, soporte activo y arquitecturas diseñadas para operaciones críticas de alta concurrencia.
+                </p>
+
+                <div class="technology-hero-actions d-flex flex-wrap align-items-center gap-3">
+                    <a href="{{ path('app_services') }}#formulario-contacto" class="btn btn-hero-primary rounded-pill d-inline-flex align-items-center gap-2">
+                        <span data-i18n="technology_page.hero_btn_cta">Iniciar Proyecto</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                    <a href="#ecosistema" class="btn btn-hero-outline-light btn-hero-secondary rounded-pill d-inline-flex align-items-center gap-2">
+                        <span data-i18n="technology_page.hero_btn_explore">Explorar Ecosistema</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel de Arquitectura de Stack (diferenciador visual en desktop) -->
+            <div class="col-12 col-lg-5 d-none d-lg-block">
+                <div class="technology-hero-card card border border-white-15 rounded-4 shadow-lg overflow-hidden bg-glass text-white">
+                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom border-white-10 bg-black-20">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="console-circle console-circle-red"></span>
+                            <span class="console-circle console-circle-yellow"></span>
+                            <span class="console-circle console-circle-green"></span>
+                            <span class="extra-small font-monospace text-white-50 ms-1">stack-architecture.spec</span>
+                        </div>
+                        <span class="extra-small font-monospace text-info">verified</span>
+                    </div>
+
+                    <div class="p-3 p-lg-4">
+                        <div class="tech-stack-row pb-2 mb-2 border-bottom border-white-10">
+                            <div class="extra-small text-white-50 text-uppercase fw-semibold mb-1" data-i18n="technology_page.stack_layer1_label">Capa de Aplicación & APIs</div>
+                            <div class="text-white fw-bold extra-small">PHP 8.5 (Symfony) · Python (FastAPI/Django) · Go</div>
+                        </div>
+                        <div class="tech-stack-row pb-2 mb-2 border-bottom border-white-10">
+                            <div class="extra-small text-white-50 text-uppercase fw-semibold mb-1" data-i18n="technology_page.stack_layer2_label">Frontend & Desarrollo Móvil</div>
+                            <div class="text-white fw-bold extra-small">Kotlin (Android) · TypeScript · Vue.js · React · Vite</div>
+                        </div>
+                        <div class="tech-stack-row pb-2 mb-2 border-bottom border-white-10">
+                            <div class="extra-small text-white-50 text-uppercase fw-semibold mb-1" data-i18n="technology_page.stack_layer3_label">Infraestructura Cloud & DevOps</div>
+                            <div class="text-white fw-bold extra-small">AWS · GCP · Docker · Kubernetes · Terraform · CI/CD</div>
+                        </div>
+                        <div class="tech-stack-row">
+                            <div class="extra-small text-white-50 text-uppercase fw-semibold mb-1" data-i18n="technology_page.stack_layer4_label">Datos, Caché & Mensajería</div>
+                            <div class="text-white fw-bold extra-small">PostgreSQL · Redis · RabbitMQ · Elasticsearch</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     2. CRITERIOS DE SELECCIÓN TECNOLÓGICA
+     ========================================================================= -->
+<section class="technology-criteria-section py-5 py-lg-6 bg-light" id="criterios" aria-labelledby="criteria-title">
+    <div class="container">
+        <div class="text-center max-w-700 mx-auto mb-5">
+            <span class="section-eyebrow" data-i18n="technology_page.criteria_eyebrow">Rigor Técnico</span>
+            <h2 id="criteria-title" class="section-title" data-i18n="technology_page.criteria_title">Criterios de ingeniería para la selección de tecnologías</h2>
+            <p class="section-subtitle text-muted" data-i18n="technology_page.criteria_subtitle">
+                No elegimos tecnologías por tendencias pasajeras. Seleccionamos cada componente en función de su solidez operativa, seguridad y facilidad de mantenimiento.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="tech-criterion-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="tech-criterion-icon mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.crit1_title">Madurez & Soporte LTS</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.crit1_desc">
+                        Priorizamos versiones con soporte extendido (Long-Term Support) y comunidades globales activas que garantizan actualizaciones de seguridad continuas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="tech-criterion-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="tech-criterion-icon mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.crit2_title">Rendimiento & Concurrencia</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.crit2_desc">
+                        Evaluamos latencia, consumo de memoria y capacidad de procesamiento ante picos de tráfico para garantizar tiempos de respuesta subsegundo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="tech-criterion-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="tech-criterion-icon mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/>
+                        </svg>
+                    </div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.crit3_title">Portabilidad Cloud-Native</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.crit3_desc">
+                        Evitamos el bloqueo de proveedor (vendor lock-in) diseñando servicios contenerizados con estándares OCI compatibles con cualquier nube pública o privada.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="tech-criterion-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="tech-criterion-icon mb-3">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.crit4_title">Seguridad por Diseño (OWASP)</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.crit4_desc">
+                        Herramientas que facilitan análisis estático de vulnerabilidades (SAST/DAST), cifrado de datos en tránsito y en reposo, y gestión segura de secretos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     3. ECOSISTEMA TECNOLÓGICO POR CAPAS (BENTO MATRIX)
+     ========================================================================= -->
+<section class="technology-ecosystem-section py-5 py-lg-6 bg-white" id="ecosistema" aria-labelledby="ecosystem-title">
+    <div class="container">
+        <div class="text-center max-w-700 mx-auto mb-5">
+            <span class="section-eyebrow" data-i18n="technology_page.eco_eyebrow">Catálogo Técnico</span>
+            <h2 id="ecosystem-title" class="section-title" data-i18n="technology_page.eco_title">Ecosistema tecnológico de alta fidelidad</h2>
+            <p class="section-subtitle text-muted" data-i18n="technology_page.eco_subtitle">
+                Estructura modular dividida por dominios de especialidad para dar respuesta integral a cualquier desafío digital corporativo.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- 1. Backend & Microservicios -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="tech-matrix-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="tech-category-icon bg-navy-light text-navy">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-navy mb-1" data-i18n="technology_page.cat1_title">Backend & Microservicios</h3>
+                            <div class="extra-small text-muted" data-i18n="technology_page.cat1_sub">Lógica de negocio, APIs REST/GraphQL y arquitectura limpia</div>
+                        </div>
+                    </div>
+                    <p class="text-muted extra-small mb-3" data-i18n="technology_page.cat1_desc">
+                        Construimos núcleos empresariales con frameworks estructurados bajo principios SOLID, Hexagonal Architecture y Domain-Driven Design (DDD).
+                    </p>
+                    <div class="tech-tag-group d-flex flex-wrap gap-2 pt-2 border-top">
+                        <span class="tech-tag-item">Symfony (PHP)</span>
+                        <span class="tech-tag-item">FastAPI (Python)</span>
+                        <span class="tech-tag-item">Django</span>
+                        <span class="tech-tag-item">Node.js</span>
+                        <span class="tech-tag-item">Go</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Frontend & Experiencia Web -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="tech-matrix-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="tech-category-icon bg-navy-light text-navy">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-navy mb-1" data-i18n="technology_page.cat2_title">Frontend & Interfaces Web</h3>
+                            <div class="extra-small text-muted" data-i18n="technology_page.cat2_sub">Interactividad reactiva, velocidad de carga y accesibilidad UX</div>
+                        </div>
+                    </div>
+                    <p class="text-muted extra-small mb-3" data-i18n="technology_page.cat2_desc">
+                        Interfaces modernas basadas en componentes, bundles optimizados con Vite y cumplimiento estricto de accesibilidad web (WCAG 2.1).
+                    </p>
+                    <div class="tech-tag-group d-flex flex-wrap gap-2 pt-2 border-top">
+                        <span class="tech-tag-item">TypeScript</span>
+                        <span class="tech-tag-item">Vue.js</span>
+                        <span class="tech-tag-item">React</span>
+                        <span class="tech-tag-item">Vite</span>
+                        <span class="tech-tag-item">Bootstrap 5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Desarrollo Móvil (Android & iOS) -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="tech-matrix-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="tech-category-icon bg-navy-light text-navy">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-navy mb-1" data-i18n="technology_page.cat_mobile_title">Desarrollo Móvil (Android & iOS)</h3>
+                            <div class="extra-small text-muted" data-i18n="technology_page.cat_mobile_sub">Aplicaciones nativas de alto rendimiento y arquitectura moderna</div>
+                        </div>
+                    </div>
+                    <p class="text-muted extra-small mb-3" data-i18n="technology_page.cat_mobile_desc">
+                        Desarrollo nativo en Kotlin para Android con Jetpack Compose y Clean Architecture, garantizando fluidez, consumo óptimo de batería y estándares Material Design.
+                    </p>
+                    <div class="tech-tag-group d-flex flex-wrap gap-2 pt-2 border-top">
+                        <span class="tech-tag-item">Kotlin (Android)</span>
+                        <span class="tech-tag-item">Jetpack Compose</span>
+                        <span class="tech-tag-item">Coroutines / Flow</span>
+                        <span class="tech-tag-item">Swift (iOS)</span>
+                        <span class="tech-tag-item">Flutter</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Cloud & DevOps -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="tech-matrix-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="tech-category-icon bg-navy-light text-navy">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-navy mb-1" data-i18n="technology_page.cat3_title">Cloud Infrastructure & DevOps</h3>
+                            <div class="extra-small text-muted" data-i18n="technology_page.cat3_sub">Infraestructura como Código, orquestación y CI/CD automatizado</div>
+                        </div>
+                    </div>
+                    <p class="text-muted extra-small mb-3" data-i18n="technology_page.cat3_desc">
+                        Despliegues automatizados con zero-downtime, escalabilidad horizontal elástica y entornos inmutables mediante contenedores y Terraform.
+                    </p>
+                    <div class="tech-tag-group d-flex flex-wrap gap-2 pt-2 border-top">
+                        <span class="tech-tag-item">AWS</span>
+                        <span class="tech-tag-item">Google Cloud</span>
+                        <span class="tech-tag-item">Docker</span>
+                        <span class="tech-tag-item">Kubernetes</span>
+                        <span class="tech-tag-item">Terraform</span>
+                        <span class="tech-tag-item">GitHub Actions</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Bases de Datos & Mensajería -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="tech-matrix-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="tech-category-icon bg-navy-light text-navy">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-navy mb-1" data-i18n="technology_page.cat4_title">Bases de Datos & Mensajería</h3>
+                            <div class="extra-small text-muted" data-i18n="technology_page.cat4_sub">Persistencia relacional, no relacional y colas de eventos</div>
+                        </div>
+                    </div>
+                    <p class="text-muted extra-small mb-3" data-i18n="technology_page.cat4_desc">
+                        Diseño de esquemas con integridad referencial estricta, replicación, caché distribuida y brokers de mensajería para desacoplamiento asíncrono.
+                    </p>
+                    <div class="tech-tag-group d-flex flex-wrap gap-2 pt-2 border-top">
+                        <span class="tech-tag-item">PostgreSQL</span>
+                        <span class="tech-tag-item">MySQL</span>
+                        <span class="tech-tag-item">Redis</span>
+                        <span class="tech-tag-item">RabbitMQ</span>
+                        <span class="tech-tag-item">Elasticsearch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Testing, Calidad & Seguridad -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="tech-matrix-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="tech-category-icon bg-navy-light text-navy">
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="h6 fw-bold text-navy mb-1" data-i18n="technology_page.cat_qa_title">Testing, Calidad & Seguridad</h3>
+                            <div class="extra-small text-muted" data-i18n="technology_page.cat_qa_sub">Aseguramiento de código, tests automáticos y hardening</div>
+                        </div>
+                    </div>
+                    <p class="text-muted extra-small mb-3" data-i18n="technology_page.cat_qa_desc">
+                        Pipelines de integración con análisis estático de vulnerabilidades (SAST), cobertura de pruebas unitarias y auditorías periódicas de seguridad OWASP.
+                    </p>
+                    <div class="tech-tag-group d-flex flex-wrap gap-2 pt-2 border-top">
+                        <span class="tech-tag-item">PHPUnit</span>
+                        <span class="tech-tag-item">JUnit / MockK</span>
+                        <span class="tech-tag-item">Jest</span>
+                        <span class="tech-tag-item">SonarQube</span>
+                        <span class="tech-tag-item">OWASP ZAP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     4. ESTÁNDARES Y PATRONES DE INGENIERÍA
+     ========================================================================= -->
+<section class="technology-standards-section py-5 py-lg-6 bg-light" id="estandares" aria-labelledby="standards-title">
+    <div class="container">
+        <div class="text-center max-w-700 mx-auto mb-5">
+            <span class="section-eyebrow" data-i18n="technology_page.std_eyebrow">Buenas Prácticas</span>
+            <h2 id="standards-title" class="section-title" data-i18n="technology_page.std_title">Estándares de ingeniería aplicados a cada entrega</h2>
+            <p class="section-subtitle text-muted" data-i18n="technology_page.std_subtitle">
+                La tecnología cobra valor cuando está respaldada por patrones de diseño probados y procesos continuos de aseguramiento de calidad.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-12 col-md-4">
+                <div class="standard-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="standard-number font-monospace text-primary fw-bold mb-3">01</div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.std1_title">Arquitectura Hexagonal & DDD</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.std1_desc">
+                        Aislamiento estricto de la lógica de negocio frente a frameworks y bases de datos, facilitando tests automatizados y mantenimiento a largo plazo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="standard-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="standard-number font-monospace text-primary fw-bold mb-3">02</div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.std2_title">API-First & Contratos Claros</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.std2_desc">
+                        Definición formal de interfaces con OpenAPI 3.0 / Swagger antes del desarrollo, habilitando integración paralela fluida entre frontend y backend.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="standard-card card h-100 p-4 border-0 shadow-sm rounded-4 bg-white">
+                    <div class="standard-number font-monospace text-primary fw-bold mb-3">03</div>
+                    <h3 class="h6 fw-bold text-navy mb-2" data-i18n="technology_page.std3_title">Observabilidad & Telemetría</h3>
+                    <p class="text-muted extra-small mb-0" data-i18n="technology_page.std3_desc">
+                        Monitoreo integral de métricas, trazas distribuidas y logs centralizados para detectar anomalías antes de que afecten la experiencia del usuario.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

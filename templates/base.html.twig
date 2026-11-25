@@ -78,7 +78,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('app_home') }}#tecnologias">
+                                    <a class="nav-link {% if app.request.attributes.get('_route') in ['app_technology', 'app_technology_es'] %}active{% endif %}" {% if app.request.attributes.get('_route') in ['app_technology', 'app_technology_es'] %}aria-current="page"{% endif %} href="{{ path('app_technology') }}">
                                         <span class="nav-link-title" data-i18n="nav.tecnologias">Tecnologías</span>
                                     </a>
                                 </li>
@@ -166,7 +166,7 @@
                             <li><a href="{{ path('app_about') }}" data-i18n="nav.quienes_somos">Quiénes Somos</a></li>
                             <li><a href="{{ path('app_services') }}" data-i18n="nav.servicios">Servicios</a></li>
                             <li><a href="{{ path('app_methodology') }}" data-i18n="nav.metodologia">Metodología</a></li>
-                            <li><a href="{{ path('app_home') }}#tecnologias" data-i18n="nav.tecnologias">Tecnologías</a></li>
+                            <li><a href="{{ path('app_technology') }}" data-i18n="nav.tecnologias">Tecnologías</a></li>
                         </ul>
                     </div>
 
