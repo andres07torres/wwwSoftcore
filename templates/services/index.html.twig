@@ -310,6 +310,201 @@
 </section>
 
 <!-- =========================================================================
+     2.5. CARRUSEL DE PROYECTOS REALIZADOS (CONFIGURABLE)
+     =========================================================================
+     INSTRUCCIONES PARA CONFIGURAR TUS PROYECTOS:
+     1. Edita el listado `projects_config` de abajo para agregar, quitar o
+        modificar tus proyectos (puedes tener 1, 3, 5 o los que necesites).
+     2. Campos disponibles por cada proyecto:
+        - titulo       (obligatorio): Nombre del proyecto.
+        - categoria    (obligatorio): Ej. "Plataforma Web", "Cloud & DevOps", "App Móvil".
+        - cliente      (opcional)   : Nombre del cliente o sector (ej. "Sector Financiero").
+        - anio         (opcional)   : Año de entrega (ej. "2025").
+        - descripcion  (obligatorio): Resumen breve del problema resuelto (2-3 líneas).
+        - imagen       (opcional)   : Ruta de imagen en Vite (ej. "assets/images/projects/mi-proyecto.webp")
+                                      o URL pública (ej. "/images/mi-proyecto.png" o "https://...").
+                                      Si lo dejas vacío (""), se mostrará un placeholder elegante.
+        - imagen_alt   (opcional)   : Texto alternativo accesible para la imagen.
+        - metrica      (opcional)   : Logro o resultado destacado (ej. "+99.9% disponibilidad").
+        - tecnologias  (opcional)   : Lista de tecnologías usadas (ej. ['Symfony', 'PostgreSQL', 'Docker']).
+        - url          (opcional)   : Enlace al proyecto en vivo, demo o repositorio (déjalo "" si es privado).
+        - url_texto    (opcional)   : Texto del enlace (por defecto: "Ver proyecto").
+     ========================================================================= -->
+{% set projects_config = projects|default([
+    {
+        titulo: 'Plataforma de Gestión Operativa (ERP Web)',
+        categoria: 'Software a Medida',
+        cliente: 'Sector Logística',
+        anio: '2025',
+        descripcion: 'Sistema web modular para control de inventarios, trazabilidad de pedidos en tiempo real y facturación automatizada con paneles gerenciales.',
+        imagen: 'assets/images/preview.webp',
+        imagen_alt: 'Vista previa de la Plataforma de Gestión Operativa',
+        metrica: '-45% en tiempos de despacho',
+        tecnologias: ['Symfony', 'PostgreSQL', 'Docker', 'Bootstrap 5'],
+        url: '#formulario-contacto',
+        url_texto: 'Solicitar caso similar'
+    },
+    {
+        titulo: 'Portal de Autoservicio & API B2B',
+        categoria: 'APIs & Microservicios',
+        cliente: 'Sector Financiero',
+        anio: '2025',
+        descripcion: 'Arquitectura RESTful de alta concurrencia con autenticación OAuth2, integración de pasarelas de pago y sincronización asíncrona con caché Redis.',
+        imagen: 'assets/images/preview2.webp',
+        imagen_alt: 'Vista previa del Portal de Autoservicio y API B2B',
+        metrica: '99.98% uptime mensual',
+        tecnologias: ['PHP 8.4', 'Symfony', 'Redis', 'AWS'],
+        url: '#formulario-contacto',
+        url_texto: 'Solicitar caso similar'
+    },
+    {
+        titulo: 'Migración Cloud & Pipeline CI/CD',
+        categoria: 'Cloud & DevOps',
+        cliente: 'Sector Retail',
+        anio: '2024',
+        descripcion: 'Contenerización de aplicaciones legadas, infraestructura como código y despliegues automatizados sin tiempo de inactividad con monitoreo 24/7.',
+        imagen: 'assets/images/hero/hero-2.png',
+        imagen_alt: 'Infraestructura Cloud y automatización CI/CD',
+        metrica: 'Despliegues 5x más rápidos',
+        tecnologias: ['Kubernetes', 'Docker', 'Cloudflare', 'CI/CD'],
+        url: '#formulario-contacto',
+        url_texto: 'Solicitar caso similar'
+    },
+    {
+        titulo: 'Aplicación Web Interactiva de Analítica',
+        categoria: 'Frontend & UX',
+        cliente: 'Sector Salud',
+        anio: '2024',
+        descripcion: 'Interfaz reactiva mobile-first para visualización de indicadores clínicos, generación de reportes exportables y control granular de permisos.',
+        imagen: 'assets/images/hero/hero-4.png',
+        imagen_alt: 'Dashboard interactivo de analítica web',
+        metrica: '+98 puntaje Core Web Vitals',
+        tecnologias: ['React', 'TypeScript', 'Vite', 'PostgreSQL'],
+        url: '#formulario-contacto',
+        url_texto: 'Solicitar caso similar'
+    }
+]) %}
+
+<section class="projects-carousel-section py-5 py-lg-6 overflow-hidden" id="proyectos" aria-labelledby="projects-title">
+    <div class="container mb-4 mb-lg-5">
+        <div class="text-center max-w-700 mx-auto">
+            <span class="section-eyebrow" data-i18n="services_page.projects_eyebrow">Proyectos Realizados</span>
+            <h2 id="projects-title" class="section-title" data-i18n="services_page.projects_title">
+                Casos y soluciones construidas a medida
+            </h2>
+            <p class="section-subtitle text-muted mb-0" data-i18n="services_page.projects_subtitle">
+                Explora algunos de los sistemas, plataformas y arquitecturas que hemos diseñado y puesto en producción.
+            </p>
+        </div>
+    </div>
+
+    {% if projects_config is empty %}
+        <div class="container">
+            <div class="projects-empty-state text-center p-5 rounded-4 bg-white border">
+                <p class="text-muted mb-0" data-i18n="services_page.projects_empty">
+                    Próximamente publicaremos nuestros proyectos destacados.
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <!-- Carrusel continuo infinito (igual al de tecnologías en Inicio; se pausa al pasar el cursor) -->
+        <div class="projects-marquee-wrapper" aria-label="Carrusel de proyectos realizados">
+            <div class="projects-marquee-track">
+                {% for copy in 1..2 %}
+                    <div class="projects-marquee-group" {% if copy == 2 %}aria-hidden="true"{% endif %}>
+                        {% for project in projects_config %}
+                            {% set image_src = '' %}
+                            {% if project.imagen is defined and project.imagen %}
+                                {% if project.imagen starts with 'http://' or project.imagen starts with 'https://' or project.imagen starts with '/' %}
+                                    {% set image_src = project.imagen %}
+                                {% else %}
+                                    {% set image_src = asset(project.imagen, 'vite') %}
+                                {% endif %}
+                            {% endif %}
+
+                            {% set is_external = project.url is defined and project.url and (project.url starts with 'http://' or project.url starts with 'https://') %}
+
+                            <article class="project-slide">
+                                <div class="project-card card h-100 border-0 rounded-4 overflow-hidden shadow-sm">
+                                    <!-- Imagen o Placeholder del proyecto -->
+                                    <div class="project-card-media position-relative overflow-hidden">
+                                        {% if image_src %}
+                                            <img src="{{ image_src }}"
+                                                 alt="{{ copy == 1 ? project.imagen_alt|default(project.titulo) : '' }}"
+                                                 class="project-card-img w-100 h-100"
+                                                 loading="lazy">
+                                        {% else %}
+                                            <div class="project-card-placeholder d-flex flex-column align-items-center justify-content-center text-white text-center p-4">
+                                                <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" class="mb-2 opacity-75" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                                </svg>
+                                                <span class="small fw-semibold opacity-75">{{ project.categoria|default('Proyecto') }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="project-card-media-overlay" aria-hidden="true"></div>
+
+                                        {% if project.categoria is defined and project.categoria %}
+                                            <span class="project-category-pill">{{ project.categoria }}</span>
+                                        {% endif %}
+
+                                        {% if project.anio is defined and project.anio %}
+                                            <span class="project-year-pill">{{ project.anio }}</span>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Contenido de la tarjeta -->
+                                    <div class="project-card-body d-flex flex-column flex-grow-1 p-4">
+                                        {% if project.cliente is defined and project.cliente %}
+                                            <span class="project-client-label mb-1">{{ project.cliente }}</span>
+                                        {% endif %}
+
+                                        <h3 class="h5 project-card-title mb-2">{{ project.titulo }}</h3>
+
+                                        <p class="text-muted project-card-desc mb-3">{{ project.descripcion }}</p>
+
+                                        {% if project.metrica is defined and project.metrica %}
+                                            <div class="project-metric-pill d-inline-flex align-items-center gap-2 mb-3">
+                                                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                                </svg>
+                                                <span>{{ project.metrica }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="mt-auto pt-3 border-top">
+                                            {% if project.tecnologias is defined and project.tecnologias is not empty %}
+                                                <div class="service-tech-tags mb-3">
+                                                    {% for tech in project.tecnologias %}
+                                                        <span class="tech-tag">{{ tech }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if project.url is defined and project.url %}
+                                                <a href="{{ project.url }}"
+                                                   class="project-card-link d-inline-flex align-items-center gap-2 fw-semibold small text-decoration-none"
+                                                   {% if copy == 2 %}tabindex="-1"{% endif %}
+                                                   {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                                    <span>{{ project.url_texto|default('Ver proyecto') }}</span>
+                                                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                                    </svg>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+<!-- =========================================================================
      3. MODELO DE TRABAJO Y ENTREGAS (WORKFLOW)
      ========================================================================= -->
 <section class="workflow-section py-5 py-lg-6 bg-white" id="metodologia-servicio" aria-labelledby="workflow-title">

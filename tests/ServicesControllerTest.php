@@ -36,6 +36,13 @@ final class ServicesControllerTest extends WebTestCase
         $this->assertSelectorTextContains('#databases', 'Bases de Datos & Rendimiento');
         $this->assertSelectorTextContains('#seguridad', 'Ciberseguridad & Hardening');
 
+        // 3.5. Carrusel continuo de Proyectos Realizados (configurable)
+        $this->assertSelectorExists('#proyectos');
+        $this->assertSelectorExists('.projects-marquee-wrapper');
+        $this->assertSelectorExists('.projects-marquee-track');
+        $this->assertSelectorCount(2, '.projects-marquee-group');
+        $this->assertSelectorCount(8, '.project-slide');
+
         // 4. Proceso de Trabajo (4 pasos)
         $this->assertSelectorExists('#metodologia-servicio');
         $this->assertSelectorCount(4, '.workflow-card');
