@@ -86,6 +86,7 @@ COPY . .
 
 COPY --from=composer_builder /app/vendor/ ./vendor/
 COPY --from=assets_builder /app/public/build/ ./public/build/
+COPY --from=assets_builder /app/public/build/ /var/www/public_build/
 
 RUN composer dump-autoload --optimize
 
