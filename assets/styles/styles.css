@@ -2621,6 +2621,7 @@ body {
 
 .project-card-media {
     aspect-ratio: 16 / 10;
+    height: 210px;
     background-color: var(--sc-navy);
 }
 
