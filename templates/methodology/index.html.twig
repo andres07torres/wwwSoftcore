@@ -6,9 +6,9 @@
 <!-- =========================================================================
      1. HERO SECTION - METODOLOGÍA
      ========================================================================= -->
-<section class="methodology-hero-section py-5 position-relative text-white" aria-labelledby="methodology-hero-title">
+<section class="methodology-hero-section position-relative text-white" aria-labelledby="methodology-hero-title">
     <div class="methodology-hero-bg-overlay"></div>
-    <div class="container position-relative py-3 py-lg-4">
+    <div class="container position-relative py-0 py-lg-4">
         <div class="row align-items-center g-4 g-lg-5">
             <div class="col-12 col-lg-7">
                 <h1 id="methodology-hero-title" class="methodology-hero-title mb-4" data-i18n-html="methodology_page.hero_title">
@@ -19,7 +19,7 @@
                     Combinamos rigor de arquitectura, sprints iterativos y automatización CI/CD para convertir requerimientos complejos en software robusto, escalable y sin fricción operativa.
                 </p>
 
-                <div class="d-flex flex-wrap align-items-center gap-3">
+                <div class="methodology-hero-actions d-flex flex-wrap align-items-center gap-3">
                     <a href="{{ path('app_services') }}#formulario-contacto" class="btn btn-hero-primary rounded-pill d-inline-flex align-items-center gap-2">
                         <span data-i18n="methodology_page.hero_btn_cta">Iniciar Proyecto</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -33,16 +33,61 @@
                         </svg>
                     </a>
                 </div>
+
+                <div class="text-white-50 extra-small pt-3 mt-1" data-i18n="methodology_page.hero_flow_note">
+                    Ciclos de 2 semanas · Demostraciones en staging · Transparencia radical
+                </div>
             </div>
 
-            <div class="col-12 col-lg-5">
-                <div class="methodology-hero-media position-relative">
-                    <div class="methodology-img-frame rounded-4 overflow-hidden shadow-lg border border-white-15">
-                        <img src="{{ asset('assets/images/hero/hero-4.png', 'vite') }}" 
-                             alt="Planificación y arquitectura ágil en SoftCore" 
-                             class="img-fluid w-100 methodology-hero-img"
-                             loading="eager">
-                        <div class="methodology-img-overlay"></div>
+            <!-- Panel de Pipeline de Entrega Continua (diferenciador visual de metodología en desktop) -->
+            <div class="col-12 col-lg-5 d-none d-lg-block">
+                <div class="methodology-hero-console card border border-white-15 rounded-4 shadow-lg overflow-hidden bg-glass text-white">
+                    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom border-white-10 bg-black-20">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="console-circle console-circle-red"></span>
+                            <span class="console-circle console-circle-yellow"></span>
+                            <span class="console-circle console-circle-green"></span>
+                            <span class="extra-small font-monospace text-white-50 ms-1">pipeline: agile-lifecycle.yaml</span>
+                        </div>
+                        <span class="extra-small font-monospace text-info">active</span>
+                    </div>
+                    
+                    <div class="p-3 p-lg-4">
+                        <div class="pipeline-step-row d-flex align-items-start gap-3 pb-2 mb-2 border-bottom border-white-10">
+                            <span class="font-monospace text-info extra-small fw-bold">01</span>
+                            <div>
+                                <div class="extra-small fw-semibold text-white" data-i18n="methodology_page.pipe1_title">Descubrimiento & Estrategia</div>
+                                <div class="extra-small text-white-50" data-i18n="methodology_page.pipe1_desc">SAD, contratos y backlog priorizado</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-step-row d-flex align-items-start gap-3 pb-2 mb-2 border-bottom border-white-10">
+                            <span class="font-monospace text-info extra-small fw-bold">02</span>
+                            <div>
+                                <div class="extra-small fw-semibold text-white" data-i18n="methodology_page.pipe2_title">Arquitectura & Diseño C4</div>
+                                <div class="extra-small text-white-50" data-i18n="methodology_page.pipe2_desc">OpenAPI, esquemas BD e infraestructura base</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-step-row d-flex align-items-start gap-3 pb-2 mb-2 border-bottom border-white-10">
+                            <span class="font-monospace text-info extra-small fw-bold">03</span>
+                            <div>
+                                <div class="extra-small fw-semibold text-white" data-i18n="methodology_page.pipe3_title">Sprints Ágiles Iterativos</div>
+                                <div class="extra-small text-white-50" data-i18n="methodology_page.pipe3_desc">Entregas quincenales funcionales en staging</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-step-row d-flex align-items-start gap-3 pb-2 mb-2 border-bottom border-white-10">
+                            <span class="font-monospace text-info extra-small fw-bold">04</span>
+                            <div>
+                                <div class="extra-small fw-semibold text-white" data-i18n="methodology_page.pipe4_title">QA & Hardening OWASP</div>
+                                <div class="extra-small text-white-50" data-i18n="methodology_page.pipe4_desc">Tests automatizados de carga y seguridad</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-step-row d-flex align-items-start gap-3">
+                            <span class="font-monospace text-info extra-small fw-bold">05</span>
+                            <div>
+                                <div class="extra-small fw-semibold text-white" data-i18n="methodology_page.pipe5_title">Despliegue Continuo Cloud</div>
+                                <div class="extra-small text-white-50" data-i18n="methodology_page.pipe5_desc">Zero-downtime, telemetría y soporte 24/7</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
