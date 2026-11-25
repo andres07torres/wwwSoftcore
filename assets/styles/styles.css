@@ -1392,6 +1392,10 @@ body {
         flex-direction: column;
         width: 100%;
         max-width: 280px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
         gap: 0.65rem !important;
     }
     .about-hero-actions .btn {
@@ -1728,6 +1732,10 @@ body {
         flex-direction: column;
         width: 100%;
         max-width: 280px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
         gap: 0.65rem !important;
     }
     .services-hero-actions .btn {
@@ -2110,6 +2118,10 @@ body {
         flex-direction: column;
         width: 100%;
         max-width: 280px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
         gap: 0.65rem !important;
     }
     .methodology-hero-actions .btn {
@@ -2342,6 +2354,10 @@ body {
         flex-direction: column;
         width: 100%;
         max-width: 280px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
         gap: 0.65rem !important;
     }
     .technology-hero-actions .btn {
@@ -2497,9 +2513,10 @@ body {
     .methodology-hero-actions,
     .technology-hero-actions {
         justify-content: center !important;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        align-items: center !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 
@@ -2509,16 +2526,23 @@ body {
     .methodology-hero-actions,
     .technology-hero-actions {
         justify-content: center !important;
-        width: 100%;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .about-hero-actions .btn,
     .services-hero-actions .btn,
     .methodology-hero-actions .btn,
     .technology-hero-actions .btn {
-        width: 100%;
-        max-width: 320px;
-        justify-content: center;
+        width: 100% !important;
+        max-width: 290px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-content: center !important;
+        display: inline-flex !important;
     }
 }
 
