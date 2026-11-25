@@ -526,9 +526,14 @@ body {
     color: #ffffff;
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 0.75rem 1.6rem;
+    height: 48px;
+    padding: 0 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50px;
     border: 1px solid var(--sc-navy);
+    box-sizing: border-box;
     transition: var(--sc-transition);
 }
 
@@ -545,9 +550,14 @@ body {
     color: var(--sc-navy);
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 0.75rem 1.4rem;
+    height: 48px;
+    padding: 0 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50px;
     border: 1px solid rgba(8, 32, 70, 0.25);
+    box-sizing: border-box;
     transition: var(--sc-transition);
 }
 
@@ -633,11 +643,16 @@ body {
     color: #ffffff;
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 0.75rem 1.5rem;
+    height: 48px;
+    padding: 0 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    box-sizing: border-box;
     transition: var(--sc-transition);
 }
 
@@ -1985,5 +2000,205 @@ body {
         color: #64748b !important;
         font-size: 0.8rem !important;
     }
+}
+
+/* --------------------------------------------------------------------------
+   13. Plantilla Metodología
+   -------------------------------------------------------------------------- */
+.methodology-hero-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--sc-navy) 0%, #082855 50%, #051a38 100%);
+    overflow: hidden;
+    min-height: clamp(460px, 65vh, 580px);
+    display: flex;
+    align-items: center;
+}
+
+.methodology-hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(2, 116, 230, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 10% 80%, rgba(243, 112, 33, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.methodology-hero-title {
+    font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+}
+
+.methodology-hero-subtitle {
+    font-size: 1.12rem;
+    line-height: 1.65;
+    font-weight: 400;
+}
+
+.methodology-hero-media {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.methodology-img-frame {
+    position: relative;
+    border-radius: 1.5rem;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.methodology-img-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+}
+
+.methodology-hero-img {
+    height: clamp(340px, 44vh, 420px);
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 1.5rem;
+    width: 100%;
+}
+
+.methodology-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 32, 70, 0.1) 0%, rgba(8, 32, 70, 0.45) 100%);
+    pointer-events: none;
+    border-radius: 1.5rem;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .methodology-hero-section {
+        min-height: auto;
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+    .methodology-hero-img {
+        height: 240px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .methodology-hero-section {
+        min-height: auto !important;
+        padding-top: 1.75rem !important;
+        padding-bottom: 1.75rem !important;
+    }
+    .methodology-hero-title {
+        font-size: 1.65rem !important;
+        line-height: 1.22 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .methodology-hero-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 1.25rem !important;
+    }
+    .methodology-hero-media {
+        max-width: 380px;
+        margin: 0 auto;
+    }
+    .methodology-hero-img {
+        height: 200px !important;
+        border-radius: 1rem !important;
+    }
+    .methodology-img-frame {
+        border-radius: 1rem !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .methodology-hero-section .d-flex.flex-wrap {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 0.65rem !important;
+    }
+    .methodology-hero-section .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.6rem 1.15rem;
+        font-size: 0.86rem;
+    }
+}
+
+.pillar-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(8, 32, 70, 0.06) !important;
+}
+
+.pillar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(8, 32, 70, 0.08) !important;
+}
+
+.pillar-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(2, 116, 230, 0.1);
+    color: var(--sc-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phase-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(8, 32, 70, 0.07) !important;
+}
+
+.phase-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(8, 32, 70, 0.09) !important;
+}
+
+.phase-step-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    border-radius: 50rem;
+    background: var(--sc-navy);
+    color: #ffffff;
+}
+
+.phase-duration {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.phase-deliverable {
+    border: none;
+    background: transparent;
+}
+
+.standard-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(8, 32, 70, 0.06);
+}
+
+.standard-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(8, 32, 70, 0.08) !important;
+}
+
+.standard-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(0, 191, 166, 0.12);
+    color: #0d9488;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 

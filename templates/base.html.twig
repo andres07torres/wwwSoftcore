@@ -73,7 +73,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('app_home') }}#metodologia">
+                                    <a class="nav-link {% if app.request.attributes.get('_route') in ['app_methodology', 'app_methodology_es'] %}active{% endif %}" {% if app.request.attributes.get('_route') in ['app_methodology', 'app_methodology_es'] %}aria-current="page"{% endif %} href="{{ path('app_methodology') }}">
                                         <span class="nav-link-title" data-i18n="nav.metodologia">Metodología</span>
                                     </a>
                                 </li>
@@ -165,7 +165,7 @@
                             <li><a href="{{ path('app_home') }}" data-i18n="nav.inicio">Inicio</a></li>
                             <li><a href="{{ path('app_about') }}" data-i18n="nav.quienes_somos">Quiénes Somos</a></li>
                             <li><a href="{{ path('app_services') }}" data-i18n="nav.servicios">Servicios</a></li>
-                            <li><a href="{{ path('app_home') }}#metodologia" data-i18n="nav.metodologia">Metodología</a></li>
+                            <li><a href="{{ path('app_methodology') }}" data-i18n="nav.metodologia">Metodología</a></li>
                             <li><a href="{{ path('app_home') }}#tecnologias" data-i18n="nav.tecnologias">Tecnologías</a></li>
                         </ul>
                     </div>
