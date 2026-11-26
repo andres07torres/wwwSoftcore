@@ -58,6 +58,6 @@ final class HomeControllerTest extends WebTestCase
         $this->assertSelectorExists('.main-footer#consultoria');
         $this->assertSelectorExists('.footer-logo');
         $this->assertSelectorExists('.footer-bottom');
-        $this->assertSelectorTextContains('.footer-bottom', 'SoftCore');
+        $this->assertSelectorTextContains('.footer-bottom', 'SoftCorec');
     }
 }

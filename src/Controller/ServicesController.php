@@ -18,7 +18,7 @@ final class ServicesController extends AbstractController
             $email = trim((string) $request->request->get('email'));
 
             if (!empty($name) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->addFlash('success', '¡Gracias por escribirnos! Tu solicitud ha sido recibida correctamente. Un arquitecto de soluciones de SoftCore te responderá en menos de 24 horas.');
+                $this->addFlash('success', '¡Gracias por escribirnos! Tu solicitud ha sido recibida correctamente. Un arquitecto de soluciones de SoftCorec te responderá en menos de 24 horas.');
             } else {
                 $this->addFlash('error', 'Por favor completa tu nombre y un correo electrónico corporativo válido.');
             }

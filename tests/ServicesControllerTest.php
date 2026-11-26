@@ -65,7 +65,7 @@ final class ServicesControllerTest extends WebTestCase
         // 6. Footer heredado
         $this->assertSelectorExists('.main-footer#consultoria');
         $this->assertSelectorExists('.footer-logo');
-        $this->assertSelectorTextContains('.footer-bottom', 'SoftCore');
+        $this->assertSelectorTextContains('.footer-bottom', 'SoftCorec');
     }
 
     public function testServicesContactFormSubmission(): void

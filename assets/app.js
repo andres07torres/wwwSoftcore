@@ -41,4 +41,4 @@ import './styles/styles.css';
 // Compilar y emitir automáticamente todas las imágenes de assets/images
 import.meta.glob('./images/**', { eager: true });
 
-console.log('Softcore frontend assets loaded successfully 🚀');
+console.log('SoftCorec frontend assets loaded successfully 🚀');
