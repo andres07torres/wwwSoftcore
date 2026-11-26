@@ -18,14 +18,15 @@ final class MaintenanceListenerTest extends WebTestCase
             $client->request('GET', '/');
             $this->assertResponseStatusCodeSame(Response::HTTP_SERVICE_UNAVAILABLE);
             $this->assertResponseHeaderSame('Retry-After', '3600');
-            $this->assertSelectorExists('main.maintenance-screen');
-            $this->assertSelectorExists('img.maintenance-gif[src*="mantenimiento-animado"]');
+            $this->assertSelectorTextContains('h1', 'Estamos en mantenimiento');
+            $this->assertSelectorExists('.progress');
+            $this->assertSelectorExists('.tape.top');
             $this->assertSelectorNotExists('.main-header');
             $this->assertSelectorNotExists('.main-footer');
 
             $client->request('GET', '/services');
             $this->assertResponseStatusCodeSame(Response::HTTP_SERVICE_UNAVAILABLE);
-            $this->assertSelectorExists('img.maintenance-gif[src*="mantenimiento-animado"]');
+            $this->assertSelectorTextContains('h1', 'Estamos en mantenimiento');
         } finally {
             @unlink($lockFile);
         }
