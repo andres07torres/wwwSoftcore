@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}SoftCorec{% endblock %}</title>
         <meta name="description" content="{% block meta_description %}Arquitectura de software de alto rendimiento, ingeniería cloud y desarrollo a medida para acelerar el crecimiento de tu empresa.{% endblock %}">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
 
         <!-- Open Graph / WhatsApp / Redes Sociales -->
         <meta property="og:type" content="website">

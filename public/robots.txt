@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /_profiler/
+Disallow: /_wdt/
+Disallow: /_error/
+
+Sitemap: https://softcorec.com/sitemap.xml
