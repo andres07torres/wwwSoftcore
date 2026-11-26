@@ -12,9 +12,10 @@ if [ -f /var/www/public_build/.vite/entrypoints.json ]; then
     cp -r /var/www/public_build/. /var/www/html/public/build/ 2>/dev/null || true
 fi
 
-# Ajustar permisos para www-data
-chown -R www-data:www-data /var/www/html/var /var/www/html/public 2>/dev/null || true
-chmod -R 775 /var/www/html/var /var/www/html/public 2>/dev/null || true
+# Ajustar permisos solo para var (runtime de Symfony) sin apropiarse de public/ en el host
+chown -R www-data:www-data /var/www/html/var 2>/dev/null || true
+chmod -R 775 /var/www/html/var 2>/dev/null || true
+chmod -R a+rX /var/www/html/public/build 2>/dev/null || true
 
 # Ejecutar el comando del contenedor (php-fpm)
 exec "$@"
