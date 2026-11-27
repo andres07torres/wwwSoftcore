@@ -4,17 +4,8 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Tipografía Montserrat (@import al inicio del archivo)
+   1. Tipografía Montserrat (cargada de forma no bloqueante en base.html.twig)
    -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
-@font-face {
-    font-family: 'Montserrat';
-    src: url('../fonts/Montserrat-Thin.ttf') format('truetype');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
-}
 
 /* --------------------------------------------------------------------------
    2. Variables y Tokens

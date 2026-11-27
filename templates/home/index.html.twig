@@ -3,6 +3,10 @@
 {% block title %}SoftCorec - Arquitectura de Software & Cloud Solutions{% endblock %}
 {% block meta_description %}SoftCorec diseña y desarrolla arquitectura de software a medida, soluciones cloud, desarrollo web y móvil de alto rendimiento para empresas.{% endblock %}
 
+{% block head_preload %}
+        <link rel="preload" as="image" href="{{ asset('assets/images/hero/hero-1.webp', 'vite') }}" imagesrcset="{{ asset('assets/images/hero/hero-1-mobile.webp', 'vite') }} 800w, {{ asset('assets/images/hero/hero-1.webp', 'vite') }} 1672w" imagesizes="100vw" fetchpriority="high">
+{% endblock %}
+
 {% block body %}
 <!-- =========================================================================
      1. HERO SECTION - CARRUSEL FULL WIDTH (DE IZQUIERDA A DERECHA)
@@ -20,7 +24,7 @@
         <!-- Slides con imágenes que cubren el ancho completo de extremo a extremo -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('assets/images/hero/hero-1.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Colaboración y arquitectura de software" loading="eager" fetchpriority="high">
+                <img src="{{ asset('assets/images/hero/hero-1.webp', 'vite') }}" srcset="{{ asset('assets/images/hero/hero-1-mobile.webp', 'vite') }} 800w, {{ asset('assets/images/hero/hero-1.webp', 'vite') }} 1672w" sizes="100vw" width="1672" height="941" class="d-block w-100 hero-fullscreen-img" alt="Colaboración y arquitectura de software" loading="eager" decoding="async" fetchpriority="high">
                 <div class="hero-slide-overlay"></div>
             </div>
             <div class="carousel-item">
