@@ -8,10 +8,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class TechnologyController extends AbstractController
 {
-    #[Route('/technology', name: 'app_technology')]
-    #[Route('/tecnologias', name: 'app_technology_es')]
+    #[Route('/tecnologias', name: 'app_technology')]
     public function index(): Response
     {
         return $this->render('technology/index.html.twig');
+    }
+
+    #[Route('/technology', name: 'app_technology_legacy', methods: ['GET'])]
+    public function legacyRedirect(): Response
+    {
+        return $this->redirectToRoute('app_technology', [], Response::HTTP_MOVED_PERMANENTLY);
     }
 }

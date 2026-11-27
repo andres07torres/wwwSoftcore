@@ -9,8 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ServicesController extends AbstractController
 {
-    #[Route('/services', name: 'app_services', methods: ['GET', 'POST'])]
-    #[Route('/servicios', name: 'app_services_es', methods: ['GET', 'POST'])]
+    #[Route('/servicios', name: 'app_services', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         if ($request->isMethod('POST')) {
@@ -27,5 +26,11 @@ final class ServicesController extends AbstractController
         }
 
         return $this->render('services/index.html.twig');
+    }
+
+    #[Route('/services', name: 'app_services_legacy', methods: ['GET'])]
+    public function legacyRedirect(): Response
+    {
+        return $this->redirectToRoute('app_services', [], Response::HTTP_MOVED_PERMANENTLY);
     }
 }
