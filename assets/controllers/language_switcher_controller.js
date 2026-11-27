@@ -12,7 +12,7 @@ const translations = {
 
         // Hero
         'hero.title': 'Arquitectura de software a medida que <span class="text-gradient-light">escala con tu negocio</span>',
-        'hero.subtitle': 'Diseñamos y desarrollamos infraestructuras tecnológicas robustas, escalables y orientadas a resultados. Optimizamos procesos críticos para acelerar el crecimiento de tu empresa.',
+        'hero.subtitle': 'En SoftCorec diseñamos y desarrollamos infraestructuras tecnológicas robustas, escalables y orientadas a resultados. Optimizamos procesos críticos para acelerar el crecimiento de tu empresa.',
         'hero.btn_consultoria': 'Agendar Consultoría',
         'hero.btn_servicios': 'Ver Servicios',
 
@@ -354,7 +354,7 @@ const translations = {
 
         // Hero
         'hero.title': 'Custom software architecture that <span class="text-gradient-light">scales with your business</span>',
-        'hero.subtitle': 'We design and develop robust, scalable, and results-driven technological infrastructures. We optimize critical processes to accelerate your company growth.',
+        'hero.subtitle': 'At SoftCorec, we design and develop robust, scalable, and results-driven technological infrastructures. We optimize critical processes to accelerate your company growth.',
         'hero.btn_consultoria': 'Schedule Consulting',
         'hero.btn_servicios': 'View Services',
 
