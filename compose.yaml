@@ -9,12 +9,12 @@ services:
     container_name: softcore_app
     restart: unless-stopped
     environment:
-      APP_ENV: ${APP_ENV:-dev}
-      APP_DEBUG: ${APP_DEBUG:-1}
+      APP_ENV: prod
+      APP_DEBUG: "0"
       APP_MAINTENANCE: ${APP_MAINTENANCE:-0}
       APP_SECRET: ${APP_SECRET:-b34f2a78e1c9d405060708090a0b0c0d}
       DATABASE_URL: ${DATABASE_URL:-postgresql://app:secret@127.0.0.1:5432/app?serverVersion=16&charset=utf8}
-      DEFAULT_URI: ${APP_DEFAULT_URI:-https://softcore.andr3sdev7.com}
+      DEFAULT_URI: ${APP_DEFAULT_URI:-https://softcorec.com}
       TRUSTED_PROXIES: 127.0.0.1,REMOTE_ADDR,172.16.0.0/12,10.0.0.0/8
     volumes:
       - app_var:/var/www/html/var
