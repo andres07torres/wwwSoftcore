@@ -1,0 +1,56 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ is_edit ? 'Editar criterio' : 'Nuevo criterio' }} | Tecnologías{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block admin_content %}
+    <div class="sc-page-header mb-4">
+        <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
+            <a href="{{ path('app_admin_dashboard') }}">Panel</a>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <a href="{{ path('app_admin_technology') }}">Tecnologías</a>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="sc-breadcrumb-current" aria-current="page">{{ is_edit ? 'Editar criterio' : 'Nuevo criterio' }}</span>
+        </nav>
+        <h1 class="sc-page-title mb-1">{{ is_edit ? 'Editar criterio' : 'Nuevo criterio' }}</h1>
+        <p class="sc-page-subtitle mb-0">Rigor Técnico en la página pública de Tecnologías.</p>
+    </div>
+
+    <section class="sc-panel-card" style="max-width: 720px;">
+        <div class="sc-panel-card-body">
+            {{ form_start(form, { attr: { class: 'row g-3' } }) }}
+                <div class="col-12 col-sm-5">
+                    {{ form_label(form.iconKey, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.iconKey) }}
+                    {{ form_errors(form.iconKey) }}
+                </div>
+                <div class="col-12 col-sm-7">
+                    {{ form_label(form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.title) }}
+                    {{ form_errors(form.title) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.sortOrder) }}
+                    {{ form_errors(form.sortOrder) }}
+                </div>
+                <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        {{ form_widget(form.isActive) }}
+                        {{ form_label(form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                    </div>
+                </div>
+                <div class="col-12 sc-form-actions d-flex justify-content-center gap-2 pt-2">
+                    <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                    <a href="{{ path('app_admin_technology') }}#sec-criterios" class="btn sc-btn-outline">Cancelar</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

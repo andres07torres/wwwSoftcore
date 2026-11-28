@@ -1,0 +1,555 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Editar Tecnologías | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block admin_content %}
+    <div class="sc-page-header mb-4">
+        <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
+            <a href="{{ path('app_admin_dashboard') }}">Panel</a>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span>Gestión de Contenido</span>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="sc-breadcrumb-current" aria-current="page">Tecnologías</span>
+        </nav>
+        <h1 class="sc-page-title mb-1">Tecnologías</h1>
+        <p class="sc-page-subtitle mb-0">Secciones ordenadas según su aparición en la página pública de Tecnologías.</p>
+    </div>
+
+    <nav class="sc-section-nav mb-4" aria-label="Secciones de Tecnologías">
+        <a href="#sec-hero" class="sc-section-pill"><span class="sc-section-num">1</span><span>Hero</span></a>
+        <a href="#sec-criterios" class="sc-section-pill"><span class="sc-section-num">2</span><span>Rigor Técnico</span></a>
+        <a href="#sec-ecosistema" class="sc-section-pill"><span class="sc-section-num">3</span><span>Catálogo Técnico</span></a>
+        <a href="#sec-practicas" class="sc-section-pill"><span class="sc-section-num">4</span><span>Buenas Prácticas</span></a>
+    </nav>
+
+    <div class="d-flex flex-column gap-5">
+        <!-- 1. HERO -->
+        <div id="sec-hero" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 1</span>
+                <h2 class="sc-section-group-title mb-0">Hero de Tecnologías</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">1.1 Textos principales y consola de arquitectura</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Edita el título, subtítulo y las 4 capas del panel técnico (los botones del Hero se mantienen fijos).</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(hero_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-6">
+                            {{ form_label(hero_form.heroTitlePrefix, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitlePrefix) }}
+                            {{ form_errors(hero_form.heroTitlePrefix) }}
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            {{ form_label(hero_form.heroTitleHighlight, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitleHighlight) }}
+                            {{ form_errors(hero_form.heroTitleHighlight) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(hero_form.heroSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroSubtitle) }}
+                            {{ form_errors(hero_form.heroSubtitle) }}
+                        </div>
+
+                        <div class="col-12 pt-2">
+                            <hr class="my-1">
+                        </div>
+
+                        <div class="col-12 col-md-7">
+                            {{ form_label(hero_form.specLabel, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.specLabel) }}
+                            {{ form_errors(hero_form.specLabel) }}
+                        </div>
+                        <div class="col-12 col-md-5">
+                            {{ form_label(hero_form.specStatus, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.specStatus) }}
+                            {{ form_errors(hero_form.specStatus) }}
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+                            {{ form_label(hero_form.stackLayer1Label, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer1Label) }}
+                            {{ form_errors(hero_form.stackLayer1Label) }}
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            {{ form_label(hero_form.stackLayer1Value, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer1Value) }}
+                            {{ form_errors(hero_form.stackLayer1Value) }}
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+                            {{ form_label(hero_form.stackLayer2Label, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer2Label) }}
+                            {{ form_errors(hero_form.stackLayer2Label) }}
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            {{ form_label(hero_form.stackLayer2Value, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer2Value) }}
+                            {{ form_errors(hero_form.stackLayer2Value) }}
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+                            {{ form_label(hero_form.stackLayer3Label, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer3Label) }}
+                            {{ form_errors(hero_form.stackLayer3Label) }}
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            {{ form_label(hero_form.stackLayer3Value, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer3Value) }}
+                            {{ form_errors(hero_form.stackLayer3Value) }}
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+                            {{ form_label(hero_form.stackLayer4Label, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer4Label) }}
+                            {{ form_errors(hero_form.stackLayer4Label) }}
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            {{ form_label(hero_form.stackLayer4Value, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.stackLayer4Value) }}
+                            {{ form_errors(hero_form.stackLayer4Value) }}
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(hero_form) }}
+                </div>
+            </section>
+        </div>
+
+        <!-- 2. RIGOR TÉCNICO (CRITERIOS) -->
+        <div id="sec-criterios" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 2</span>
+                <h2 class="sc-section-group-title mb-0">Rigor Técnico (Criterios)</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">2.1 Encabezado de Rigor Técnico</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo de los criterios de selección.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(criteria_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(criteria_header_form.criteriaEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(criteria_header_form.criteriaEyebrow) }}
+                            {{ form_errors(criteria_header_form.criteriaEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(criteria_header_form.criteriaTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(criteria_header_form.criteriaTitle) }}
+                            {{ form_errors(criteria_header_form.criteriaTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(criteria_header_form.criteriaSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(criteria_header_form.criteriaSubtitle) }}
+                            {{ form_errors(criteria_header_form.criteriaSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(criteria_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">2.2 Tarjetas de Criterios</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay criterios activos aquí, se mostrarán los 4 criterios predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewCriterion">
+                        Nuevo criterio
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Orden</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in criteria %}
+                                <tr>
+                                    <td class="fw-semibold text-dark">{{ item.title }}</td>
+                                    <td class="text-muted">{{ item.description|length > 85 ? item.description|slice(0, 85) ~ '…' : item.description }}</td>
+                                    <td>{{ item.sortOrder }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ item.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ item.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_technology_criterion_edit', { id: item.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_technology_criterion_delete', { id: item.id }) }}" onsubmit="return confirm('¿Eliminar este criterio?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_technology_criterion_' ~ item.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay criterios personalizados. La página pública usa los 4 criterios predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3. CATÁLOGO TÉCNICO (ECOSISTEMA) -->
+        <div id="sec-ecosistema" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 3</span>
+                <h2 class="sc-section-group-title mb-0">Catálogo Técnico (Ecosistema)</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">3.1 Encabezado del Catálogo Técnico</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo del ecosistema tecnológico.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(catalog_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(catalog_header_form.catalogEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(catalog_header_form.catalogEyebrow) }}
+                            {{ form_errors(catalog_header_form.catalogEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(catalog_header_form.catalogTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(catalog_header_form.catalogTitle) }}
+                            {{ form_errors(catalog_header_form.catalogTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(catalog_header_form.catalogSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(catalog_header_form.catalogSubtitle) }}
+                            {{ form_errors(catalog_header_form.catalogSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(catalog_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">3.2 Dominios del Ecosistema</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay dominios activos aquí, se mostrarán los 6 dominios predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewDomain">
+                        Nuevo dominio
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Dominio</th>
+                                <th scope="col">Tecnologías</th>
+                                <th scope="col">Orden</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for domain in domains %}
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold text-dark">{{ domain.title }}</div>
+                                        <div class="small text-muted">{{ domain.subtitle }}</div>
+                                    </td>
+                                    <td class="text-muted">{{ domain.techTags|length > 65 ? domain.techTags|slice(0, 65) ~ '…' : domain.techTags }}</td>
+                                    <td>{{ domain.sortOrder }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ domain.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ domain.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_technology_domain_edit', { id: domain.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_technology_domain_delete', { id: domain.id }) }}" onsubmit="return confirm('¿Eliminar este dominio tecnológico?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_technology_domain_' ~ domain.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay dominios personalizados. La página pública usa los 6 dominios predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. BUENAS PRÁCTICAS (ESTÁNDARES) -->
+        <div id="sec-practicas" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 4</span>
+                <h2 class="sc-section-group-title mb-0">Buenas Prácticas (Estándares)</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">4.1 Encabezado de Buenas Prácticas</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo de los estándares aplicados.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(practices_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(practices_header_form.practicesEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(practices_header_form.practicesEyebrow) }}
+                            {{ form_errors(practices_header_form.practicesEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(practices_header_form.practicesTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(practices_header_form.practicesTitle) }}
+                            {{ form_errors(practices_header_form.practicesTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(practices_header_form.practicesSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(practices_header_form.practicesSubtitle) }}
+                            {{ form_errors(practices_header_form.practicesSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(practices_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">4.2 Tarjetas de Estándares</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay estándares activos aquí, se mostrarán los 3 estándares predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewPractice">
+                        Nuevo estándar
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">N°</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for practice in practices %}
+                                <tr>
+                                    <td><span class="sc-role-badge">{{ practice.stepNumber }}</span></td>
+                                    <td class="fw-semibold text-dark">{{ practice.title }}</td>
+                                    <td class="text-muted">{{ practice.description|length > 85 ? practice.description|slice(0, 85) ~ '…' : practice.description }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ practice.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ practice.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_technology_practice_edit', { id: practice.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_technology_practice_delete', { id: practice.id }) }}" onsubmit="return confirm('¿Eliminar este estándar?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_technology_practice_' ~ practice.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay estándares personalizados. La página pública usa los 3 estándares predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Criterio -->
+    <div class="modal fade sc-modal" id="modalNewCriterion" tabindex="-1" aria-labelledby="modalNewCriterionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewCriterionLabel">Nuevo criterio</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Rigor Técnico en Tecnologías.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_criterion_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-5">
+                            {{ form_label(new_criterion_form.iconKey, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_criterion_form.iconKey) }}
+                        </div>
+                        <div class="col-12 col-sm-7">
+                            {{ form_label(new_criterion_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_criterion_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_criterion_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_criterion_form.description) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_criterion_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_criterion_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_criterion_form.isActive) }}
+                                {{ form_label(new_criterion_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_criterion_form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Dominio -->
+    <div class="modal fade sc-modal" id="modalNewDomain" tabindex="-1" aria-labelledby="modalNewDomainLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewDomainLabel">Nuevo dominio tecnológico</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Catálogo Técnico en Tecnologías.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_domain_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-5">
+                            {{ form_label(new_domain_form.iconKey, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_domain_form.iconKey) }}
+                        </div>
+                        <div class="col-12 col-sm-7">
+                            {{ form_label(new_domain_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_domain_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_domain_form.subtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_domain_form.subtitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_domain_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_domain_form.description) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_domain_form.techTags, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_domain_form.techTags) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_domain_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_domain_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_domain_form.isActive) }}
+                                {{ form_label(new_domain_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_domain_form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nueva Práctica / Estándar -->
+    <div class="modal fade sc-modal" id="modalNewPractice" tabindex="-1" aria-labelledby="modalNewPracticeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewPracticeLabel">Nuevo estándar</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Buenas Prácticas en Tecnologías.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_practice_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-4">
+                            {{ form_label(new_practice_form.stepNumber, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_practice_form.stepNumber) }}
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            {{ form_label(new_practice_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_practice_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_practice_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_practice_form.description) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_practice_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_practice_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_practice_form.isActive) }}
+                                {{ form_label(new_practice_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_practice_form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ is_edit ? 'Editar' : 'Nuevo' }} proyecto | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{{ is_edit ? 'Editar proyecto' : 'Nuevo proyecto' }}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block topbar_actions %}
+    <a href="{{ path('app_admin_services') }}" class="btn sc-btn-outline btn-sm">Volver</a>
+{% endblock %}
+
+{% block admin_content %}
+    <section class="sc-panel-card sc-form-card-narrow">
+        <div class="sc-panel-card-header">
+            <div>
+                <h2 class="sc-panel-card-title">{{ is_edit ? 'Actualizar proyecto' : 'Crear proyecto' }}</h2>
+                <p class="sc-panel-card-subtitle mb-0">Carrusel de Proyectos Realizados.</p>
+            </div>
+        </div>
+        <div class="sc-panel-card-body">
+            {% if is_edit and project.imagePath %}
+                <div class="mb-3">
+                    <span class="form-label sc-form-label d-block">Imagen actual</span>
+                    <img src="{{ project.imagePath }}" alt="{{ project.title }}" class="sc-slide-preview-lg">
+                </div>
+            {% endif %}
+            {{ form_start(form, { attr: { class: 'row g-3' } }) }}
+                <div class="col-12 col-sm-7">
+                    {{ form_label(form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.title) }}
+                    {{ form_errors(form.title) }}
+                </div>
+                <div class="col-12 col-sm-5">
+                    {{ form_label(form.category, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.category) }}
+                    {{ form_errors(form.category) }}
+                </div>
+                <div class="col-12 col-sm-8">
+                    {{ form_label(form.client, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.client) }}
+                    {{ form_errors(form.client) }}
+                </div>
+                <div class="col-12 col-sm-4">
+                    {{ form_label(form.year, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.year) }}
+                    {{ form_errors(form.year) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.imageFile, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.imageFile) }}
+                    {{ form_errors(form.imageFile) }}
+                </div>
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.metric, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.metric) }}
+                    {{ form_errors(form.metric) }}
+                </div>
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.techTags, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.techTags) }}
+                    {{ form_errors(form.techTags) }}
+                </div>
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.sortOrder) }}
+                    {{ form_errors(form.sortOrder) }}
+                </div>
+                <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        {{ form_widget(form.isActive) }}
+                        {{ form_label(form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center gap-2 pt-3 sc-form-actions">
+                    <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                    <a href="{{ path('app_admin_services') }}" class="btn sc-btn-outline">Cancelar</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

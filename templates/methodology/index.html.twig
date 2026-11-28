@@ -4,6 +4,7 @@
 {% block meta_description %}Descubre la metodología ágil de SoftCorec: descubrimiento técnico, diseño arquitectónico, entregas continuas y aseguramiento de calidad.{% endblock %}
 
 {% block body %}
+{% set has_config = methodology_config is defined and methodology_config is not null %}
 <!-- =========================================================================
      1. HERO SECTION - METODOLOGÍA
      ========================================================================= -->
@@ -12,13 +13,23 @@
     <div class="container position-relative py-0 py-lg-4">
         <div class="row align-items-center g-4 g-lg-5">
             <div class="col-12 col-lg-7">
-                <h1 id="methodology-hero-title" class="methodology-hero-title mb-4" data-i18n-html="methodology_page.hero_title">
-                    Metodología diseñada para <span class="text-gradient-light">entregas continuas</span> y valor medible
-                </h1>
+                {% if has_config %}
+                    <h1 id="methodology-hero-title" class="methodology-hero-title mb-4">
+                        {{ methodology_config.heroTitlePrefix }} <span class="text-gradient-light">{{ methodology_config.heroTitleHighlight }}</span>{% if methodology_config.heroTitleSuffix %} {{ methodology_config.heroTitleSuffix }}{% endif %}
+                    </h1>
 
-                <p class="methodology-hero-subtitle text-white-50 mb-4 lead" data-i18n="methodology_page.hero_subtitle">
-                    Combinamos rigor de arquitectura, sprints iterativos y automatización CI/CD para convertir requerimientos complejos en software robusto, escalable y sin fricción operativa.
-                </p>
+                    <p class="methodology-hero-subtitle text-white-50 mb-4 lead">
+                        {{ methodology_config.heroSubtitle }}
+                    </p>
+                {% else %}
+                    <h1 id="methodology-hero-title" class="methodology-hero-title mb-4" data-i18n-html="methodology_page.hero_title">
+                        Metodología diseñada para <span class="text-gradient-light">entregas continuas</span> y valor medible
+                    </h1>
+
+                    <p class="methodology-hero-subtitle text-white-50 mb-4 lead" data-i18n="methodology_page.hero_subtitle">
+                        Combinamos rigor de arquitectura, sprints iterativos y automatización CI/CD para convertir requerimientos complejos en software robusto, escalable y sin fricción operativa.
+                    </p>
+                {% endif %}
 
                 <div class="methodology-hero-actions d-flex flex-wrap align-items-center gap-3 justify-content-center justify-content-lg-start mx-auto mx-lg-0">
                     <a href="{{ path('app_services') }}#formulario-contacto" class="btn btn-hero-primary rounded-pill d-inline-flex align-items-center gap-2">
@@ -35,9 +46,13 @@
                     </a>
                 </div>
 
-                <div class="text-white-50 extra-small pt-3 mt-1" data-i18n="methodology_page.hero_flow_note">
-                    Ciclos de 2 semanas · Demostraciones en staging · Transparencia radical
-                </div>
+                {% if has_config %}
+                    <div class="text-white-50 extra-small pt-3 mt-1">{{ methodology_config.heroFlowNote }}</div>
+                {% else %}
+                    <div class="text-white-50 extra-small pt-3 mt-1" data-i18n="methodology_page.hero_flow_note">
+                        Ciclos de 2 semanas · Demostraciones en staging · Transparencia radical
+                    </div>
+                {% endif %}
             </div>
 
             <!-- Panel de Pipeline de Entrega Continua (diferenciador visual de metodología en desktop) -->
@@ -48,12 +63,23 @@
                             <span class="console-circle console-circle-red"></span>
                             <span class="console-circle console-circle-yellow"></span>
                             <span class="console-circle console-circle-green"></span>
-                            <span class="extra-small font-monospace text-white-50 ms-1">pipeline: agile-lifecycle.yaml</span>
+                            <span class="extra-small font-monospace text-white-50 ms-1">{{ has_config and methodology_config.pipelineLabel ? methodology_config.pipelineLabel : 'pipeline: agile-lifecycle.yaml' }}</span>
                         </div>
                         <span class="extra-small font-monospace text-info">active</span>
                     </div>
                     
                     <div class="p-3 p-lg-4">
+                        {% if phases is defined and phases is not empty %}
+                            {% for phase in phases %}
+                                <div class="pipeline-step-row d-flex align-items-start gap-3{% if not loop.last %} pb-2 mb-2 border-bottom border-white-10{% endif %}">
+                                    <span class="font-monospace text-info extra-small fw-bold">{{ '%02d'|format(loop.index) }}</span>
+                                    <div>
+                                        <div class="extra-small fw-semibold text-white">{{ phase.title }}</div>
+                                        <div class="extra-small text-white-50">{{ phase.deliverable }}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
                         <div class="pipeline-step-row d-flex align-items-start gap-3 pb-2 mb-2 border-bottom border-white-10">
                             <span class="font-monospace text-info extra-small fw-bold">01</span>
                             <div>
@@ -89,6 +115,7 @@
                                 <div class="extra-small text-white-50" data-i18n="methodology_page.pipe5_desc">Zero-downtime, telemetría y soporte 24/7</div>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -102,14 +129,45 @@
 <section class="methodology-pillars-section py-5 py-lg-6 bg-light" id="pilares" aria-labelledby="pillars-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="methodology_page.pillars_eyebrow">Nuestra Filosofía</span>
-            <h2 id="pillars-title" class="section-title" data-i18n="methodology_page.pillars_title">Principios que garantizan predictibilidad y calidad</h2>
-            <p class="section-subtitle text-muted" data-i18n="methodology_page.pillars_subtitle">
-                Estructuramos cada desarrollo para reducir la incertidumbre, acelerar el time-to-market y proteger la estabilidad de tus operaciones.
-            </p>
+            {% if has_config %}
+                <span class="section-eyebrow">{{ methodology_config.pillarsEyebrow }}</span>
+                <h2 id="pillars-title" class="section-title">{{ methodology_config.pillarsTitle }}</h2>
+                <p class="section-subtitle text-muted">{{ methodology_config.pillarsSubtitle }}</p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="methodology_page.pillars_eyebrow">Nuestra Filosofía</span>
+                <h2 id="pillars-title" class="section-title" data-i18n="methodology_page.pillars_title">Principios que garantizan predictibilidad y calidad</h2>
+                <p class="section-subtitle text-muted" data-i18n="methodology_page.pillars_subtitle">
+                    Estructuramos cada desarrollo para reducir la incertidumbre, acelerar el time-to-market y proteger la estabilidad de tus operaciones.
+                </p>
+            {% endif %}
         </div>
 
         <div class="row g-4">
+            {% if pillars is defined and pillars is not empty %}
+                {% for pillar in pillars %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="pillar-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                            <div class="pillar-icon-box mb-3">
+                                {% if pillar.iconKey == 'bolt' %}
+                                    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                {% elseif pillar.iconKey == 'shield' %}
+                                    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                {% elseif pillar.iconKey == 'eye' %}
+                                    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                {% elseif pillar.iconKey == 'code' %}
+                                    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                {% elseif pillar.iconKey == 'chart' %}
+                                    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                                {% else %}
+                                    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                                {% endif %}
+                            </div>
+                            <h3 class="h5 pillar-title mb-2">{{ pillar.title }}</h3>
+                            <p class="text-muted small mb-0">{{ pillar.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
             <!-- Pilar 1 -->
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="pillar-card card h-100 p-4 border-0 shadow-sm rounded-4">
@@ -170,6 +228,7 @@
                     </p>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -180,14 +239,42 @@
 <section class="methodology-phases-section py-5 py-lg-6 bg-white" id="fases" aria-labelledby="phases-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="methodology_page.phases_eyebrow">Ciclo de Entrega</span>
-            <h2 id="phases-title" class="section-title" data-i18n="methodology_page.phases_title">De la idea a la producción en 5 etapas</h2>
-            <p class="section-subtitle text-muted" data-i18n="methodology_page.phases_subtitle">
-                Un flujo estructurado donde cada fase cuenta con objetivos claros y entregables técnicos verificables.
-            </p>
+            {% if has_config %}
+                <span class="section-eyebrow">{{ methodology_config.phasesEyebrow }}</span>
+                <h2 id="phases-title" class="section-title">{{ methodology_config.phasesTitle }}</h2>
+                <p class="section-subtitle text-muted">{{ methodology_config.phasesSubtitle }}</p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="methodology_page.phases_eyebrow">Ciclo de Entrega</span>
+                <h2 id="phases-title" class="section-title" data-i18n="methodology_page.phases_title">De la idea a la producción en 5 etapas</h2>
+                <p class="section-subtitle text-muted" data-i18n="methodology_page.phases_subtitle">
+                    Un flujo estructurado donde cada fase cuenta con objetivos claros y entregables técnicos verificables.
+                </p>
+            {% endif %}
         </div>
 
         <div class="phases-timeline">
+            {% if phases is defined and phases is not empty %}
+                {% for phase in phases %}
+                    <div class="phase-item card border-0 shadow-sm rounded-4 p-4 p-lg-5{% if not loop.last %} mb-4{% endif %}">
+                        <div class="row align-items-center g-4">
+                            <div class="col-12 col-md-3 text-start text-md-center">
+                                <div class="d-inline-flex flex-column align-items-start align-items-md-center">
+                                    <span class="phase-step-badge mb-1">{{ phase.phaseBadge }}</span>
+                                    <span class="phase-duration text-muted extra-small">{{ phase.duration }}</span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <h3 class="h4 phase-title mb-2">{{ phase.title }}</h3>
+                                <p class="text-muted mb-3">{{ phase.description }}</p>
+                                <div class="phase-deliverable d-flex flex-wrap align-items-baseline gap-2 pt-1">
+                                    <span class="fw-bold text-navy small">Entregable:</span>
+                                    <span class="text-muted small">{{ phase.deliverable }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
             <!-- Fase 1 -->
             <div class="phase-item card border-0 shadow-sm rounded-4 p-4 p-lg-5 mb-4">
                 <div class="row align-items-center g-4">
@@ -297,6 +384,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -307,14 +395,45 @@
 <section class="methodology-standards-section py-5 py-lg-6 bg-light" aria-labelledby="standards-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="methodology_page.standards_eyebrow">Buenas Prácticas</span>
-            <h2 id="standards-title" class="section-title" data-i18n="methodology_page.standards_title">Estándares técnicos no negociables</h2>
-            <p class="section-subtitle text-muted" data-i18n="methodology_page.standards_subtitle">
-                Nuestro código y nuestras arquitecturas están respaldados por convenciones internacionales de la industria.
-            </p>
+            {% if has_config %}
+                <span class="section-eyebrow">{{ methodology_config.standardsEyebrow }}</span>
+                <h2 id="standards-title" class="section-title">{{ methodology_config.standardsTitle }}</h2>
+                <p class="section-subtitle text-muted">{{ methodology_config.standardsSubtitle }}</p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="methodology_page.standards_eyebrow">Buenas Prácticas</span>
+                <h2 id="standards-title" class="section-title" data-i18n="methodology_page.standards_title">Estándares técnicos no negociables</h2>
+                <p class="section-subtitle text-muted" data-i18n="methodology_page.standards_subtitle">
+                    Nuestro código y nuestras arquitecturas están respaldados por convenciones internacionales de la industria.
+                </p>
+            {% endif %}
         </div>
 
         <div class="row g-4">
+            {% if standards is defined and standards is not empty %}
+                {% for std in standards %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="standard-box p-4 rounded-4 bg-white shadow-sm h-100 text-center">
+                            <div class="standard-icon mb-3 mx-auto">
+                                {% if std.iconKey == 'clipboard' %}
+                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                                {% elseif std.iconKey == 'lock' %}
+                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                {% elseif std.iconKey == 'chart' %}
+                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                                {% elseif std.iconKey == 'shield' %}
+                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                {% elseif std.iconKey == 'bolt' %}
+                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                {% else %}
+                                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                {% endif %}
+                            </div>
+                            <h3 class="h5 fw-bold mb-2">{{ std.title }}</h3>
+                            <p class="text-muted extra-small mb-0">{{ std.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="standard-box p-4 rounded-4 bg-white shadow-sm h-100 text-center">
                     <div class="standard-icon mb-3 mx-auto">
@@ -370,6 +489,7 @@
                     </p>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>

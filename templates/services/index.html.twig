@@ -4,6 +4,7 @@
 {% block meta_description %}Servicios de SoftCorec: desarrollo web y móvil a medida, arquitectura de software, ingeniería Cloud & DevOps y consultoría IT para tu empresa.{% endblock %}
 
 {% block body %}
+{% set has_config = services_config is defined and services_config is not null %}
 <!-- =========================================================================
      1. HERO SECTION - SERVICIOS
      ========================================================================= -->
@@ -12,13 +13,23 @@
     <div class="container position-relative py-0 py-lg-4">
         <div class="row align-items-center g-4 g-lg-5">
             <div class="col-12 col-lg-7">
-                <h1 id="services-hero-title" class="services-hero-title mb-4" data-i18n-html="services_page.hero_title">
-                    Servicios de ingeniería diseñados para <span class="text-gradient-light">escalar tu negocio</span>
-                </h1>
+                {% if has_config %}
+                    <h1 id="services-hero-title" class="services-hero-title mb-4">
+                        {{ services_config.heroTitlePrefix }} <span class="text-gradient-light">{{ services_config.heroTitleHighlight }}</span>
+                    </h1>
 
-                <p class="services-hero-subtitle text-white-50 mb-3 lead" data-i18n="services_page.hero_subtitle">
-                    Acompañamos a tu empresa en cada fase del ciclo tecnológico: desde el diseño conceptual de arquitecturas robustas hasta el despliegue cloud automatizado y la optimización continua.
-                </p>
+                    <p class="services-hero-subtitle text-white-50 mb-3 lead">
+                        {{ services_config.heroSubtitle }}
+                    </p>
+                {% else %}
+                    <h1 id="services-hero-title" class="services-hero-title mb-4" data-i18n-html="services_page.hero_title">
+                        Servicios de ingeniería diseñados para <span class="text-gradient-light">escalar tu negocio</span>
+                    </h1>
+
+                    <p class="services-hero-subtitle text-white-50 mb-3 lead" data-i18n="services_page.hero_subtitle">
+                        Acompañamos a tu empresa en cada fase del ciclo tecnológico: desde el diseño conceptual de arquitecturas robustas hasta el despliegue cloud automatizado y la optimización continua.
+                    </p>
+                {% endif %}
 
                 <!-- Tira técnica de especializaciones clave (visible en tablet y desktop) -->
                 <div class="services-hero-domains d-none d-md-flex flex-wrap gap-2 gap-md-3 mb-4 text-white-75 extra-small">
@@ -62,15 +73,21 @@
             <div class="col-12 col-lg-5 d-none d-lg-block">
                 <div class="services-hero-media position-relative">
                     <div class="services-img-frame rounded-4 overflow-hidden shadow-lg border border-white-15">
-                        <img src="{{ asset('assets/images/hero/hero-3.webp', 'vite') }}" 
-                             alt="Equipo de ingeniería de software y cloud de SoftCorec desarrollando soluciones" 
+                        <img src="{{ has_config and services_config.heroImagePath ? services_config.heroImagePath : asset('assets/images/hero/hero-3.webp', 'vite') }}"
+                             alt="{{ has_config and services_config.heroCaption ? services_config.heroCaption : 'Equipo de ingeniería de software y cloud de SoftCorec desarrollando soluciones' }}"
                              class="img-fluid w-100 services-hero-img"
                              loading="eager">
                         <div class="services-img-overlay"></div>
                     </div>
-                    <div class="services-hero-caption text-white-50 extra-small pt-2 text-center text-lg-end" data-i18n="services_page.hero_caption">
-                        Desarrollo Full-Lifecycle & Arquitectura Cloud · SoftCorec
-                    </div>
+                    {% if has_config %}
+                        <div class="services-hero-caption text-white-50 extra-small pt-2 text-center text-lg-end">
+                            {{ services_config.heroCaption }}
+                        </div>
+                    {% else %}
+                        <div class="services-hero-caption text-white-50 extra-small pt-2 text-center text-lg-end" data-i18n="services_page.hero_caption">
+                            Desarrollo Full-Lifecycle & Arquitectura Cloud · SoftCorec
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -83,14 +100,59 @@
 <section class="services-catalog-section py-5 py-lg-6 bg-light" id="catalogo" aria-labelledby="catalog-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="services_page.catalog_eyebrow">Nuestro Portafolio</span>
-            <h2 id="catalog-title" class="section-title" data-i18n="services_page.catalog_title">Soluciones diseñadas con rigor técnico</h2>
-            <p class="section-subtitle text-muted" data-i18n="services_page.catalog_subtitle">
-                Arquitecturas escalables, código limpio y buenas prácticas de ingeniería para resolver desafíos de alto impacto.
-            </p>
+            {% if has_config %}
+                <span class="section-eyebrow">{{ services_config.catalogEyebrow }}</span>
+                <h2 id="catalog-title" class="section-title">{{ services_config.catalogTitle }}</h2>
+                <p class="section-subtitle text-muted">{{ services_config.catalogSubtitle }}</p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="services_page.catalog_eyebrow">Nuestro Portafolio</span>
+                <h2 id="catalog-title" class="section-title" data-i18n="services_page.catalog_title">Soluciones diseñadas con rigor técnico</h2>
+                <p class="section-subtitle text-muted" data-i18n="services_page.catalog_subtitle">
+                    Arquitecturas escalables, código limpio y buenas prácticas de ingeniería para resolver desafíos de alto impacto.
+                </p>
+            {% endif %}
         </div>
 
         <div class="row g-4">
+            {% if catalog_items is defined and catalog_items is not empty %}
+                {% for item in catalog_items %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
+                            <div class="service-detail-icon-box mb-3">
+                                {% if item.iconKey == 'cloud' %}
+                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                                {% elseif item.iconKey == 'mobile' %}
+                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                {% elseif item.iconKey == 'document' %}
+                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                {% elseif item.iconKey == 'database' %}
+                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                                {% elseif item.iconKey == 'lock' %}
+                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                {% else %}
+                                    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                {% endif %}
+                            </div>
+                            <span class="service-category-badge mb-2">{{ item.category }}</span>
+                            <h3 class="h5 service-card-title mb-3">{{ item.title }}</h3>
+                            <p class="text-muted service-card-desc mb-3">{{ item.description }}</p>
+                            <ul class="list-unstyled service-capabilities-list mb-4">
+                                {% for cap in item.capabilitiesList %}
+                                    <li>
+                                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="text-primary me-2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                        <span>{{ cap }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="service-tech-tags mt-auto pt-3 border-top">
+                                {% for tag in item.techTagsList %}
+                                    <span class="tech-tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
             <!-- Servicio 1: Desarrollo de Software a Medida & APIs -->
             <div class="col-12 col-md-6 col-lg-4" id="software">
                 <div class="service-detail-card card h-100 p-4 border-0 shadow-sm rounded-4">
@@ -306,6 +368,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -389,13 +452,19 @@
 <section class="projects-carousel-section py-5 py-lg-6 overflow-hidden" id="proyectos" aria-labelledby="projects-title">
     <div class="container mb-4 mb-lg-5">
         <div class="text-center max-w-700 mx-auto">
-            <span class="section-eyebrow" data-i18n="services_page.projects_eyebrow">Proyectos Realizados</span>
-            <h2 id="projects-title" class="section-title" data-i18n="services_page.projects_title">
-                Casos y soluciones construidas a medida
-            </h2>
-            <p class="section-subtitle text-muted mb-0" data-i18n="services_page.projects_subtitle">
-                Explora algunos de los sistemas, plataformas y arquitecturas que hemos diseñado y puesto en producción.
-            </p>
+            {% if has_config %}
+                <span class="section-eyebrow">{{ services_config.projectsEyebrow }}</span>
+                <h2 id="projects-title" class="section-title">{{ services_config.projectsTitle }}</h2>
+                <p class="section-subtitle text-muted mb-0">{{ services_config.projectsSubtitle }}</p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="services_page.projects_eyebrow">Proyectos Realizados</span>
+                <h2 id="projects-title" class="section-title" data-i18n="services_page.projects_title">
+                    Casos y soluciones construidas a medida
+                </h2>
+                <p class="section-subtitle text-muted mb-0" data-i18n="services_page.projects_subtitle">
+                    Explora algunos de los sistemas, plataformas y arquitecturas que hemos diseñado y puesto en producción.
+                </p>
+            {% endif %}
         </div>
     </div>
 
@@ -511,14 +580,31 @@
 <section class="workflow-section py-5 py-lg-6 bg-white" id="metodologia-servicio" aria-labelledby="workflow-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="services_page.workflow_eyebrow">Cómo Trabajamos</span>
-            <h2 id="workflow-title" class="section-title" data-i18n="services_page.workflow_title">Un proceso claro, predecible y orientado a resultados</h2>
-            <p class="section-subtitle text-muted" data-i18n="services_page.workflow_subtitle">
-                De la conceptualización a la producción con transparencia total y validación rigurosa en cada hito.
-            </p>
+            {% if has_config %}
+                <span class="section-eyebrow">{{ services_config.workflowEyebrow }}</span>
+                <h2 id="workflow-title" class="section-title">{{ services_config.workflowTitle }}</h2>
+                <p class="section-subtitle text-muted">{{ services_config.workflowSubtitle }}</p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="services_page.workflow_eyebrow">Cómo Trabajamos</span>
+                <h2 id="workflow-title" class="section-title" data-i18n="services_page.workflow_title">Un proceso claro, predecible y orientado a resultados</h2>
+                <p class="section-subtitle text-muted" data-i18n="services_page.workflow_subtitle">
+                    De la conceptualización a la producción con transparencia total y validación rigurosa en cada hito.
+                </p>
+            {% endif %}
         </div>
 
         <div class="row g-4">
+            {% if workflow_steps is defined and workflow_steps is not empty %}
+                {% for step in workflow_steps %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="workflow-card p-4 rounded-4 h-100 border">
+                            <div class="workflow-step-badge mb-3">{{ step.stepNumber }}</div>
+                            <h3 class="h5 workflow-card-title mb-2">{{ step.title }}</h3>
+                            <p class="text-muted small mb-0">{{ step.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
             <!-- Paso 1 -->
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="workflow-card p-4 rounded-4 h-100 border">
@@ -562,6 +648,7 @@
                     </p>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -578,38 +665,54 @@
                 <div class="row g-5 align-items-center">
                     <!-- Columna Izquierda: Propuesta de valor & contacto directo -->
                     <div class="col-12 col-lg-5">
-                        <h2 id="services-form-title" class="h1 fw-bold mb-3 text-white" data-i18n="services_page.form_title">
-                            ¿Tienes un proyecto desafiante en mente?
-                        </h2>
-                        
-                        <p class="text-white-50 mb-4 lead fs-6" data-i18n="services_page.form_subtitle">
-                            Conversemos sobre tus metas tecnológicas y diseñemos juntos una arquitectura sólida, escalable y optimizada para tu negocio.
-                        </p>
+                        {% if has_config %}
+                            <h2 id="services-form-title" class="h1 fw-bold mb-3 text-white">{{ services_config.contactTitle }}</h2>
+                            <p class="text-white-50 mb-4 lead fs-6">{{ services_config.contactSubtitle }}</p>
+                        {% else %}
+                            <h2 id="services-form-title" class="h1 fw-bold mb-3 text-white" data-i18n="services_page.form_title">
+                                ¿Tienes un proyecto desafiante en mente?
+                            </h2>
+                            <p class="text-white-50 mb-4 lead fs-6" data-i18n="services_page.form_subtitle">
+                                Conversemos sobre tus metas tecnológicas y diseñemos juntos una arquitectura sólida, escalable y optimizada para tu negocio.
+                            </p>
+                        {% endif %}
 
                         <div class="form-benefits-list mb-4">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <div class="form-check-icon">
                                     <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                 </div>
-                                <span class="text-white-90 small" data-i18n="services_page.form_feat1">Respuesta técnica en menos de 24 horas</span>
+                                {% if has_config %}
+                                    <span class="text-white-90 small">{{ services_config.contactBenefit1 }}</span>
+                                {% else %}
+                                    <span class="text-white-90 small" data-i18n="services_page.form_feat1">Respuesta técnica en menos de 24 horas</span>
+                                {% endif %}
                             </div>
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <div class="form-check-icon">
                                     <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                 </div>
-                                <span class="text-white-90 small" data-i18n="services_page.form_feat2">Acuerdo de confidencialidad (NDA) garantizado</span>
+                                {% if has_config %}
+                                    <span class="text-white-90 small">{{ services_config.contactBenefit2 }}</span>
+                                {% else %}
+                                    <span class="text-white-90 small" data-i18n="services_page.form_feat2">Acuerdo de confidencialidad (NDA) garantizado</span>
+                                {% endif %}
                             </div>
                             <div class="d-flex align-items-center gap-3 mb-4">
                                 <div class="form-check-icon">
                                     <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                 </div>
-                                <span class="text-white-90 small" data-i18n="services_page.form_feat3">Diagnóstico preliminar sin costo ni compromiso</span>
+                                {% if has_config %}
+                                    <span class="text-white-90 small">{{ services_config.contactBenefit3 }}</span>
+                                {% else %}
+                                    <span class="text-white-90 small" data-i18n="services_page.form_feat3">Diagnóstico preliminar sin costo ni compromiso</span>
+                                {% endif %}
                             </div>
                         </div>
 
                         <div class="pt-3 border-top border-white-15">
                             <p class="text-white-50 extra-small mb-2" data-i18n="services_page.form_whatsapp_alt">¿Prefieres una consulta inmediata?</p>
-                            <a href="https://wa.me/51987654321?text=Hola%20SoftCorec,%20deseo%20asesoría%20sobre%20un%20proyecto%20de%20software" 
+                            <a href="{{ has_config ? services_config.contactWhatsappHref : 'https://wa.me/593999999999?text=Hola%20SoftCorec%2C%20quiero%20una%20consultor%C3%ADa' }}"
                                target="_blank" 
                                rel="noopener noreferrer" 
                                class="btn btn-hero-outline-light rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2">
@@ -627,12 +730,17 @@
                     <!-- Columna Derecha: Tarjeta con Formulario de Contacto -->
                     <div class="col-12 col-lg-7">
                         <div class="services-form-card bg-white text-dark rounded-4 p-4 p-md-5 shadow">
-                            <h3 class="h4 fw-bold mb-1 text-navy" data-i18n="services_page.form_card_title">
-                                Solicitar Asesoría Técnica
-                            </h3>
-                            <p class="text-muted small mb-4" data-i18n="services_page.form_card_subtitle">
-                                Completa el formulario y analizaremos tus requerimientos sin costo inicial.
-                            </p>
+                            {% if has_config %}
+                                <h3 class="h4 fw-bold mb-1 text-navy">{{ services_config.contactFormTitle }}</h3>
+                                <p class="text-muted small mb-4">{{ services_config.contactFormSubtitle }}</p>
+                            {% else %}
+                                <h3 class="h4 fw-bold mb-1 text-navy" data-i18n="services_page.form_card_title">
+                                    Solicitar Asesoría Técnica
+                                </h3>
+                                <p class="text-muted small mb-4" data-i18n="services_page.form_card_subtitle">
+                                    Completa el formulario y analizaremos tus requerimientos sin costo inicial.
+                                </p>
+                            {% endif %}
 
                             <!-- Notificaciones de éxito o error dentro de la tarjeta del formulario -->
                             {% for message in app.flashes('success') %}

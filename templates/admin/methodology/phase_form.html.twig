@@ -1,0 +1,64 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ is_edit ? 'Editar' : 'Nueva' }} fase | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{{ is_edit ? 'Editar fase' : 'Nueva fase' }}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block topbar_actions %}
+    <a href="{{ path('app_admin_methodology') }}" class="btn sc-btn-outline btn-sm">Volver</a>
+{% endblock %}
+
+{% block admin_content %}
+    <section class="sc-panel-card sc-form-card-narrow">
+        <div class="sc-panel-card-header">
+            <div>
+                <h2 class="sc-panel-card-title">{{ is_edit ? 'Actualizar fase' : 'Crear fase' }}</h2>
+                <p class="sc-panel-card-subtitle mb-0">Ciclo de Entrega en Metodología.</p>
+            </div>
+        </div>
+        <div class="sc-panel-card-body">
+            {{ form_start(form, { attr: { class: 'row g-3' } }) }}
+                <div class="col-12 col-sm-4">
+                    {{ form_label(form.phaseBadge, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.phaseBadge) }}
+                    {{ form_errors(form.phaseBadge) }}
+                </div>
+                <div class="col-12 col-sm-8">
+                    {{ form_label(form.duration, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.duration) }}
+                    {{ form_errors(form.duration) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.title) }}
+                    {{ form_errors(form.title) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+                <div class="col-12">
+                    {{ form_label(form.deliverable, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.deliverable) }}
+                    {{ form_errors(form.deliverable) }}
+                </div>
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.sortOrder) }}
+                    {{ form_errors(form.sortOrder) }}
+                </div>
+                <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        {{ form_widget(form.isActive) }}
+                        {{ form_label(form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center gap-2 pt-3 sc-form-actions">
+                    <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                    <a href="{{ path('app_admin_methodology') }}" class="btn sc-btn-outline">Cancelar</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

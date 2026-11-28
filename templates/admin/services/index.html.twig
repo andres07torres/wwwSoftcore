@@ -1,0 +1,598 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Editar Servicios | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block admin_content %}
+    <div class="sc-page-header mb-4">
+        <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
+            <a href="{{ path('app_admin_dashboard') }}">Panel</a>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span>Gestión de Contenido</span>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="sc-breadcrumb-current" aria-current="page">Servicios</span>
+        </nav>
+        <h1 class="sc-page-title mb-1">Servicios</h1>
+        <p class="sc-page-subtitle mb-0">Secciones ordenadas según su aparición en la página pública de Servicios.</p>
+    </div>
+
+    <nav class="sc-section-nav mb-4" aria-label="Secciones de Servicios">
+        <a href="#sec-hero" class="sc-section-pill"><span class="sc-section-num">1</span><span>Hero</span></a>
+        <a href="#sec-portafolio" class="sc-section-pill"><span class="sc-section-num">2</span><span>Nuestro Portafolio</span></a>
+        <a href="#sec-proyectos" class="sc-section-pill"><span class="sc-section-num">3</span><span>Proyectos Realizados</span></a>
+        <a href="#sec-workflow" class="sc-section-pill"><span class="sc-section-num">4</span><span>Cómo Trabajamos</span></a>
+        <a href="#sec-contacto" class="sc-section-pill"><span class="sc-section-num">5</span><span>Contacto & Asesoría</span></a>
+    </nav>
+
+    <div class="d-flex flex-column gap-5">
+        <!-- 1. HERO -->
+        <div id="sec-hero" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 1</span>
+                <h2 class="sc-section-group-title mb-0">Hero de Servicios</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">1.1 Textos e imagen principal</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Edita el título, descripción, imagen lateral y pie de imagen.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(hero_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-7">
+                            {{ form_label(hero_form.heroTitlePrefix, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitlePrefix) }}
+                            {{ form_errors(hero_form.heroTitlePrefix) }}
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            {{ form_label(hero_form.heroTitleHighlight, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitleHighlight) }}
+                            {{ form_errors(hero_form.heroTitleHighlight) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(hero_form.heroSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroSubtitle) }}
+                            {{ form_errors(hero_form.heroSubtitle) }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                            {{ form_label(hero_form.heroImageFile, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroImageFile) }}
+                            {{ form_errors(hero_form.heroImageFile) }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                            {{ form_label(hero_form.heroCaption, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroCaption) }}
+                            {{ form_errors(hero_form.heroCaption) }}
+                        </div>
+                        {% if config.heroImagePath %}
+                            <div class="col-12">
+                                <span class="form-label sc-form-label d-block">Imagen actual</span>
+                                <img src="{{ config.heroImagePath }}" alt="{{ config.heroCaption }}" class="sc-slide-preview-lg">
+                            </div>
+                        {% endif %}
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(hero_form) }}
+                </div>
+            </section>
+        </div>
+
+        <!-- 2. NUESTRO PORTAFOLIO -->
+        <div id="sec-portafolio" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 2</span>
+                <h2 class="sc-section-group-title mb-0">Nuestro Portafolio</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">2.1 Encabezado del Portafolio</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo del catálogo de servicios.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(catalog_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(catalog_header_form.catalogEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(catalog_header_form.catalogEyebrow) }}
+                            {{ form_errors(catalog_header_form.catalogEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(catalog_header_form.catalogTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(catalog_header_form.catalogTitle) }}
+                            {{ form_errors(catalog_header_form.catalogTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(catalog_header_form.catalogSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(catalog_header_form.catalogSubtitle) }}
+                            {{ form_errors(catalog_header_form.catalogSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(catalog_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">2.2 Tarjetas de Servicios</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay servicios activos aquí, se mostrarán los 6 servicios predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewCatalogItem">
+                        Nuevo servicio
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Orden</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in catalog_items %}
+                                <tr>
+                                    <td><span class="sc-role-badge">{{ item.category }}</span></td>
+                                    <td class="fw-semibold text-dark">{{ item.title }}</td>
+                                    <td>{{ item.sortOrder }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ item.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ item.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_services_catalog_edit', { id: item.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_services_catalog_delete', { id: item.id }) }}" onsubmit="return confirm('¿Eliminar este servicio?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_service_catalog_' ~ item.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay servicios personalizados. La página pública usa los 6 servicios predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3. PROYECTOS REALIZADOS -->
+        <div id="sec-proyectos" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 3</span>
+                <h2 class="sc-section-group-title mb-0">Proyectos Realizados</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">3.1 Encabezado de Proyectos</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo del carrusel de proyectos.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(projects_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(projects_header_form.projectsEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(projects_header_form.projectsEyebrow) }}
+                            {{ form_errors(projects_header_form.projectsEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(projects_header_form.projectsTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(projects_header_form.projectsTitle) }}
+                            {{ form_errors(projects_header_form.projectsTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(projects_header_form.projectsSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(projects_header_form.projectsSubtitle) }}
+                            {{ form_errors(projects_header_form.projectsSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(projects_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">3.2 Tarjetas de Proyectos</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay proyectos activos aquí, se mostrarán los 4 proyectos predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewProject">
+                        Nuevo proyecto
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Proyecto</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Año</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for project in projects %}
+                                <tr>
+                                    <td class="fw-semibold text-dark">{{ project.title }}</td>
+                                    <td><span class="sc-role-badge">{{ project.category }}</span></td>
+                                    <td>{{ project.year ?: '—' }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ project.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ project.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_services_project_edit', { id: project.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_services_project_delete', { id: project.id }) }}" onsubmit="return confirm('¿Eliminar este proyecto?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_service_project_' ~ project.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay proyectos personalizados. La página pública usa los 4 proyectos predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. CÓMO TRABAJAMOS -->
+        <div id="sec-workflow" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 4</span>
+                <h2 class="sc-section-group-title mb-0">Cómo Trabajamos</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">4.1 Encabezado de Cómo Trabajamos</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo del flujo de trabajo.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(workflow_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(workflow_header_form.workflowEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(workflow_header_form.workflowEyebrow) }}
+                            {{ form_errors(workflow_header_form.workflowEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(workflow_header_form.workflowTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(workflow_header_form.workflowTitle) }}
+                            {{ form_errors(workflow_header_form.workflowTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(workflow_header_form.workflowSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(workflow_header_form.workflowSubtitle) }}
+                            {{ form_errors(workflow_header_form.workflowSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(workflow_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">4.2 Pasos del Proceso</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay pasos activos aquí, se mostrarán los 4 pasos predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewWorkflowStep">
+                        Nuevo paso
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Paso</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for step in workflow_steps %}
+                                <tr>
+                                    <td><span class="sc-role-badge">{{ step.stepNumber }}</span></td>
+                                    <td class="fw-semibold text-dark">{{ step.title }}</td>
+                                    <td class="text-muted">{{ step.description|length > 85 ? step.description|slice(0, 85) ~ '…' : step.description }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ step.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ step.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_services_workflow_edit', { id: step.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_services_workflow_delete', { id: step.id }) }}" onsubmit="return confirm('¿Eliminar este paso?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_service_workflow_' ~ step.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay pasos personalizados. La página pública usa los 4 pasos predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 5. CONTACTO & ASESORÍA -->
+        <div id="sec-contacto" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 5</span>
+                <h2 class="sc-section-group-title mb-0">Contacto & Solicitar Asesoría</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">5.1 Textos, beneficios y enlace de WhatsApp</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Personaliza la propuesta de valor y los títulos del formulario de asesoría.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(contact_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12">
+                            {{ form_label(contact_form.contactTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactTitle) }}
+                            {{ form_errors(contact_form.contactTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(contact_form.contactSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactSubtitle) }}
+                            {{ form_errors(contact_form.contactSubtitle) }}
+                        </div>
+                        <div class="col-12 col-md-4">
+                            {{ form_label(contact_form.contactBenefit1, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactBenefit1) }}
+                            {{ form_errors(contact_form.contactBenefit1) }}
+                        </div>
+                        <div class="col-12 col-md-4">
+                            {{ form_label(contact_form.contactBenefit2, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactBenefit2) }}
+                            {{ form_errors(contact_form.contactBenefit2) }}
+                        </div>
+                        <div class="col-12 col-md-4">
+                            {{ form_label(contact_form.contactBenefit3, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactBenefit3) }}
+                            {{ form_errors(contact_form.contactBenefit3) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(contact_form.contactWhatsappUrl, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactWhatsappUrl) }}
+                            <div class="form-text">{{ form_help(contact_form.contactWhatsappUrl) }}</div>
+                            {{ form_errors(contact_form.contactWhatsappUrl) }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                            {{ form_label(contact_form.contactFormTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactFormTitle) }}
+                            {{ form_errors(contact_form.contactFormTitle) }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                            {{ form_label(contact_form.contactFormSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(contact_form.contactFormSubtitle) }}
+                            {{ form_errors(contact_form.contactFormSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(contact_form) }}
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Servicio del Portafolio -->
+    <div class="modal fade sc-modal" id="modalNewCatalogItem" tabindex="-1" aria-labelledby="modalNewCatalogItemLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewCatalogItemLabel">Nuevo servicio</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Se mostrará en el portafolio de Servicios.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_catalog_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-5">
+                            {{ form_label(new_catalog_form.iconKey, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.iconKey) }}
+                        </div>
+                        <div class="col-12 col-sm-7">
+                            {{ form_label(new_catalog_form.category, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.category) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_catalog_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_catalog_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.description) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_catalog_form.capabilities, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.capabilities) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_catalog_form.techTags, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.techTags) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_catalog_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_catalog_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_catalog_form.isActive) }}
+                                {{ form_label(new_catalog_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_catalog_form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Proyecto Realizado -->
+    <div class="modal fade sc-modal" id="modalNewProject" tabindex="-1" aria-labelledby="modalNewProjectLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewProjectLabel">Nuevo proyecto</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Se mostrará en el carrusel de Proyectos Realizados.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_project_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-7">
+                            {{ form_label(new_project_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.title) }}
+                        </div>
+                        <div class="col-12 col-sm-5">
+                            {{ form_label(new_project_form.category, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.category) }}
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            {{ form_label(new_project_form.client, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.client) }}
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            {{ form_label(new_project_form.year, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.year) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_project_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.description) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_project_form.imageFile, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.imageFile) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_project_form.metric, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.metric) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_project_form.techTags, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.techTags) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_project_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_project_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_project_form.isActive) }}
+                                {{ form_label(new_project_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_project_form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Paso de Workflow -->
+    <div class="modal fade sc-modal" id="modalNewWorkflowStep" tabindex="-1" aria-labelledby="modalNewWorkflowStepLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewWorkflowStepLabel">Nuevo paso</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Se mostrará en Cómo Trabajamos de Servicios.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_workflow_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-4">
+                            {{ form_label(new_workflow_form.stepNumber, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_workflow_form.stepNumber) }}
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            {{ form_label(new_workflow_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_workflow_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_workflow_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_workflow_form.description) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_workflow_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_workflow_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_workflow_form.isActive) }}
+                                {{ form_label(new_workflow_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_workflow_form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

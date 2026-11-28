@@ -1,10 +1,18 @@
 {% extends 'admin/layout.html.twig' %}
 
 {% block title %}Panel Administrativo | SoftCorec{% endblock %}
-{% block page_title %}Panel Administrativo{% endblock %}
+{% block page_title %}{% endblock %}
 {% block page_subtitle %}{% endblock %}
 
 {% block admin_content %}
+    <div class="sc-page-header mb-4">
+        <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
+            <span class="sc-breadcrumb-current" aria-current="page">Panel</span>
+        </nav>
+        <h1 class="sc-page-title mb-1">Panel</h1>
+        <p class="sc-page-subtitle mb-0">Resumen general del sistema administrativo SoftCorec.</p>
+    </div>
+
     <!-- KPIs -->
     <section class="row g-3" aria-label="Indicadores clave">
         <div class="col-12 col-sm-6 col-xl-3">

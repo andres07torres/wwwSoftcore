@@ -1,0 +1,507 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Editar Metodología | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block admin_content %}
+    <div class="sc-page-header mb-4">
+        <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
+            <a href="{{ path('app_admin_dashboard') }}">Panel</a>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span>Gestión de Contenido</span>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="sc-breadcrumb-current" aria-current="page">Metodología</span>
+        </nav>
+        <h1 class="sc-page-title mb-1">Metodología</h1>
+        <p class="sc-page-subtitle mb-0">Secciones ordenadas según su aparición en la página pública de Metodología.</p>
+    </div>
+
+    <nav class="sc-section-nav mb-4" aria-label="Secciones de Metodología">
+        <a href="#sec-hero" class="sc-section-pill"><span class="sc-section-num">1</span><span>Hero</span></a>
+        <a href="#sec-filosofia" class="sc-section-pill"><span class="sc-section-num">2</span><span>Nuestra Filosofía</span></a>
+        <a href="#sec-fases" class="sc-section-pill"><span class="sc-section-num">3</span><span>Ciclo de Entrega</span></a>
+        <a href="#sec-estandares" class="sc-section-pill"><span class="sc-section-num">4</span><span>Buenas Prácticas</span></a>
+    </nav>
+
+    <div class="d-flex flex-column gap-5">
+        <!-- 1. HERO -->
+        <div id="sec-hero" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 1</span>
+                <h2 class="sc-section-group-title mb-0">Hero de Metodología</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">1.1 Textos principales y consola pipeline</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Edita el título, descripción, nota inferior y etiqueta del panel pipeline.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(hero_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(hero_form.heroTitlePrefix, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitlePrefix) }}
+                            {{ form_errors(hero_form.heroTitlePrefix) }}
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(hero_form.heroTitleHighlight, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitleHighlight) }}
+                            {{ form_errors(hero_form.heroTitleHighlight) }}
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(hero_form.heroTitleSuffix, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroTitleSuffix) }}
+                            {{ form_errors(hero_form.heroTitleSuffix) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(hero_form.heroSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroSubtitle) }}
+                            {{ form_errors(hero_form.heroSubtitle) }}
+                        </div>
+                        <div class="col-12 col-md-7">
+                            {{ form_label(hero_form.heroFlowNote, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.heroFlowNote) }}
+                            {{ form_errors(hero_form.heroFlowNote) }}
+                        </div>
+                        <div class="col-12 col-md-5">
+                            {{ form_label(hero_form.pipelineLabel, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(hero_form.pipelineLabel) }}
+                            {{ form_errors(hero_form.pipelineLabel) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(hero_form) }}
+                </div>
+            </section>
+        </div>
+
+        <!-- 2. NUESTRA FILOSOFÍA -->
+        <div id="sec-filosofia" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 2</span>
+                <h2 class="sc-section-group-title mb-0">Nuestra Filosofía</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">2.1 Encabezado de Nuestra Filosofía</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(pillars_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(pillars_header_form.pillarsEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(pillars_header_form.pillarsEyebrow) }}
+                            {{ form_errors(pillars_header_form.pillarsEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(pillars_header_form.pillarsTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(pillars_header_form.pillarsTitle) }}
+                            {{ form_errors(pillars_header_form.pillarsTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(pillars_header_form.pillarsSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(pillars_header_form.pillarsSubtitle) }}
+                            {{ form_errors(pillars_header_form.pillarsSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(pillars_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">2.2 Tarjetas de Principios</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay principios activos aquí, se mostrarán los 4 principios predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewPillar">
+                        Nuevo principio
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Orden</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pillar in pillars %}
+                                <tr>
+                                    <td class="fw-semibold text-dark">{{ pillar.title }}</td>
+                                    <td class="text-muted">{{ pillar.description|length > 85 ? pillar.description|slice(0, 85) ~ '…' : pillar.description }}</td>
+                                    <td>{{ pillar.sortOrder }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ pillar.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ pillar.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_methodology_pillar_edit', { id: pillar.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_methodology_pillar_delete', { id: pillar.id }) }}" onsubmit="return confirm('¿Eliminar este principio?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_methodology_pillar_' ~ pillar.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay principios personalizados. La página pública usa los 4 principios predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3. CICLO DE ENTREGA (FASES) -->
+        <div id="sec-fases" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 3</span>
+                <h2 class="sc-section-group-title mb-0">Ciclo de Entrega (Fases)</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">3.1 Encabezado del Ciclo de Entrega</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo de las etapas.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(phases_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(phases_header_form.phasesEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(phases_header_form.phasesEyebrow) }}
+                            {{ form_errors(phases_header_form.phasesEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(phases_header_form.phasesTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(phases_header_form.phasesTitle) }}
+                            {{ form_errors(phases_header_form.phasesTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(phases_header_form.phasesSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(phases_header_form.phasesSubtitle) }}
+                            {{ form_errors(phases_header_form.phasesSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(phases_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">3.2 Fases del Ciclo de Vida</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay fases activas aquí, se mostrarán las 5 fases predeterminadas (también alimentan el panel pipeline del Hero).</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewPhase">
+                        Nueva fase
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fase</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Duración</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for phase in phases %}
+                                <tr>
+                                    <td><span class="sc-role-badge">{{ phase.phaseBadge }}</span></td>
+                                    <td class="fw-semibold text-dark">{{ phase.title }}</td>
+                                    <td class="text-muted">{{ phase.duration }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ phase.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ phase.isActive ? 'Activa' : 'Oculta' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_methodology_phase_edit', { id: phase.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_methodology_phase_delete', { id: phase.id }) }}" onsubmit="return confirm('¿Eliminar esta fase?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_methodology_phase_' ~ phase.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay fases personalizadas. La página pública usa las 5 fases predeterminadas.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. BUENAS PRÁCTICAS (ESTÁNDARES) -->
+        <div id="sec-estandares" class="sc-section-group d-flex flex-column gap-4">
+            <div class="sc-section-group-header">
+                <span class="sc-section-badge">Sección 4</span>
+                <h2 class="sc-section-group-title mb-0">Buenas Prácticas (Estándares)</h2>
+            </div>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h3 class="sc-panel-card-title">4.1 Encabezado de Buenas Prácticas</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Etiqueta superior, título y subtítulo de estándares técnicos.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    {{ form_start(standards_header_form, { attr: { class: 'row g-3' } }) }}
+                        <div class="col-12 col-lg-4">
+                            {{ form_label(standards_header_form.standardsEyebrow, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(standards_header_form.standardsEyebrow) }}
+                            {{ form_errors(standards_header_form.standardsEyebrow) }}
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            {{ form_label(standards_header_form.standardsTitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(standards_header_form.standardsTitle) }}
+                            {{ form_errors(standards_header_form.standardsTitle) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(standards_header_form.standardsSubtitle, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(standards_header_form.standardsSubtitle) }}
+                            {{ form_errors(standards_header_form.standardsSubtitle) }}
+                        </div>
+                        <div class="col-12 d-flex justify-content-center pt-2">
+                            <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        </div>
+                    {{ form_end(standards_header_form) }}
+                </div>
+            </section>
+
+            <section class="sc-panel-card">
+                <div class="sc-panel-card-header flex-wrap">
+                    <div>
+                        <h3 class="sc-panel-card-title">4.2 Tarjetas de Estándares</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Si no hay estándares activos aquí, se mostrarán los 4 estándares predeterminados.</p>
+                    </div>
+                    <button type="button" class="btn sc-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalNewStandard">
+                        Nuevo estándar
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Orden</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for std in standards %}
+                                <tr>
+                                    <td class="fw-semibold text-dark">{{ std.title }}</td>
+                                    <td class="text-muted">{{ std.description|length > 85 ? std.description|slice(0, 85) ~ '…' : std.description }}</td>
+                                    <td>{{ std.sortOrder }}</td>
+                                    <td>
+                                        <span class="sc-status-pill {{ std.isActive ? 'is-online' : 'is-warning' }}">
+                                            <span class="sc-status-dot" aria-hidden="true"></span>
+                                            {{ std.isActive ? 'Activo' : 'Oculto' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path('app_admin_methodology_standard_edit', { id: std.id }) }}" class="btn sc-btn-outline btn-sm">Editar</a>
+                                            <form method="post" action="{{ path('app_admin_methodology_standard_delete', { id: std.id }) }}" onsubmit="return confirm('¿Eliminar este estándar?');" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_methodology_standard_' ~ std.id) }}">
+                                                <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        Aún no hay estándares personalizados. La página pública usa los 4 estándares predeterminados.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Principio -->
+    <div class="modal fade sc-modal" id="modalNewPillar" tabindex="-1" aria-labelledby="modalNewPillarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewPillarLabel">Nuevo principio</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Nuestra Filosofía en Metodología.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_pillar_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-5">
+                            {{ form_label(new_pillar_form.iconKey, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_pillar_form.iconKey) }}
+                        </div>
+                        <div class="col-12 col-sm-7">
+                            {{ form_label(new_pillar_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_pillar_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_pillar_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_pillar_form.description) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_pillar_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_pillar_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_pillar_form.isActive) }}
+                                {{ form_label(new_pillar_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_pillar_form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nueva Fase -->
+    <div class="modal fade sc-modal" id="modalNewPhase" tabindex="-1" aria-labelledby="modalNewPhaseLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewPhaseLabel">Nueva fase</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Ciclo de Entrega en Metodología.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_phase_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-4">
+                            {{ form_label(new_phase_form.phaseBadge, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_phase_form.phaseBadge) }}
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            {{ form_label(new_phase_form.duration, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_phase_form.duration) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_phase_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_phase_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_phase_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_phase_form.description) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_phase_form.deliverable, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_phase_form.deliverable) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_phase_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_phase_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_phase_form.isActive) }}
+                                {{ form_label(new_phase_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_phase_form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nuevo Estándar -->
+    <div class="modal fade sc-modal" id="modalNewStandard" tabindex="-1" aria-labelledby="modalNewStandardLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 class="modal-title sc-panel-card-title" id="modalNewStandardLabel">Nuevo estándar</h3>
+                        <p class="sc-panel-card-subtitle mb-0">Buenas Prácticas en Metodología.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                {{ form_start(new_standard_form) }}
+                    <div class="modal-body row g-3">
+                        <div class="col-12 col-sm-5">
+                            {{ form_label(new_standard_form.iconKey, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_standard_form.iconKey) }}
+                        </div>
+                        <div class="col-12 col-sm-7">
+                            {{ form_label(new_standard_form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_standard_form.title) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(new_standard_form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_standard_form.description) }}
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            {{ form_label(new_standard_form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                            {{ form_widget(new_standard_form.sortOrder) }}
+                        </div>
+                        <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                            <div class="form-check form-switch">
+                                {{ form_widget(new_standard_form.isActive) }}
+                                {{ form_label(new_standard_form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center gap-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                        <button type="button" class="btn sc-btn-outline" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                {{ form_end(new_standard_form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

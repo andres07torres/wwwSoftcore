@@ -33,7 +33,7 @@ final class CreateAdminCommand extends Command
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'Correo electrónico del administrador')
             ->addArgument('password', InputArgument::REQUIRED, 'Contraseña en texto plano')
-            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Nombre completo del administrador', 'Administrador SoftCorec')
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Nombre completo del administrador', 'Administrador')
         ;
     }
 
@@ -65,7 +65,7 @@ final class CreateAdminCommand extends Command
             $user->setEmail($email);
         }
 
-        $user->setFullName('' !== $fullName ? $fullName : 'Administrador SoftCorec');
+        $user->setFullName('' !== $fullName ? $fullName : 'Administrador');
         $user->setRoles(['ROLE_ADMIN']);
         $user->setIsActive(true);
         $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
