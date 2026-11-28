@@ -124,16 +124,16 @@ body.sc-login-body {
 }
 
 .sc-form-label {
-    font-size: 0.8125rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--sc-navy);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 
 .sc-form-control {
-    font-size: 0.9375rem;
-    padding: 0.7rem 0.9rem;
-    border-radius: 10px;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
     border: 1px solid #cbd5e1;
     color: var(--sc-text);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -604,8 +604,8 @@ select.form-select.sc-form-control {
 }
 
 .sc-admin-content {
-    padding: 1.5rem;
-    max-width: 1280px;
+    padding: 1.5rem 1.25rem;
+    max-width: 960px;
     width: 100%;
     margin: 0 auto;
 }
@@ -681,7 +681,7 @@ select.form-select.sc-form-control {
 }
 
 .sc-panel-card-header {
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--sc-border);
     display: flex;
     align-items: center;
@@ -768,11 +768,13 @@ select.form-select.sc-form-control {
 
 /* Admin Forms & Media Previews */
 .sc-panel-card-body {
-    padding: 1.5rem;
+    padding: 1.15rem 1.25rem;
 }
 
 .sc-form-card-narrow {
-    max-width: 720px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .sc-admin-alert {
