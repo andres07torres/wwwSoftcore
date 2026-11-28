@@ -1,0 +1,39 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Panel Administrativo | SoftCorec{% endblock %}
+{% block page_title %}Panel Administrativo{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block admin_content %}
+    <!-- KPIs -->
+    <section class="row g-3" aria-label="Indicadores clave">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="sc-kpi-card">
+                <span class="sc-kpi-label">Usuarios totales</span>
+                <div class="sc-kpi-value">{{ total_users }}</div>
+                <span class="sc-kpi-meta">Cuentas registradas en sistema</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="sc-kpi-card">
+                <span class="sc-kpi-label">Administradores</span>
+                <div class="sc-kpi-value">{{ admins_count }}</div>
+                <span class="sc-kpi-meta">Con rol ROLE_ADMIN</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="sc-kpi-card">
+                <span class="sc-kpi-label">Cuentas activas</span>
+                <div class="sc-kpi-value">{{ active_users }}</div>
+                <span class="sc-kpi-meta">Habilitadas para acceder</span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="sc-kpi-card">
+                <span class="sc-kpi-label">Estado del portal</span>
+                <div class="sc-kpi-value sc-kpi-value-sm">{{ maintenance_active ? 'Mantenimiento' : 'Operativo' }}</div>
+                <span class="sc-kpi-meta">SoftCorec Web Platform</span>
+            </div>
+        </div>
+    </section>
+{% endblock %}

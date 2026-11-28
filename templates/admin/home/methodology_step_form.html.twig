@@ -1,0 +1,66 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ is_edit ? 'Editar' : 'Nuevo' }} paso de metodología | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{{ is_edit ? 'Editar paso de metodología' : 'Nuevo paso de metodología' }}{% endblock %}
+{% block page_subtitle %}Configura el número, título, descripción y orden del paso en Cómo Trabajamos.{% endblock %}
+
+{% block topbar_actions %}
+    <a href="{{ path('app_admin_home') }}" class="btn sc-btn-outline btn-sm">
+        Volver a Inicio
+    </a>
+{% endblock %}
+
+{% block admin_content %}
+    <section class="sc-panel-card sc-form-card-narrow" aria-labelledby="methodology-step-form-heading">
+        <div class="sc-panel-card-header">
+            <div>
+                <h2 id="methodology-step-form-heading" class="sc-panel-card-title">
+                    {{ is_edit ? 'Actualizar paso de metodología' : 'Crear paso de metodología' }}
+                </h2>
+                <p class="sc-panel-card-subtitle mb-0">Se mostrará en la sección Cómo Trabajamos de la portada.</p>
+            </div>
+        </div>
+
+        <div class="sc-panel-card-body">
+            {{ form_start(form, { attr: { class: 'row g-3' } }) }}
+                <div class="col-12 col-sm-4">
+                    {{ form_label(form.stepNumber, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.stepNumber) }}
+                    {{ form_errors(form.stepNumber) }}
+                </div>
+
+                <div class="col-12 col-sm-8">
+                    {{ form_label(form.title, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.title) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+                <div class="col-12">
+                    {{ form_label(form.description, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.sortOrder) }}
+                    {{ form_errors(form.sortOrder) }}
+                </div>
+
+                <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        {{ form_widget(form.isActive) }}
+                        {{ form_label(form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end gap-2 pt-3">
+                    <a href="{{ path('app_admin_home') }}" class="btn sc-btn-outline">Cancelar</a>
+                    <button type="submit" class="btn sc-btn-primary">
+                        {{ is_edit ? 'Guardar cambios' : 'Crear paso' }}
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

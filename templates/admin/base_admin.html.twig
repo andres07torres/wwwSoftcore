@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Administración | SoftCorec{% endblock %}</title>
+        <meta name="robots" content="noindex, nofollow">
+
+        <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('favicons/favicon.svg') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicons/apple-touch-icon.png') }}">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+        {% block stylesheets %}
+            {{ vite_entry_link_tags('admin') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ vite_entry_script_tags('admin') }}
+        {% endblock %}
+    </head>
+    <body class="{% block body_class %}sc-admin-body{% endblock %}">
+        {% block body %}{% endblock %}
+    </body>
+</html>

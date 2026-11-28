@@ -1,0 +1,100 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Mi Perfil | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block admin_content %}
+    <div class="sc-page-header mb-4">
+        <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
+            <a href="{{ path('app_admin_dashboard') }}">Panel</a>
+            <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="sc-breadcrumb-current" aria-current="page">Mi Perfil</span>
+        </nav>
+        <h1 class="sc-page-title mb-1">Gestionar mi perfil</h1>
+        <p class="sc-page-subtitle mb-0">Actualiza tus datos personales, foto de perfil y contraseña de acceso.</p>
+    </div>
+
+    <div class="d-flex flex-column gap-4" style="max-width: 780px;">
+        <!-- Datos personales -->
+        <section id="perfil" class="sc-panel-card">
+            <div class="sc-panel-card-header">
+                <div>
+                    <h2 class="sc-panel-card-title">Información personal</h2>
+                    <p class="sc-panel-card-subtitle mb-0">Nombre visible y correo de acceso al panel.</p>
+                </div>
+            </div>
+            <div class="sc-panel-card-body">
+                <form method="post" action="{{ path('app_admin_profile') }}" class="row g-3">
+                    <input type="hidden" name="_action" value="profile">
+                    <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_profile') }}">
+                    <div class="col-12 col-md-6">
+                        <label for="profileFullName" class="form-label sc-form-label">Nombre completo</label>
+                        <input type="text" id="profileFullName" name="full_name" class="form-control sc-form-control" value="{{ user.fullName }}" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="profileEmail" class="form-label sc-form-label">Correo electrónico</label>
+                        <input type="email" id="profileEmail" name="email" class="form-control sc-form-control" value="{{ user.email }}" required>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center pt-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Foto de perfil -->
+        <section id="foto" class="sc-panel-card">
+            <div class="sc-panel-card-header">
+                <div>
+                    <h2 class="sc-panel-card-title">Cambiar foto de perfil</h2>
+                    <p class="sc-panel-card-subtitle mb-0">Formatos admitidos: WebP, JPG o PNG (máximo 3 MB).</p>
+                </div>
+            </div>
+            <div class="sc-panel-card-body">
+                <form method="post" action="{{ path('app_admin_profile') }}" enctype="multipart/form-data" class="row g-3 align-items-center">
+                    <input type="hidden" name="_action" value="avatar">
+                    <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_avatar') }}">
+                    <div class="col-12">
+                        <label for="profileAvatar" class="form-label sc-form-label">Seleccionar nueva foto</label>
+                        <input type="file" id="profileAvatar" name="avatar" class="form-control sc-form-control" accept="image/webp,image/jpeg,image/png" required>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center pt-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Cambiar contraseña -->
+        <section id="contrasena" class="sc-panel-card">
+            <div class="sc-panel-card-header">
+                <div>
+                    <h2 class="sc-panel-card-title">Cambiar contraseña</h2>
+                    <p class="sc-panel-card-subtitle mb-0">Usa una contraseña segura de al menos 8 caracteres.</p>
+                </div>
+            </div>
+            <div class="sc-panel-card-body">
+                <form method="post" action="{{ path('app_admin_profile') }}" class="row g-3">
+                    <input type="hidden" name="_action" value="password">
+                    <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_password') }}">
+                    <div class="col-12">
+                        <label for="currentPassword" class="form-label sc-form-label">Contraseña actual</label>
+                        <input type="password" id="currentPassword" name="current_password" class="form-control sc-form-control" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="newPassword" class="form-label sc-form-label">Nueva contraseña</label>
+                        <input type="password" id="newPassword" name="new_password" class="form-control sc-form-control" minlength="8" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="confirmPassword" class="form-label sc-form-label">Confirmar nueva contraseña</label>
+                        <input type="password" id="confirmPassword" name="confirm_password" class="form-control sc-form-control" minlength="8" required>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center pt-2">
+                        <button type="submit" class="btn sc-btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+{% endblock %}

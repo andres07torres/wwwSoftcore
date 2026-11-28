@@ -1,0 +1,67 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ is_edit ? 'Editar' : 'Nueva' }} diapositiva | Panel Administrativo SoftCorec{% endblock %}
+{% block page_title %}{{ is_edit ? 'Editar diapositiva' : 'Nueva diapositiva' }}{% endblock %}
+{% block page_subtitle %}Configura la imagen, texto alternativo y orden en el carrusel de Inicio.{% endblock %}
+
+{% block topbar_actions %}
+    <a href="{{ path('app_admin_home') }}" class="btn sc-btn-outline btn-sm">
+        Volver a Inicio
+    </a>
+{% endblock %}
+
+{% block admin_content %}
+    <section class="sc-panel-card sc-form-card-narrow" aria-labelledby="slide-form-heading">
+        <div class="sc-panel-card-header">
+            <div>
+                <h2 id="slide-form-heading" class="sc-panel-card-title">
+                    {{ is_edit ? 'Actualizar diapositiva del carrusel' : 'Subir nueva diapositiva' }}
+                </h2>
+                <p class="sc-panel-card-subtitle mb-0">Formatos admitidos: WebP, JPG o PNG (máximo 5 MB).</p>
+            </div>
+        </div>
+
+        <div class="sc-panel-card-body">
+            {% if is_edit and slide.imagePath %}
+                <div class="mb-4">
+                    <span class="form-label sc-form-label d-block">Imagen actual</span>
+                    <img src="{{ slide.imagePath }}" alt="{{ slide.altText }}" class="sc-slide-preview-lg">
+                </div>
+            {% endif %}
+
+            {{ form_start(form, { attr: { class: 'row g-3' } }) }}
+                <div class="col-12">
+                    {{ form_label(form.imageFile, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.imageFile) }}
+                    {{ form_errors(form.imageFile) }}
+                </div>
+
+                <div class="col-12">
+                    {{ form_label(form.altText, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.altText) }}
+                    {{ form_errors(form.altText) }}
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    {{ form_label(form.sortOrder, null, { label_attr: { class: 'form-label sc-form-label' } }) }}
+                    {{ form_widget(form.sortOrder) }}
+                    {{ form_errors(form.sortOrder) }}
+                </div>
+
+                <div class="col-12 col-sm-6 d-flex align-items-end pb-2">
+                    <div class="form-check form-switch">
+                        {{ form_widget(form.isActive) }}
+                        {{ form_label(form.isActive, null, { label_attr: { class: 'form-check-label sc-form-label mb-0' } }) }}
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end gap-2 pt-3">
+                    <a href="{{ path('app_admin_home') }}" class="btn sc-btn-outline">Cancelar</a>
+                    <button type="submit" class="btn sc-btn-primary">
+                        {{ is_edit ? 'Guardar cambios' : 'Crear diapositiva' }}
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

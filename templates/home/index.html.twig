@@ -15,30 +15,45 @@
     <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel-fullscreen" data-bs-ride="carousel" data-bs-interval="5000">
         <!-- Indicadores -->
         <div class="carousel-indicators mb-4">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            {% if hero_slides is defined and hero_slides is not empty %}
+                {% for slide in hero_slides %}
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ loop.index }}"></button>
+                {% endfor %}
+            {% else %}
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            {% endif %}
         </div>
 
         <!-- Slides con imágenes que cubren el ancho completo de extremo a extremo -->
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ asset('assets/images/hero/hero-1.webp', 'vite') }}" srcset="{{ asset('assets/images/hero/hero-1-mobile.webp', 'vite') }} 800w, {{ asset('assets/images/hero/hero-1.webp', 'vite') }} 1672w" sizes="100vw" width="1672" height="941" class="d-block w-100 hero-fullscreen-img" alt="Colaboración y arquitectura de software" loading="eager" decoding="async" fetchpriority="high">
-                <div class="hero-slide-overlay"></div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('assets/images/hero/hero-2.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Equipo colaborando en desarrollo y cloud" loading="lazy">
-                <div class="hero-slide-overlay"></div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('assets/images/hero/hero-3.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Jornada productiva en ingeniería de software" loading="lazy">
-                <div class="hero-slide-overlay"></div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('assets/images/hero/hero-4.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Planificación y arquitectura de soluciones tecnológicas" loading="lazy">
-                <div class="hero-slide-overlay"></div>
-            </div>
+            {% if hero_slides is defined and hero_slides is not empty %}
+                {% for slide in hero_slides %}
+                    <div class="carousel-item{% if loop.first %} active{% endif %}">
+                        <img src="{{ slide.imagePath }}" class="d-block w-100 hero-fullscreen-img" alt="{{ slide.altText }}" loading="{{ loop.first ? 'eager' : 'lazy' }}" decoding="async"{% if loop.first %} fetchpriority="high"{% endif %}>
+                        <div class="hero-slide-overlay"></div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="carousel-item active">
+                    <img src="{{ asset('assets/images/hero/hero-1.webp', 'vite') }}" srcset="{{ asset('assets/images/hero/hero-1-mobile.webp', 'vite') }} 800w, {{ asset('assets/images/hero/hero-1.webp', 'vite') }} 1672w" sizes="100vw" width="1672" height="941" class="d-block w-100 hero-fullscreen-img" alt="Colaboración y arquitectura de software" loading="eager" decoding="async" fetchpriority="high">
+                    <div class="hero-slide-overlay"></div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/images/hero/hero-2.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Equipo colaborando en desarrollo y cloud" loading="lazy">
+                    <div class="hero-slide-overlay"></div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/images/hero/hero-3.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Jornada productiva en ingeniería de software" loading="lazy">
+                    <div class="hero-slide-overlay"></div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/images/hero/hero-4.webp', 'vite') }}" class="d-block w-100 hero-fullscreen-img" alt="Planificación y arquitectura de soluciones tecnológicas" loading="lazy">
+                    <div class="hero-slide-overlay"></div>
+                </div>
+            {% endif %}
         </div>
 
         <!-- Controles de navegación en los extremos del carrusel -->
@@ -55,13 +70,23 @@
         <div class="hero-content-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
             <div class="container text-center text-white py-5">
                 <div class="max-w-850 mx-auto hero-content">
-                    <h1 id="hero-title" class="hero-title hero-title-light mb-3 text-white" data-i18n-html="hero.title">
-                        Arquitectura de software a medida que <span class="text-gradient-light">escala con tu negocio</span>
-                    </h1>
+                    {% if hero_config is defined and hero_config is not null %}
+                        <h1 id="hero-title" class="hero-title hero-title-light mb-3 text-white">
+                            {{ hero_config.titlePrefix }} <span class="text-gradient-light">{{ hero_config.titleHighlight }}</span>
+                        </h1>
 
-                    <p class="hero-subtitle hero-subtitle-light mb-4 mx-auto text-white-50" data-i18n="hero.subtitle">
-                        En SoftCorec diseñamos y desarrollamos infraestructuras tecnológicas robustas, escalables y orientadas a resultados. Optimizamos procesos críticos para acelerar el crecimiento de tu empresa.
-                    </p>
+                        <p class="hero-subtitle hero-subtitle-light mb-4 mx-auto text-white-50">
+                            {{ hero_config.subtitle }}
+                        </p>
+                    {% else %}
+                        <h1 id="hero-title" class="hero-title hero-title-light mb-3 text-white" data-i18n-html="hero.title">
+                            Arquitectura de software a medida que <span class="text-gradient-light">escala con tu negocio</span>
+                        </h1>
+
+                        <p class="hero-subtitle hero-subtitle-light mb-4 mx-auto text-white-50" data-i18n="hero.subtitle">
+                            En SoftCorec diseñamos y desarrollamos infraestructuras tecnológicas robustas, escalables y orientadas a resultados. Optimizamos procesos críticos para acelerar el crecimiento de tu empresa.
+                        </p>
+                    {% endif %}
 
                     <div class="hero-actions d-flex flex-wrap gap-3 align-items-center justify-content-center">
                         <a href="{{ path('app_services') }}#formulario-contacto" class="btn btn-hero-primary rounded-pill d-inline-flex align-items-center gap-2">
@@ -158,82 +183,138 @@
 <section class="services-section py-5 py-lg-6" id="servicios" aria-labelledby="services-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="services.eyebrow">Nuestros Pilares</span>
-            <h2 id="services-title" class="section-title" data-i18n="services.title">Soluciones de ingeniería diseñadas para impactar</h2>
-            <p class="section-subtitle text-muted" data-i18n="services.subtitle">
-                Cubrimos el ciclo de vida completo de tus proyectos tecnológicos con estándares internacionales de calidad y seguridad.
-            </p>
+            {% if services_config is defined and services_config is not null %}
+                <span class="section-eyebrow">{{ services_config.eyebrow }}</span>
+                <h2 id="services-title" class="section-title">{{ services_config.title }}</h2>
+                <p class="section-subtitle text-muted">
+                    {{ services_config.subtitle }}
+                </p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="services.eyebrow">Nuestros Pilares</span>
+                <h2 id="services-title" class="section-title" data-i18n="services.title">Soluciones de ingeniería diseñadas para impactar</h2>
+                <p class="section-subtitle text-muted" data-i18n="services.subtitle">
+                    Cubrimos el ciclo de vida completo de tus proyectos tecnológicos con estándares internacionales de calidad y seguridad.
+                </p>
+            {% endif %}
         </div>
 
         <div class="row g-4 bento-grid">
-            <!-- Servicio 1: Desarrollo Web y Móvil -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="bento-card card h-100 p-4 border-0 shadow-sm">
-                    <div class="service-icon mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
+            {% if service_cards is defined and service_cards is not empty %}
+                {% for card in service_cards %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="bento-card card h-100 p-4 border-0 shadow-sm">
+                            <div class="service-icon mb-3">
+                                {% if card.iconKey == 'cloud_devops' %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                    </svg>
+                                {% elseif card.iconKey == 'consulting_audit' %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                {% elseif card.iconKey == 'code' %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                                    </svg>
+                                {% elseif card.iconKey == 'shield' %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                    </svg>
+                                {% elseif card.iconKey == 'bolt' %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                {% endif %}
+                            </div>
+                            <h3 class="h5 mb-2 service-card-title">{{ card.title }}</h3>
+                            <p class="text-muted flex-grow-1 service-card-desc">
+                                {{ card.description }}
+                            </p>
+                            <div class="service-card-footer mt-3 pt-3 border-top">
+                                <a href="{{ card.linkUrl }}" class="service-link d-inline-flex align-items-center gap-1">
+                                    <span>{{ card.linkText }}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="h5 mb-2 service-card-title" data-i18n="services.card1_title">Desarrollo Web & Móvil</h3>
-                    <p class="text-muted flex-grow-1 service-card-desc" data-i18n="services.card1_desc">
-                        Plataformas web corporativas, SPAs y aplicaciones nativas/híbridas con arquitecturas limpias, alta velocidad de respuesta y UX intuitiva.
-                    </p>
-                    <div class="service-card-footer mt-3 pt-3 border-top">
-                        <a href="#servicios" class="service-link d-inline-flex align-items-center gap-1">
-                            <span data-i18n="services.card1_link">Ver detalles del servicio</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                {% endfor %}
+            {% else %}
+                <!-- Servicio 1: Desarrollo Web y Móvil -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="bento-card card h-100 p-4 border-0 shadow-sm">
+                        <div class="service-icon mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                        </a>
+                        </div>
+                        <h3 class="h5 mb-2 service-card-title" data-i18n="services.card1_title">Desarrollo Web & Móvil</h3>
+                        <p class="text-muted flex-grow-1 service-card-desc" data-i18n="services.card1_desc">
+                            Plataformas web corporativas, SPAs y aplicaciones nativas/híbridas con arquitecturas limpias, alta velocidad de respuesta y UX intuitiva.
+                        </p>
+                        <div class="service-card-footer mt-3 pt-3 border-top">
+                            <a href="#servicios" class="service-link d-inline-flex align-items-center gap-1">
+                                <span data-i18n="services.card1_link">Ver detalles del servicio</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Servicio 2: Cloud & DevOps -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="bento-card card h-100 p-4 border-0 shadow-sm">
-                    <div class="service-icon mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                    </div>
-                    <h3 class="h5 mb-2 service-card-title" data-i18n="services.card2_title">Cloud Architecture & DevOps</h3>
-                    <p class="text-muted flex-grow-1 service-card-desc" data-i18n="services.card2_desc">
-                        Diseño de infraestructura como código (Terraform), contenedores con Kubernetes y flujos CI/CD para despliegues automatizados y sin fricción.
-                    </p>
-                    <div class="service-card-footer mt-3 pt-3 border-top">
-                        <a href="#servicios" class="service-link d-inline-flex align-items-center gap-1">
-                            <span data-i18n="services.card2_link">Ver detalles del servicio</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                <!-- Servicio 2: Cloud & DevOps -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="bento-card card h-100 p-4 border-0 shadow-sm">
+                        <div class="service-icon mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
-                        </a>
+                        </div>
+                        <h3 class="h5 mb-2 service-card-title" data-i18n="services.card2_title">Cloud Architecture & DevOps</h3>
+                        <p class="text-muted flex-grow-1 service-card-desc" data-i18n="services.card2_desc">
+                            Diseño de infraestructura como código (Terraform), contenedores con Kubernetes y flujos CI/CD para despliegues automatizados y sin fricción.
+                        </p>
+                        <div class="service-card-footer mt-3 pt-3 border-top">
+                            <a href="#servicios" class="service-link d-inline-flex align-items-center gap-1">
+                                <span data-i18n="services.card2_link">Ver detalles del servicio</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Servicio 3: Consultoría IT & Modernización -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="bento-card card h-100 p-4 border-0 shadow-sm">
-                    <div class="service-icon mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="h5 mb-2 service-card-title" data-i18n="services.card3_title">Consultoría & Auditoría IT</h3>
-                    <p class="text-muted flex-grow-1 service-card-desc" data-i18n="services.card3_desc">
-                        Evaluación de deuda técnica, auditorías de seguridad, optimización de base de datos y modernización estratégica de sistemas legados.
-                    </p>
-                    <div class="service-card-footer mt-3 pt-3 border-top">
-                        <a href="#servicios" class="service-link d-inline-flex align-items-center gap-1">
-                            <span data-i18n="services.card3_link">Ver detalles del servicio</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                <!-- Servicio 3: Consultoría IT & Modernización -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="bento-card card h-100 p-4 border-0 shadow-sm">
+                        <div class="service-icon mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                        </a>
+                        </div>
+                        <h3 class="h5 mb-2 service-card-title" data-i18n="services.card3_title">Consultoría & Auditoría IT</h3>
+                        <p class="text-muted flex-grow-1 service-card-desc" data-i18n="services.card3_desc">
+                            Evaluación de deuda técnica, auditorías de seguridad, optimización de base de datos y modernización estratégica de sistemas legados.
+                        </p>
+                        <div class="service-card-footer mt-3 pt-3 border-top">
+                            <a href="#servicios" class="service-link d-inline-flex align-items-center gap-1">
+                                <span data-i18n="services.card3_link">Ver detalles del servicio</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -244,57 +325,79 @@
 <section class="methodology-section py-5 py-lg-6 bg-white" id="metodologia" aria-labelledby="methodology-title">
     <div class="container">
         <div class="text-center max-w-700 mx-auto mb-5">
-            <span class="section-eyebrow" data-i18n="methodology.eyebrow">Cómo Trabajamos</span>
-            <h2 id="methodology-title" class="section-title" data-i18n="methodology.title">Metodología ágil orientada a entregas tangibles</h2>
-            <p class="section-subtitle text-muted" data-i18n="methodology.subtitle">
-                Un proceso transparente, predecible y validado en cada etapa para minimizar riesgos técnicos y de negocio.
-            </p>
+            {% if methodology_config is defined and methodology_config is not null %}
+                <span class="section-eyebrow">{{ methodology_config.eyebrow }}</span>
+                <h2 id="methodology-title" class="section-title">{{ methodology_config.title }}</h2>
+                <p class="section-subtitle text-muted">
+                    {{ methodology_config.subtitle }}
+                </p>
+            {% else %}
+                <span class="section-eyebrow" data-i18n="methodology.eyebrow">Cómo Trabajamos</span>
+                <h2 id="methodology-title" class="section-title" data-i18n="methodology.title">Metodología ágil orientada a entregas tangibles</h2>
+                <p class="section-subtitle text-muted" data-i18n="methodology.subtitle">
+                    Un proceso transparente, predecible y validado en cada etapa para minimizar riesgos técnicos y de negocio.
+                </p>
+            {% endif %}
         </div>
 
         <div class="row g-4 methodology-steps">
-            <!-- Paso 1 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="step-card p-4 rounded-3 h-100">
-                    <div class="step-number mb-3">01</div>
-                    <h3 class="h5 step-title mb-2" data-i18n="methodology.step1_title">Diagnóstico & Estrategia</h3>
-                    <p class="text-muted step-desc" data-i18n="methodology.step1_desc">
-                        Relevamiento de requerimientos, análisis de factibilidad y diseño conceptual de la arquitectura.
-                    </p>
+            {% if methodology_steps is defined and methodology_steps is not empty %}
+                {% for step in methodology_steps %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="step-card p-4 rounded-3 h-100">
+                            <div class="step-number mb-3">{{ step.stepNumber }}</div>
+                            <h3 class="h5 step-title mb-2">{{ step.title }}</h3>
+                            <p class="text-muted step-desc">
+                                {{ step.description }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <!-- Paso 1 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="step-card p-4 rounded-3 h-100">
+                        <div class="step-number mb-3">01</div>
+                        <h3 class="h5 step-title mb-2" data-i18n="methodology.step1_title">Diagnóstico & Estrategia</h3>
+                        <p class="text-muted step-desc" data-i18n="methodology.step1_desc">
+                            Relevamiento de requerimientos, análisis de factibilidad y diseño conceptual de la arquitectura.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Paso 2 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="step-card p-4 rounded-3 h-100">
-                    <div class="step-number mb-3">02</div>
-                    <h3 class="h5 step-title mb-2" data-i18n="methodology.step2_title">Diseño & Prototipado</h3>
-                    <p class="text-muted step-desc" data-i18n="methodology.step2_desc">
-                        Modelado de datos, definición de interfaces API y maquetación de flujos de usuario clave.
-                    </p>
+                <!-- Paso 2 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="step-card p-4 rounded-3 h-100">
+                        <div class="step-number mb-3">02</div>
+                        <h3 class="h5 step-title mb-2" data-i18n="methodology.step2_title">Diseño & Prototipado</h3>
+                        <p class="text-muted step-desc" data-i18n="methodology.step2_desc">
+                            Modelado de datos, definición de interfaces API y maquetación de flujos de usuario clave.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Paso 3 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="step-card p-4 rounded-3 h-100">
-                    <div class="step-number mb-3">03</div>
-                    <h3 class="h5 step-title mb-2" data-i18n="methodology.step3_title">Desarrollo & Testing</h3>
-                    <p class="text-muted step-desc" data-i18n="methodology.step3_desc">
-                        Sprints iterativos con pruebas unitarias, de integración y revisión continua de código.
-                    </p>
+                <!-- Paso 3 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="step-card p-4 rounded-3 h-100">
+                        <div class="step-number mb-3">03</div>
+                        <h3 class="h5 step-title mb-2" data-i18n="methodology.step3_title">Desarrollo & Testing</h3>
+                        <p class="text-muted step-desc" data-i18n="methodology.step3_desc">
+                            Sprints iterativos con pruebas unitarias, de integración y revisión continua de código.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Paso 4 -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="step-card p-4 rounded-3 h-100">
-                    <div class="step-number mb-3">04</div>
-                    <h3 class="h5 step-title mb-2" data-i18n="methodology.step4_title">Despliegue & Monitoreo</h3>
-                    <p class="text-muted step-desc" data-i18n="methodology.step4_desc">
-                        Lanzamiento automatizado a producción con alertas en tiempo real y soporte técnico constante.
-                    </p>
+                <!-- Paso 4 -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="step-card p-4 rounded-3 h-100">
+                        <div class="step-number mb-3">04</div>
+                        <h3 class="h5 step-title mb-2" data-i18n="methodology.step4_title">Despliegue & Monitoreo</h3>
+                        <p class="text-muted step-desc" data-i18n="methodology.step4_desc">
+                            Lanzamiento automatizado a producción con alertas en tiempo real y soporte técnico constante.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <div class="text-center mt-5">
