@@ -1331,3 +1331,41 @@ select.form-select.sc-form-control {
     border-color: #94a3b8;
     color: #0f172a;
 }
+
+/* Profile Page */
+.sc-profile-meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    border: 1px solid var(--sc-border);
+    font-size: 0.82rem;
+    color: var(--sc-text-muted);
+}
+
+.sc-profile-meta-strip strong {
+    color: var(--sc-text);
+}
+
+.sc-profile-avatar-preview {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #14212B;
+    border: 1.5px solid #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.sc-profile-avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

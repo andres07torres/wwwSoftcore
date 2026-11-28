@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -21,6 +22,7 @@ final class AdminProfileController extends AbstractController
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
+        private readonly UserRepository $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
         #[Autowire('%kernel.project_dir%/public/uploads/avatars')]
         private readonly string $avatarDir,
@@ -49,16 +51,21 @@ final class AdminProfileController extends AbstractController
                 $fullName = trim((string) $request->request->get('full_name', ''));
                 $email = mb_strtolower(trim((string) $request->request->get('email', '')));
 
-                if ('' === $fullName || !filter_var($email, \FILTER_VALIDATE_EMAIL)) {
+                if ('' === $fullName || mb_strlen($fullName) > 120 || !filter_var($email, \FILTER_VALIDATE_EMAIL)) {
                     $this->addFlash('error', 'Ingresa un nombre y correo electrónico válidos.');
                 } else {
-                    $user->setFullName($fullName);
-                    $user->setEmail($email);
-                    $this->entityManager->flush();
-                    $this->addFlash('success', 'Datos de perfil actualizados correctamente.');
+                    $existing = $this->userRepository->findOneByEmail($email);
+                    if (null !== $existing && $existing->getId() !== $user->getId()) {
+                        $this->addFlash('error', 'Ese correo electrónico ya está registrado en otra cuenta.');
+                    } else {
+                        $user->setFullName($fullName);
+                        $user->setEmail($email);
+                        $this->entityManager->flush();
+                        $this->addFlash('success', 'Datos de perfil actualizados correctamente.');
+                    }
                 }
 
-                return $this->redirectToRoute('app_admin_profile');
+                return $this->redirectToRoute('app_admin_profile', ['_fragment' => 'perfil']);
             }
 
             if ('avatar' === $action) {
@@ -89,14 +96,20 @@ final class AdminProfileController extends AbstractController
                 $user->setAvatarPath(self::AVATAR_PREFIX.$fileName);
                 $this->entityManager->flush();
 
-                if (null !== $oldAvatar && str_starts_with($oldAvatar, self::AVATAR_PREFIX)) {
-                    $oldFullPath = $this->avatarDir.\DIRECTORY_SEPARATOR.basename($oldAvatar);
-                    if (is_file($oldFullPath)) {
-                        @unlink($oldFullPath);
-                    }
-                }
+                $this->removeAvatarFile($oldAvatar);
 
                 $this->addFlash('success', 'Foto de perfil actualizada correctamente.');
+
+                return $this->redirectToRoute('app_admin_profile', ['_fragment' => 'foto']);
+            }
+
+            if ('avatar_delete' === $action) {
+                $oldAvatar = $user->getAvatarPath();
+                $user->setAvatarPath(null);
+                $this->entityManager->flush();
+                $this->removeAvatarFile($oldAvatar);
+
+                $this->addFlash('success', 'Foto de perfil eliminada.');
 
                 return $this->redirectToRoute('app_admin_profile', ['_fragment' => 'foto']);
             }
@@ -112,6 +125,8 @@ final class AdminProfileController extends AbstractController
                     $this->addFlash('error', 'La nueva contraseña debe tener al menos 8 caracteres.');
                 } elseif ($newPassword !== $confirmPassword) {
                     $this->addFlash('error', 'La confirmación de contraseña no coincide.');
+                } elseif ($currentPassword === $newPassword) {
+                    $this->addFlash('error', 'La nueva contraseña debe ser diferente a la actual.');
                 } else {
                     $user->setPassword($this->passwordHasher->hashPassword($user, $newPassword));
                     $this->entityManager->flush();
@@ -125,5 +140,15 @@ final class AdminProfileController extends AbstractController
         return $this->render('admin/profile/index.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    private function removeAvatarFile(?string $avatarPath): void
+    {
+        if (null !== $avatarPath && str_starts_with($avatarPath, self::AVATAR_PREFIX)) {
+            $fullPath = $this->avatarDir.\DIRECTORY_SEPARATOR.basename($avatarPath);
+            if (is_file($fullPath)) {
+                @unlink($fullPath);
+            }
+        }
     }
 }

@@ -170,12 +170,49 @@ function initHoverDropdowns() {
     });
 }
 
+function initAvatarPreview() {
+    const input = document.querySelector('[data-avatar-input]');
+    const container = document.querySelector('[data-avatar-preview]');
+    if (!input || !container || input.dataset.previewBound === 'true') {
+        return;
+    }
+    input.dataset.previewBound = 'true';
+
+    input.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        if (!file || !file.type.startsWith('image/')) {
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const url = typeof event.target?.result === 'string' ? event.target.result : '';
+            if (!url) {
+                return;
+            }
+            let img = container.querySelector('[data-avatar-preview-img]');
+            const fallback = container.querySelector('[data-avatar-preview-fallback]');
+            if (fallback) {
+                fallback.remove();
+            }
+            if (!img) {
+                img = document.createElement('img');
+                img.setAttribute('data-avatar-preview-img', '');
+                img.alt = 'Vista previa de foto de perfil';
+                container.appendChild(img);
+            }
+            img.src = url;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
 function initAdminUI() {
     initPasswordToggles();
     initSidebarToggleEffect();
     initAdminLanguageToggle();
     initEcuadorClock();
     initHoverDropdowns();
+    initAvatarPreview();
 }
 
 if (document.readyState === 'loading') {

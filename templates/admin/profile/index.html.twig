@@ -7,7 +7,7 @@
 {% block admin_content %}
     <div class="sc-page-header mb-4">
         <nav aria-label="Ruta de navegación" class="sc-breadcrumb">
-            <a href="{{ path('app_admin_dashboard') }}">Panel</a>
+            <a href="{{ path('app_admin_dashboard') }}">Dashboard</a>
             <span class="sc-breadcrumb-sep" aria-hidden="true">/</span>
             <span class="sc-breadcrumb-current" aria-current="page">Mi Perfil</span>
         </nav>
@@ -15,14 +15,15 @@
         <p class="sc-page-subtitle mb-0">Actualiza tus datos personales, foto de perfil y contraseña de acceso.</p>
     </div>
 
-    <div class="d-flex flex-column gap-4" style="max-width: 780px;">
-        <!-- Datos personales -->
+    <div class="d-flex flex-column gap-4" style="max-width: 820px;">
+        <!-- 1. Datos personales -->
         <section id="perfil" class="sc-panel-card">
-            <div class="sc-panel-card-header">
+            <div class="sc-panel-card-header flex-wrap">
                 <div>
-                    <h2 class="sc-panel-card-title">Información personal</h2>
+                    <h2 class="sc-panel-card-title">1. Información personal</h2>
                     <p class="sc-panel-card-subtitle mb-0">Nombre visible y correo de acceso al panel.</p>
                 </div>
+                <span class="sc-role-badge">{{ 'ROLE_ADMIN' in user.roles ? 'Admin' : 'Usuario' }}</span>
             </div>
             <div class="sc-panel-card-body">
                 <form method="post" action="{{ path('app_admin_profile') }}" class="row g-3">
@@ -30,12 +31,18 @@
                     <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_profile') }}">
                     <div class="col-12 col-md-6">
                         <label for="profileFullName" class="form-label sc-form-label">Nombre completo</label>
-                        <input type="text" id="profileFullName" name="full_name" class="form-control sc-form-control" value="{{ user.fullName }}" required>
+                        <input type="text" id="profileFullName" name="full_name" class="form-control sc-form-control" value="{{ user.fullName }}" maxlength="120" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="profileEmail" class="form-label sc-form-label">Correo electrónico</label>
                         <input type="email" id="profileEmail" name="email" class="form-control sc-form-control" value="{{ user.email }}" required>
                     </div>
+                    <div class="col-12">
+                        <div class="sc-profile-meta-strip">
+                            <span><strong>Cuenta:</strong> {{ user.isActive ? 'Activa' : 'Inactiva' }}</span>
+                            <span><strong>Último acceso:</strong> {{ user.lastLoginAt ? user.lastLoginAt|date('d/m/Y H:i', 'America/Guayaquil') : 'Sesión actual' }}</span>
+                        </div>
+                    </div>
                     <div class="col-12 d-flex justify-content-center pt-2">
                         <button type="submit" class="btn sc-btn-primary">Guardar</button>
                     </div>
@@ -43,21 +50,39 @@
             </div>
         </section>
 
-        <!-- Foto de perfil -->
+        <!-- 2. Foto de perfil -->
         <section id="foto" class="sc-panel-card">
-            <div class="sc-panel-card-header">
+            <div class="sc-panel-card-header flex-wrap">
                 <div>
-                    <h2 class="sc-panel-card-title">Cambiar foto de perfil</h2>
+                    <h2 class="sc-panel-card-title">2. Cambiar foto de perfil</h2>
                     <p class="sc-panel-card-subtitle mb-0">Formatos admitidos: WebP, JPG o PNG (máximo 3 MB).</p>
                 </div>
+                {% if user.avatarPath %}
+                    <form method="post" action="{{ path('app_admin_profile') }}" onsubmit="return confirm('¿Eliminar tu foto de perfil actual?');" class="ms-auto">
+                        <input type="hidden" name="_action" value="avatar_delete">
+                        <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_avatar_delete') }}">
+                        <button type="submit" class="btn sc-btn-danger-soft btn-sm">Eliminar foto</button>
+                    </form>
+                {% endif %}
             </div>
             <div class="sc-panel-card-body">
                 <form method="post" action="{{ path('app_admin_profile') }}" enctype="multipart/form-data" class="row g-3 align-items-center">
                     <input type="hidden" name="_action" value="avatar">
                     <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_avatar') }}">
-                    <div class="col-12">
-                        <label for="profileAvatar" class="form-label sc-form-label">Seleccionar nueva foto</label>
-                        <input type="file" id="profileAvatar" name="avatar" class="form-control sc-form-control" accept="image/webp,image/jpeg,image/png" required>
+                    <div class="col-12 d-flex flex-column flex-sm-row align-items-center gap-3">
+                        <div class="sc-profile-avatar-preview" data-avatar-preview>
+                            {% if user.avatarPath %}
+                                <img src="{{ user.avatarPath }}" alt="{{ user.fullName }}" data-avatar-preview-img>
+                            {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" data-avatar-preview-fallback>
+                                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd"/>
+                                </svg>
+                            {% endif %}
+                        </div>
+                        <div class="flex-grow-1 w-100">
+                            <label for="profileAvatar" class="form-label sc-form-label">Seleccionar nueva foto</label>
+                            <input type="file" id="profileAvatar" name="avatar" class="form-control sc-form-control" accept="image/webp,image/jpeg,image/png" data-avatar-input required>
+                        </div>
                     </div>
                     <div class="col-12 d-flex justify-content-center pt-2">
                         <button type="submit" class="btn sc-btn-primary">Guardar</button>
@@ -66,11 +91,11 @@
             </div>
         </section>
 
-        <!-- Cambiar contraseña -->
+        <!-- 3. Cambiar contraseña -->
         <section id="contrasena" class="sc-panel-card">
             <div class="sc-panel-card-header">
                 <div>
-                    <h2 class="sc-panel-card-title">Cambiar contraseña</h2>
+                    <h2 class="sc-panel-card-title">3. Cambiar contraseña</h2>
                     <p class="sc-panel-card-subtitle mb-0">Usa una contraseña segura de al menos 8 caracteres.</p>
                 </div>
             </div>
@@ -78,17 +103,51 @@
                 <form method="post" action="{{ path('app_admin_profile') }}" class="row g-3">
                     <input type="hidden" name="_action" value="password">
                     <input type="hidden" name="_token" value="{{ csrf_token('admin_profile_password') }}">
-                    <div class="col-12">
+                    <div class="col-12 col-md-6">
                         <label for="currentPassword" class="form-label sc-form-label">Contraseña actual</label>
-                        <input type="password" id="currentPassword" name="current_password" class="form-control sc-form-control" required>
+                        <div class="input-group sc-password-group">
+                            <input type="password" id="currentPassword" name="current_password" class="form-control sc-form-control" autocomplete="current-password" required>
+                            <button type="button" class="sc-password-toggle" data-toggle-password="#currentPassword" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                <svg class="sc-icon-eye" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <svg class="sc-icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    <div class="w-100 d-none d-md-block m-0"></div>
                     <div class="col-12 col-md-6">
                         <label for="newPassword" class="form-label sc-form-label">Nueva contraseña</label>
-                        <input type="password" id="newPassword" name="new_password" class="form-control sc-form-control" minlength="8" required>
+                        <div class="input-group sc-password-group">
+                            <input type="password" id="newPassword" name="new_password" class="form-control sc-form-control" minlength="8" autocomplete="new-password" required>
+                            <button type="button" class="sc-password-toggle" data-toggle-password="#newPassword" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                <svg class="sc-icon-eye" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <svg class="sc-icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="confirmPassword" class="form-label sc-form-label">Confirmar nueva contraseña</label>
-                        <input type="password" id="confirmPassword" name="confirm_password" class="form-control sc-form-control" minlength="8" required>
+                        <div class="input-group sc-password-group">
+                            <input type="password" id="confirmPassword" name="confirm_password" class="form-control sc-form-control" minlength="8" autocomplete="new-password" required>
+                            <button type="button" class="sc-password-toggle" data-toggle-password="#confirmPassword" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                <svg class="sc-icon-eye" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <svg class="sc-icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="col-12 d-flex justify-content-center pt-2">
                         <button type="submit" class="btn sc-btn-primary">Guardar</button>
