@@ -108,9 +108,22 @@ final class AdminAuthTest extends WebTestCase
 
         try {
             $crawler = $client->request('GET', '/login');
+            // Attempting login without accepting terms must fail
+            $formWithoutTerms = $crawler->selectButton('Ingresar al panel')->form([
+                '_username' => $email,
+                '_password' => 'TestPass2026!',
+            ]);
+            $client->submit($formWithoutTerms);
+            $this->assertResponseRedirects('/login');
+            $client->followRedirect();
+            $this->assertSelectorTextContains('[data-login-terms-error]', 'Debes aceptar los términos y condiciones');
+
+            // Accepting terms allows login
+            $crawler = $client->request('GET', '/login');
             $form = $crawler->selectButton('Ingresar al panel')->form([
                 '_username' => $email,
                 '_password' => 'TestPass2026!',
+                '_accept_terms' => '1',
             ]);
             $client->submit($form);
             $this->assertResponseRedirects('/admin');

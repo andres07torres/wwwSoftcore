@@ -230,6 +230,54 @@ function initSidebarSublinks() {
     });
 }
 
+function initLoginTermsGuard() {
+    const checkbox = document.querySelector('[data-login-terms]');
+    const errorEl = document.querySelector('[data-login-terms-error]');
+    const form = checkbox ? checkbox.closest('form') : null;
+    if (!checkbox || !errorEl || !form || form.dataset.termsBound === 'true') {
+        return;
+    }
+    form.dataset.termsBound = 'true';
+
+    let hideTimer = null;
+
+    const showErrorFor5s = () => {
+        if (hideTimer) {
+            clearTimeout(hideTimer);
+        }
+        errorEl.classList.remove('d-none');
+        hideTimer = setTimeout(() => {
+            errorEl.classList.add('d-none');
+            hideTimer = null;
+        }, 5000);
+    };
+
+    const hideError = () => {
+        if (hideTimer) {
+            clearTimeout(hideTimer);
+            hideTimer = null;
+        }
+        errorEl.classList.add('d-none');
+    };
+
+    if (!errorEl.classList.contains('d-none')) {
+        showErrorFor5s();
+    }
+
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            hideError();
+        }
+    });
+
+    form.addEventListener('submit', (event) => {
+        if (!checkbox.checked) {
+            event.preventDefault();
+            showErrorFor5s();
+        }
+    });
+}
+
 function initAdminUI() {
     initPasswordToggles();
     initSidebarToggleEffect();
@@ -238,6 +286,7 @@ function initAdminUI() {
     initHoverDropdowns();
     initAvatarPreview();
     initSidebarSublinks();
+    initLoginTermsGuard();
 }
 
 if (document.readyState === 'loading') {

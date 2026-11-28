@@ -208,6 +208,42 @@ select.form-select.sc-form-control {
     color: #ffffff;
 }
 
+.sc-login-terms {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding-left: 0;
+}
+
+.sc-login-terms .form-check-input {
+    margin: 0;
+    width: 1.08rem;
+    height: 1.08rem;
+    border-radius: 5px;
+    border: 1.5px solid #94a3b8;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.sc-login-terms .form-check-input:checked {
+    background-color: #14212B;
+    border-color: #14212B;
+}
+
+.sc-login-terms .form-check-label {
+    font-size: 0.86rem;
+    color: var(--sc-text);
+    cursor: pointer;
+    user-select: none;
+}
+
+.sc-login-terms-error {
+    margin: 0.45rem 0 0;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #c2410c;
+}
+
 .sc-login-footer {
     margin-top: 1.5rem;
     padding-top: 1.25rem;
