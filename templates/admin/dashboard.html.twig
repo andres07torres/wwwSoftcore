@@ -10,8 +10,8 @@
         <p class="sc-page-subtitle mb-0">Resumen general del contenido y estado del portal SoftCorec.</p>
     </div>
 
-    <!-- KPIs de contenido real -->
-    <section class="row g-3" aria-label="Indicadores clave">
+    <!-- 1. KPIs de contenido real -->
+    <section class="row g-3 mb-4" aria-label="Indicadores clave">
         <div class="col-12 col-sm-6 col-xl-3">
             <div class="sc-kpi-card">
                 <div class="sc-kpi-header">
@@ -72,4 +72,158 @@
             </div>
         </div>
     </section>
+
+    <!-- 2. Bloques operativos -->
+    <div class="row g-4">
+        <!-- Columna principal (Izquierda) -->
+        <div class="col-12 col-xl-8 d-flex flex-column gap-4">
+            <!-- Tabla de las 5 páginas del portal -->
+            <section class="sc-panel-card" aria-label="Páginas del portal">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h2 class="sc-panel-card-title">Páginas del portal</h2>
+                        <p class="sc-panel-card-subtitle mb-0">Estado de personalización, elementos activos y acceso directo a edición.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table sc-admin-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Página</th>
+                                <th scope="col">Elementos</th>
+                                <th scope="col">Última edición</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col" class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for page in pages_overview %}
+                                <tr>
+                                    <td class="fw-semibold text-dark">{{ page.name }}</td>
+                                    <td class="text-muted">{{ page.active_items }} {{ page.active_items == 1 ? 'activo' : 'activos' }}</td>
+                                    <td class="text-muted">
+                                        {{ page.updated_at ? page.updated_at|date('d/m/Y H:i', 'America/Guayaquil') : 'Sin cambios' }}
+                                    </td>
+                                    <td>
+                                        <span class="sc-role-badge {{ page.customized ? '' : 'is-neutral' }}">
+                                            {{ page.customized ? 'Personalizada' : 'Predeterminada' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center gap-2">
+                                            <a href="{{ path(page.edit_route) }}" class="btn sc-btn-primary btn-sm">Editar</a>
+                                            <a href="{{ path(page.public_route) }}" class="btn sc-btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Ver</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Distribución de contenido por página -->
+            <section class="sc-panel-card" aria-label="Distribución de contenido por página">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h2 class="sc-panel-card-title">Distribución de contenido por página</h2>
+                        <p class="sc-panel-card-subtitle mb-0">Elementos activos registrados en base de datos por cada módulo.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    <div class="d-flex flex-column gap-3">
+                        {% for page in pages_overview %}
+                            <div class="sc-bar-row">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="sc-bar-label">{{ page.name }}</span>
+                                    <span class="sc-bar-count">{{ page.active_items }} / {{ page.total_items }}</span>
+                                </div>
+                                <div class="sc-bar-track" role="progressbar" aria-valuenow="{{ page.bar_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ page.name }}">
+                                    <div class="sc-bar-fill" style="width: {{ page.bar_pct }}%;"></div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Columna lateral (Derecha) -->
+        <div class="col-12 col-xl-4 d-flex flex-column gap-4">
+            <!-- Interruptor rápido de Modo Mantenimiento -->
+            <section class="sc-panel-card" aria-label="Control de Modo Mantenimiento">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h2 class="sc-panel-card-title">Modo Mantenimiento</h2>
+                        <p class="sc-panel-card-subtitle mb-0">Control rápido de disponibilidad pública.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    <div class="sc-maintenance-box {{ maintenance_active ? 'is-active' : '' }} mb-3">
+                        <div class="fw-semibold text-dark mb-1">
+                            {{ maintenance_active ? 'Mantenimiento activo' : 'Portal en línea' }}
+                        </div>
+                        <p class="small text-muted mb-0">
+                            {{ maintenance_active
+                                ? 'Los visitantes ven la página de mantenimiento. El panel administrativo sigue accesible.'
+                                : 'El sitio público está visible para todos los visitantes con normalidad.' }}
+                        </p>
+                    </div>
+
+                    {% if maintenance_env_forced %}
+                        <p class="small text-muted mb-0">
+                            Forzado mediante la variable de entorno <code>APP_MAINTENANCE=1</code>.
+                        </p>
+                    {% else %}
+                        <form
+                            method="post"
+                            action="{{ path('app_admin_maintenance_toggle') }}"
+                            onsubmit="return confirm('{{ maintenance_active ? '¿Desactivar el modo mantenimiento y volver a publicar el sitio?' : '¿Activar el modo mantenimiento para los visitantes del sitio público?' }}');"
+                            class="d-flex justify-content-center"
+                        >
+                            <input type="hidden" name="_token" value="{{ csrf_token('admin_toggle_maintenance') }}">
+                            <button type="submit" class="btn {{ maintenance_active ? 'sc-btn-primary' : 'sc-btn-danger-soft' }} btn-sm px-3">
+                                {{ maintenance_active ? 'Desactivar mantenimiento' : 'Activar mantenimiento' }}
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- Sesión y estado del sistema -->
+            <section class="sc-panel-card" aria-label="Sesión y sistema">
+                <div class="sc-panel-card-header">
+                    <div>
+                        <h2 class="sc-panel-card-title">Sesión y sistema</h2>
+                        <p class="sc-panel-card-subtitle mb-0">Información de tu cuenta y entorno.</p>
+                    </div>
+                </div>
+                <div class="sc-panel-card-body">
+                    <dl class="sc-system-list mb-3">
+                        <div class="sc-system-item">
+                            <dt>Usuario</dt>
+                            <dd>{{ app.user.fullName }}</dd>
+                        </div>
+                        <div class="sc-system-item">
+                            <dt>Correo</dt>
+                            <dd>{{ app.user.email }}</dd>
+                        </div>
+                        <div class="sc-system-item">
+                            <dt>Último acceso</dt>
+                            <dd>{{ app.user.lastLoginAt ? app.user.lastLoginAt|date('d/m/Y H:i', 'America/Guayaquil') : 'Sesión actual' }}</dd>
+                        </div>
+                        <div class="sc-system-item">
+                            <dt>Entorno</dt>
+                            <dd class="text-uppercase">{{ app_env }} · PHP {{ php_version|split('.')|slice(0, 2)|join('.') }}</dd>
+                        </div>
+                    </dl>
+
+                    <div class="sc-dashboard-actions d-flex flex-wrap justify-content-center align-items-center gap-2">
+                        <a href="{{ path('app_admin_profile') }}" class="btn sc-btn-primary">Gestionar mi perfil</a>
+                        <a href="{{ path('app_home') }}" class="btn sc-btn-outline" target="_blank" rel="noopener noreferrer">Ver sitio público</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}

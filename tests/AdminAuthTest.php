@@ -132,6 +132,7 @@ final class AdminAuthTest extends WebTestCase
             $this->assertResponseIsSuccessful();
             $this->assertSelectorTextContains('h1', 'Dashboard');
             $this->assertSelectorTextContains('.sc-user-menu-email', $email);
+            $this->assertSelectorTextContains('table', 'Tecnologías');
 
             $client->request('GET', '/logout');
             $this->assertResponseRedirects('/login');

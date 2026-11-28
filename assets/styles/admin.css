@@ -124,16 +124,16 @@ body.sc-login-body {
 }
 
 .sc-form-label {
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     color: var(--sc-navy);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
 }
 
 .sc-form-control {
-    font-size: 0.875rem;
-    padding: 0.5rem 0.8rem;
-    border-radius: 8px;
+    font-size: 0.9375rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
     border: 1px solid #cbd5e1;
     color: var(--sc-text);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -719,8 +719,8 @@ select.form-select.sc-form-control {
 }
 
 .sc-admin-content {
-    padding: 1.5rem 1.25rem;
-    max-width: 960px;
+    padding: 1.5rem;
+    max-width: 1280px;
     width: 100%;
     margin: 0 auto;
 }
@@ -796,7 +796,7 @@ select.form-select.sc-form-control {
 }
 
 .sc-panel-card-header {
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--sc-border);
     display: flex;
     align-items: center;
@@ -883,13 +883,11 @@ select.form-select.sc-form-control {
 
 /* Admin Forms & Media Previews */
 .sc-panel-card-body {
-    padding: 1.15rem 1.25rem;
+    padding: 1.5rem;
 }
 
 .sc-form-card-narrow {
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 720px;
 }
 
 .sc-admin-alert {
@@ -1485,4 +1483,91 @@ select.form-select.sc-form-control {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+/* Dashboard Distribution Bars & System Card */
+.sc-bar-label {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--sc-text);
+}
+
+.sc-bar-count {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sc-text-muted);
+}
+
+.sc-bar-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background-color: #e2e8f0;
+    overflow: hidden;
+}
+
+.sc-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #14212B 0%, #38bdf8 100%);
+    transition: width 0.35s ease;
+}
+
+.sc-maintenance-box {
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    border: 1px solid var(--sc-border);
+}
+
+.sc-maintenance-box.is-active {
+    background-color: #fff7ed;
+    border-color: #fed7aa;
+}
+
+.sc-system-list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.sc-system-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.82rem;
+}
+
+.sc-system-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.sc-system-item dt {
+    color: var(--sc-text-muted);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.sc-system-item dd {
+    margin: 0;
+    color: var(--sc-text);
+    font-weight: 600;
+    text-align: right;
+    word-break: break-word;
+}
+
+.sc-dashboard-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.84rem;
+    font-weight: 600;
+    line-height: 1.25;
+    padding: 0.52rem 1rem;
+    border-radius: 9px;
 }

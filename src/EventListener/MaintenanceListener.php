@@ -32,7 +32,13 @@ final readonly class MaintenanceListener
         }
 
         $path = $event->getRequest()->getPathInfo();
-        if (str_starts_with($path, '/_profiler') || str_starts_with($path, '/_wdt')) {
+        if (
+            str_starts_with($path, '/_profiler')
+            || str_starts_with($path, '/_wdt')
+            || str_starts_with($path, '/admin')
+            || '/login' === $path
+            || '/logout' === $path
+        ) {
             return;
         }
 
