@@ -372,6 +372,72 @@ select.form-select.sc-form-control {
     background-color: #38bdf8;
 }
 
+.sc-sidebar-toggle {
+    background: transparent;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sc-sidebar-toggle[aria-expanded="true"] {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.sc-sidebar-toggle.active[aria-expanded="true"] {
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+.sc-sidebar-icon {
+    flex-shrink: 0;
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+}
+
+.sc-sidebar-link:hover .sc-sidebar-icon,
+.sc-sidebar-toggle[aria-expanded="true"] .sc-sidebar-icon {
+    transform: translateX(2px) scale(1.12) rotate(-6deg);
+    color: #38bdf8;
+}
+
+.sc-sidebar-chevron {
+    flex-shrink: 0;
+    opacity: 0.72;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+.sc-sidebar-toggle[aria-expanded="true"] .sc-sidebar-chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+.sc-sidebar-sublist {
+    list-style: none;
+    margin: 0.35rem 0 0.45rem 1.25rem;
+    padding: 0.15rem 0 0.15rem 0.95rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.sc-sidebar-sublink {
+    display: block;
+    padding: 0.42rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.sc-sidebar-sublink:hover,
+.sc-sidebar-sublink:focus-visible {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
 .sc-sidebar-footer {
     padding: 0.9rem 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);

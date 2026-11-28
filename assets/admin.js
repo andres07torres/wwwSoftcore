@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/js/dist/offcanvas';
+import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/collapse';
 import Dropdown from 'bootstrap/js/dist/dropdown';
 import './styles/admin.css';
 
@@ -206,6 +207,29 @@ function initAvatarPreview() {
     });
 }
 
+function initSidebarSublinks() {
+    const sidebar = document.getElementById('adminSidebar');
+    if (!sidebar) {
+        return;
+    }
+
+    sidebar.querySelectorAll('.sc-sidebar-sublink').forEach((link) => {
+        if (link.dataset.sublinkBound === 'true') {
+            return;
+        }
+        link.dataset.sublinkBound = 'true';
+
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 992) {
+                const instance = Offcanvas.getInstance(sidebar);
+                if (instance) {
+                    instance.hide();
+                }
+            }
+        });
+    });
+}
+
 function initAdminUI() {
     initPasswordToggles();
     initSidebarToggleEffect();
@@ -213,6 +237,7 @@ function initAdminUI() {
     initEcuadorClock();
     initHoverDropdowns();
     initAvatarPreview();
+    initSidebarSublinks();
 }
 
 if (document.readyState === 'loading') {
