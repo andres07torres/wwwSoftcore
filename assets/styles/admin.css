@@ -139,6 +139,10 @@ body.sc-login-body {
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
+select.form-select.sc-form-control {
+    padding-right: 2.4rem;
+}
+
 .sc-form-control:focus {
     border-color: var(--sc-blue);
     box-shadow: 0 0 0 3px rgba(10, 87, 255, 0.15);
@@ -1218,4 +1222,30 @@ body.sc-login-body {
 .sc-user-menu-item.is-danger:hover {
     background-color: #fff1f2;
     color: #b91c1c;
+}
+
+/* Uniform Modal & Form Action Buttons */
+.sc-modal .modal-footer .btn,
+.sc-form-actions .btn {
+    min-width: 124px;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    border-radius: 10px;
+}
+
+.sc-modal .modal-footer .sc-btn-outline,
+.sc-form-actions .sc-btn-outline {
+    background-color: #e2e8f0;
+    border-color: #cbd5e1;
+    color: #334155;
+}
+
+.sc-modal .modal-footer .sc-btn-outline:hover,
+.sc-modal .modal-footer .sc-btn-outline:focus-visible,
+.sc-form-actions .sc-btn-outline:hover,
+.sc-form-actions .sc-btn-outline:focus-visible {
+    background-color: #cbd5e1;
+    border-color: #94a3b8;
+    color: #0f172a;
 }

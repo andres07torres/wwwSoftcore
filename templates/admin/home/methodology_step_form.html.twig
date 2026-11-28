@@ -54,11 +54,11 @@
                     </div>
                 </div>
 
-                <div class="col-12 d-flex justify-content-end gap-2 pt-3">
-                    <a href="{{ path('app_admin_home') }}" class="btn sc-btn-outline">Cancelar</a>
+                <div class="col-12 d-flex justify-content-center gap-2 pt-3 sc-form-actions">
                     <button type="submit" class="btn sc-btn-primary">
                         {{ is_edit ? 'Guardar cambios' : 'Crear paso' }}
                     </button>
+                    <a href="{{ path('app_admin_home') }}" class="btn sc-btn-outline">Cancelar</a>
                 </div>
             {{ form_end(form) }}
         </div>
