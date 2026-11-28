@@ -1,5 +1,28 @@
 services:
   # ---------------------------------------------------------------------------
+  # 0. Base de Datos (PostgreSQL 16)
+  # ---------------------------------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: softcore_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-softcore_db}
+      POSTGRES_USER: ${POSTGRES_USER:-softcore}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-softcore_secret}
+    ports:
+      - "${DB_PORT:-5435}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-softcore} -d ${POSTGRES_DB:-softcore_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - softcore_internal
+
+  # ---------------------------------------------------------------------------
   # 1. Aplicación Backend (PHP 8.4-FPM + Symfony)
   # ---------------------------------------------------------------------------
   app:
@@ -13,7 +36,7 @@ services:
       APP_DEBUG: "0"
       APP_MAINTENANCE: ${APP_MAINTENANCE:-0}
       APP_SECRET: ${APP_SECRET:-b34f2a78e1c9d405060708090a0b0c0d}
-      DATABASE_URL: ${DATABASE_URL:-postgresql://app:secret@127.0.0.1:5432/app?serverVersion=16&charset=utf8}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://${POSTGRES_USER:-softcore}:${POSTGRES_PASSWORD:-softcore_secret}@db:5432/${POSTGRES_DB:-softcore_db}?serverVersion=16&charset=utf8}
       DEFAULT_URI: ${APP_DEFAULT_URI:-https://softcorec.com}
       TRUSTED_PROXIES: 127.0.0.1,REMOTE_ADDR,172.16.0.0/12,10.0.0.0/8
     volumes:
@@ -22,7 +45,11 @@ services:
       - ./templates:/var/www/html/templates:ro
       - ./src:/var/www/html/src:ro
       - ./config:/var/www/html/config:ro
+      - ./migrations:/var/www/html/migrations:ro
       - ./translations:/var/www/html/translations:ro
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - softcore_internal
 
@@ -46,6 +73,8 @@ services:
 volumes:
   app_var:
     name: softcore_app_var
+  db_data:
+    name: softcore_db_data
 
 networks:
   softcore_internal:

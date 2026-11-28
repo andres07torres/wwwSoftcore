@@ -17,5 +17,14 @@ chown -R www-data:www-data /var/www/html/var 2>/dev/null || true
 chmod -R 775 /var/www/html/var 2>/dev/null || true
 chmod -R a+rX /var/www/html/public/build 2>/dev/null || true
 
+# Al iniciar php-fpm, regenerar caché de Symfony y aplicar migraciones pendientes
+if [ "$1" = "php-fpm" ]; then
+    echo "Limpiando y regenerando caché de Symfony..."
+    su-exec www-data php bin/console cache:clear --no-interaction
+
+    echo "Ejecutando migraciones de base de datos..."
+    su-exec www-data php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
+fi
+
 # Ejecutar el comando del contenedor (php-fpm)
 exec "$@"
