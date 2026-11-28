@@ -36,7 +36,7 @@ services:
       APP_DEBUG: "0"
       APP_MAINTENANCE: ${APP_MAINTENANCE:-0}
       APP_SECRET: ${APP_SECRET:-b34f2a78e1c9d405060708090a0b0c0d}
-      DATABASE_URL: ${DATABASE_URL:-postgresql://${POSTGRES_USER:-softcore}:${POSTGRES_PASSWORD:-softcore_secret}@db:5432/${POSTGRES_DB:-softcore_db}?serverVersion=16&charset=utf8}
+      DATABASE_URL: ${DOCKER_DATABASE_URL:-postgresql://${POSTGRES_USER:-softcore}:${POSTGRES_PASSWORD:-softcore_secret}@db:5432/${POSTGRES_DB:-softcore_db}?serverVersion=16&charset=utf8}
       DEFAULT_URI: ${APP_DEFAULT_URI:-https://softcorec.com}
       TRUSTED_PROXIES: 127.0.0.1,REMOTE_ADDR,172.16.0.0/12,10.0.0.0/8
     volumes:
