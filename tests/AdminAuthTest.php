@@ -48,6 +48,36 @@ final class AdminAuthTest extends WebTestCase
         $this->assertSelectorTextContains('.sc-login-alert', 'Credenciales inválidas');
     }
 
+    public function testLoginThrottlingBlocksExcessiveFailedAttempts(): void
+    {
+        $client = static::createClient([], ['REMOTE_ADDR' => '203.0.113.' . random_int(1, 250)]);
+        $email = 'throttle-' . bin2hex(random_bytes(4)) . '@softcorec.com';
+
+        for ($attempt = 1; $attempt <= 5; ++$attempt) {
+            $crawler = $client->request('GET', '/login');
+            $form = $crawler->selectButton('Ingresar al panel')->form([
+                '_username' => $email,
+                '_password' => 'WrongPassword123!',
+            ]);
+            $client->submit($form);
+            $client->followRedirect();
+
+            $this->assertResponseIsSuccessful();
+            $this->assertSelectorTextContains('.sc-login-alert', 'Credenciales inválidas');
+        }
+
+        $crawler = $client->request('GET', '/login');
+        $form = $crawler->selectButton('Ingresar al panel')->form([
+            '_username' => $email,
+            '_password' => 'WrongPassword123!',
+        ]);
+        $client->submit($form);
+        $client->followRedirect();
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.sc-login-alert', 'Demasiados intentos fallidos');
+    }
+
     public function testAdminCanLoginAccessDashboardAndLogout(): void
     {
         $client = static::createClient();
