@@ -642,6 +642,31 @@ select.form-select.sc-form-control {
     padding-top: 0.25rem;
 }
 
+.sc-kpi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.sc-kpi-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: rgba(20, 33, 43, 0.08);
+    color: #14212B;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sc-kpi-status {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.8rem;
+}
+
 .sc-kpi-meta {
     font-size: 0.78rem;
     color: var(--sc-text-muted);
